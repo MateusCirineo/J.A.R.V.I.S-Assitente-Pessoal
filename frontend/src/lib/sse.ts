@@ -12,17 +12,31 @@ export interface ChatRequest {
 export async function* streamChat(
   request: ChatRequest,
   signal?: AbortSignal,
+  runtime?: { sessionId: string; requestId: string },
 ): AsyncGenerator<SSEEvent> {
   const base = getBase();
+  const runtimeHeaders: Record<string, string> = runtime ? {
+    'X-OpenJarvis-Runtime': '1',
+    'X-Jarvis-Session': runtime.sessionId,
+    'X-Jarvis-Request': runtime.requestId,
+  } : {};
+  const cancel = () => {
+    if (runtime) void fetch(`${base}/v1/runtime/cancel`, {
+      method: 'POST', headers: authHeaders(runtimeHeaders), keepalive: true,
+    }).catch(() => undefined);
+  };
+  signal?.addEventListener('abort', cancel, { once: true });
+  try {
   const response = await fetch(`${base}/v1/chat/completions`, {
     method: 'POST',
-    headers: authHeaders({ 'Content-Type': 'application/json' }),
+    headers: authHeaders({ 'Content-Type': 'application/json', ...runtimeHeaders }),
     body: JSON.stringify(request),
     signal,
   });
 
   if (!response.ok) {
-    throw new Error(`Chat request failed: ${response.status}`);
+    const detail = await response.json().catch(() => ({}));
+    throw new Error(detail.detail || `Chat request failed: ${response.status}`);
   }
 
   const reader = response.body!.getReader();
@@ -55,6 +69,9 @@ export async function* streamChat(
     }
   } finally {
     reader.releaseLock();
+  }
+  } finally {
+    signal?.removeEventListener('abort', cancel);
   }
 }
 

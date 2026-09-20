@@ -27,6 +27,12 @@ from openjarvis.intelligence.model_catalog import resolve_model_id_for_engine
 logger = logging.getLogger(__name__)
 
 
+def _rejects_tool_calling(body: str) -> bool:
+    """True when a 400 body says the server/model does not accept tools."""
+    text = (body or "").lower()
+    return any(k in text for k in ("tool", "function call", "function_call", "functions"))
+
+
 class _OpenAICompatibleEngine(AsyncHTTPEngineMixin, InferenceEngine):
     """Base for engines that serve the OpenAI ``/v1/chat/completions`` API."""
 
@@ -99,13 +105,24 @@ class _OpenAICompatibleEngine(AsyncHTTPEngineMixin, InferenceEngine):
         # Default to tool_choice=auto when tools are provided
         if "tools" in payload and "tool_choice" not in payload:
             payload["tool_choice"] = "auto"
+        tools_dropped = False
         try:
             url = f"{self._api_prefix}/chat/completions"
             resp = self._client.post(url, json=payload)
-            if resp.status_code == 400 and "tools" in payload:
+            # Only a server that rejects *tool calling itself* gets a text-only
+            # retry, and the result says the capability was lost. Any other 400
+            # (bad parameter, context overflow...) surfaces as an error instead of
+            # silently turning an executable task into a plain text answer.
+            if (resp.status_code == 400 and "tools" in payload
+                    and _rejects_tool_calling(resp.text)):
+                logger.warning(
+                    "%s rejected tool calling (%s); retrying without tools",
+                    self.engine_id, resp.text.strip()[:200],
+                )
                 payload.pop("tools", None)
                 payload.pop("tool_choice", None)
                 resp = self._client.post(url, json=payload)
+                tools_dropped = True
             resp.raise_for_status()
         except (httpx.ConnectError, httpx.TimeoutException) as exc:
             raise EngineConnectionError(
@@ -169,6 +186,8 @@ class _OpenAICompatibleEngine(AsyncHTTPEngineMixin, InferenceEngine):
                 }
                 for tc in raw_tool_calls
             ]
+        if tools_dropped:
+            result["capability_lost"] = ["tools"]
         return result
 
     async def stream(

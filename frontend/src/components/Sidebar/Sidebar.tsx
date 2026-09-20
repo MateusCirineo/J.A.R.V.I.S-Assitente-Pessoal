@@ -14,12 +14,16 @@ import {
   Sun,
   Moon,
   Monitor,
+  Orbit,
+  Gauge,
+  Radar,
   Loader2,
   ScrollText,
   Database,
 } from 'lucide-react';
 import { ConversationList } from './ConversationList';
 import { useAppStore } from '../../lib/store';
+import { openHudView } from '../../lib/hud-runtime';
 
 export function Sidebar() {
   const navigate = useNavigate();
@@ -38,8 +42,15 @@ export function Sidebar() {
   const settings = useAppStore((s) => s.settings);
   const updateSettings = useAppStore((s) => s.updateSettings);
 
-  const ThemeIcon = settings.theme === 'light' ? Sun : settings.theme === 'dark' ? Moon : Monitor;
-  const nextTheme = settings.theme === 'light' ? 'dark' : settings.theme === 'dark' ? 'system' : 'light';
+  const ThemeIcon =
+    settings.theme === 'light' ? Sun : settings.theme === 'dark' ? Moon : settings.theme === 'hud' ? Orbit : Monitor;
+  const THEME_CYCLE = ['light', 'dark', 'hud', 'system'] as const;
+  const nextTheme = THEME_CYCLE[(THEME_CYCLE.indexOf(settings.theme) + 1) % THEME_CYCLE.length];
+
+  const hudLinks = [
+    { view: 'painel' as const, icon: Gauge, label: 'Painel' },
+    { view: 'jarvis' as const, icon: Radar, label: 'Modo Jarvis' },
+  ];
 
   const messages = useAppStore((s) => s.messages);
   const handleNewChat = () => {
@@ -227,6 +238,22 @@ export function Sidebar() {
                 </button>
               );
             })}
+            <div className="mt-1 pt-1 flex flex-col gap-0.5" style={{ borderTop: '1px solid var(--color-border-subtle)' }}>
+              {hudLinks.map((link) => (
+                <button
+                  key={link.view}
+                  onClick={() => { void openHudView(link.view); }}
+                  className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors w-full text-left cursor-pointer"
+                  style={{ color: 'var(--color-text-secondary)' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--color-bg-secondary)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
+                  title={`Open ${link.label} (HUD runtime at 127.0.0.1:8765)`}
+                >
+                  <link.icon size={16} />
+                  {link.label}
+                </button>
+              ))}
+            </div>
           </nav>
         </div>
       </aside>

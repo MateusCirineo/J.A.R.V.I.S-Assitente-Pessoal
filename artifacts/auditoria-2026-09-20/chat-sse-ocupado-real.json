@@ -1,0 +1,46 @@
+{
+  "http": 200,
+  "sse": "text/event-stream; charset=utf-8",
+  "final_done": true,
+  "chunks": [
+    {
+      "id": "chatcmpl-0666f00a9b544c7c8c635ff4834e3af6",
+      "created": 1789878712,
+      "model": "jarvis-runtime",
+      "runtime": {
+        "ok": false,
+        "estado": "ocupado",
+        "modelo_solicitado": "gemma4:e4b"
+      },
+      "object": "chat.completion.chunk",
+      "choices": [
+        {
+          "index": 0,
+          "delta": {
+            "role": "assistant",
+            "content": "Estou atendendo outro pedido. Aguarde ou interrompa a atividade atual; este pedido não foi executado."
+          },
+          "finish_reason": null
+        }
+      ]
+    },
+    {
+      "id": "chatcmpl-0666f00a9b544c7c8c635ff4834e3af6",
+      "created": 1789878712,
+      "model": "jarvis-runtime",
+      "runtime": {
+        "ok": false,
+        "estado": "ocupado",
+        "modelo_solicitado": "gemma4:e4b"
+      },
+      "object": "chat.completion.chunk",
+      "choices": [
+        {
+          "index": 0,
+          "delta": {},
+          "finish_reason": "stop"
+        }
+      ]
+    }
+  ]
+}

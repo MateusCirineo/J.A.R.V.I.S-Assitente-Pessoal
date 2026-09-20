@@ -1,0 +1,33 @@
+{
+  "utc": "2026-09-20T04:34:16.241148+00:00",
+  "runtime": {
+    "ok": true,
+    "servico": "jarvis-hud",
+    "versao_codigo": "68dc34703323caa2",
+    "boot_concluido": true
+  },
+  "versao_disco": "68dc34703323caa2",
+  "codigo_carregado_confere": true,
+  "runtime_pid": 28776,
+  "servidor_pid": 32124,
+  "servidor_host": "127.0.0.1",
+  "servidor_porta": 8000,
+  "servidor_saude": {
+    "status": "ok"
+  },
+  "modelos_configurados": {
+    "chat": "gemma4:e4b",
+    "voz": "gemma4:e4b"
+  },
+  "ultimo_modelo_efetivo": "qwen3.5:4b",
+  "audio_preservado": {
+    "stt_motor": "whisper",
+    "stt_modelo": "small",
+    "voz_tts": "pm_alex",
+    "voz_provedor": "kokoro"
+  },
+  "camera_ativa": false,
+  "gestos_ativos": false,
+  "modelo_maos_sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+  "bridge_sha256": "f85dbb242881c906555eadfd79d129d597dab1f01dbb72e71903c6e57343d9f1"
+}

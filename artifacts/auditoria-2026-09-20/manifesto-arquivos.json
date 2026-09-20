@@ -1,0 +1,1807 @@
+{
+  "aviso": "Comparação com checkpoint do início da revisão, não com árvore Git limpa. Inclui alterações preexistentes. Não atribui autoria.",
+  "bibliotecas_e_modelos": "Não incluídos; requisitos/versão/hash de S7 em modo-show/GESTOS_S7.md. Dados pessoais fora do pacote.",
+  "quantidade": 360,
+  "arquivos": [
+    {
+      "arquivo": "docs/JARVIS_AUDITORIA_2026-09-20.md",
+      "sha256": "f4876185a05acdc4dea55dedda66c8c1b3524e812f38ecd154399cc04ecf611a",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "docs/JARVIS_COMANDOS_E_VALIDACAO.md",
+      "sha256": "c1ee04761f2f3ada595f557131970439b5ec968cedf6ca85af87d880359361c7",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "frontend/src/App.tsx",
+      "sha256": "2c6723b55da7092405a070ddfc9453fdd12ecf8aef7c55c334ed1bb3fdf94e5f",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/ApprovalBell.tsx",
+      "sha256": "4e5382b666793ba70a1c5d911ade6e27a6cf63703584fcffa731369a5d654747",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Chat/AudioPlayer.tsx",
+      "sha256": "4cc94955953b71ef893e12ecb0b81b6fc138f2b8b11e5c3245f28f8e066e9879",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Chat/ChatArea.tsx",
+      "sha256": "68047e992ecaa89f4f30131cb285f8ceb4a87645b183e68d6add8d998468a85d",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Chat/InputArea.tsx",
+      "sha256": "9ea6f208d96da9d1180aa57e3f4f73f05c758d4d62964ed1c83086c2b2647267",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "frontend/src/components/Chat/MessageBubble.tsx",
+      "sha256": "8aa8c0ca360bcd24be3a28e84bce53d8adc8333101d3c101cf9de65921a9f60c",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Chat/MicButton.tsx",
+      "sha256": "f204a6583e236d713fbe9c25851f3778e0a7b05af584db2d945c6d643aabbd1e",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Chat/ResearchTimeline.tsx",
+      "sha256": "c41a1cad90dffdcb1fffb17d3f232154bb0c19975b715a2f31d4f5504e958416",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Chat/StreamingDots.tsx",
+      "sha256": "d3a9f47c55bf218e873143f31c554db33529a6e41d11ec68e8c3e09c59c7beb2",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Chat/SystemPanel.tsx",
+      "sha256": "abc7e2d6722bb7468c6e537eabe54b79cdd950f2d9301dae1fd0840a78e326f9",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Chat/ToolCallCard.tsx",
+      "sha256": "d641e01c2f9af50697d25758edde96dfe5d745fe56f33fa5eb0ad625e3967a4f",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Chat/XRayFooter.tsx",
+      "sha256": "e194117b8202f17e8641fc8b3ef55bda5cd0d7cf53abdd82d73577136e62a2e0",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/CommandPalette.tsx",
+      "sha256": "2ac96aaa19a24efaa0497daddd8ce5346544e85b2e112ebcaa51cad1a2793e5f",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Dashboard/CostComparison.tsx",
+      "sha256": "0efa04c41b083548cecf7c0a0b183bb2f5c3fa8f6b3072391dcc7faeed8db3c9",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Dashboard/EnergyDashboard.tsx",
+      "sha256": "61aa5d64ccf70817e3330f56a777db42b1729302e0c141003ceab8db8413b653",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Dashboard/TraceDebugger.tsx",
+      "sha256": "a21ae7904592df376883a5786fc665d9d30701a6184e7c0ea5eab25be51be767",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Desktop/AdminPanel.tsx",
+      "sha256": "6d465ab84c70437f7a6d369a3f08397ce7335c33a77cb0024dc6222f6eeeb1a6",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Desktop/AgentsPanel.tsx",
+      "sha256": "5a26b61a76b0799cc825518f0692164b496b28165404974c0c3d685e25863f4c",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Desktop/EnergyDashboard.tsx",
+      "sha256": "5ec196b95eac49e3367a39c31e59eed7af3a22745a90e9d71bd4ae123f08663a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Desktop/hooks/useTauriApi.ts",
+      "sha256": "97bd3aae085c8986ee5de9338db54432905b8d1908d0d5747ff2a4f1f90203e2",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Desktop/LearningCurve.tsx",
+      "sha256": "c86a1eb51902ca1dfb49514fb6f2ef3d9b3d7afa3b97e10659a88ba967d44e08",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Desktop/lib/api.ts",
+      "sha256": "aa72c4d8ecc20c87b5c4ce5faef47108587d2ae9c932c49383005fe55b219554",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Desktop/MemoryBrowser.tsx",
+      "sha256": "3b3c500983297aa5cd4e7129b78720f0fb3ac091fe850837a61d6a977ad62773",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Desktop/SavingsDashboard.tsx",
+      "sha256": "c1e2cc2525e9fc938fb96c96a8a98df0c6401791c975a29c06411df7c0e68ffe",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Desktop/SettingsPanel.tsx",
+      "sha256": "d2f6e9fc48a48dbf30e825731c8a58167f7bd1078dc97ab9727151e73069803d",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Desktop/TraceDebugger.tsx",
+      "sha256": "1d2ea91231075ac9b450296657e9ffda0ba84226f1b92d67112463eca0348f3b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Desktop/UpdateChecker.tsx",
+      "sha256": "f50986d628b9e704fa7cc1c99dd52c4a403b176ccdbeb4cb21cf46d4d8837d0b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/ErrorBoundary.tsx",
+      "sha256": "b993076fc3a76ca8b9c3f66e510e38cf539ccf3694c2791e8330b36bad8aa992",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/InferenceSourceSetup.test.tsx",
+      "sha256": "9efdfe97cde974c810a74c99dc5f6f3384403d742f3e10a402dd55e37facdc51",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/InferenceSourceSetup.tsx",
+      "sha256": "916125d08d768c819ef9c4af128a09c0d2966ef7625b9de4b44b11894339eb61",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Layout.tsx",
+      "sha256": "1703909a2776ef2e7876e168660d64d55f6a3777a36e457d0ffc0284a08ae0f5",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/OptInModal.tsx",
+      "sha256": "398264c460500c357e0afd6efd0e95a755664de93977fde518601a294bd8867a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/setup/IngestDashboard.tsx",
+      "sha256": "80352c990c1c24bb48802a6d2b619f3d6127eb04e642c6db7d18568dd1a497b7",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/setup/ReadyScreen.tsx",
+      "sha256": "ca0ee166b25187c3bb74c3485def89551f806f5f503622dc24e8171b746bb0e6",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/setup/SetupWizard.tsx",
+      "sha256": "bab31d8d66e4bee9efe0e39be486873ba3ecb0d81cfa31aad6b1863a6f1812cb",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/setup/SourceConnectFlow.tsx",
+      "sha256": "5ad40163c52968821382b8bb597f5e7d9bf06981e4bfa3d36ec94aec05ccadc2",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/setup/SourcePicker.tsx",
+      "sha256": "d3f654a42cb6eef6fc50863af8336a74fbae26a53d0d0bf915b5250b7cef7799",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/SetupScreen.tsx",
+      "sha256": "9c94628741f7be994aff5f2e55a31aac3f28fdf17ed7532a0a42acc6a417514e",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Sidebar/ConversationList.tsx",
+      "sha256": "990b75523c3fad5a6ca04eac72e05ddaa0894549cad65ba26ab35c63392c3cf2",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/Sidebar/Sidebar.tsx",
+      "sha256": "fcd70e83a83dbb995899a9c9463bd24ca4808e6fcc16f9121435df711b4f01b7",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/SystemPulse.tsx",
+      "sha256": "33f5bb036d4fe52fd56ce88bf1df676ae638cb245bc59252f5bbebd2994de280",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/ui/button.tsx",
+      "sha256": "41a58f4dfa250d51e0c8fc7bc1403083eddbeab4cd4ecf521aeb097f33944377",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/ui/dialog.tsx",
+      "sha256": "1e82de282550c89a006df986df43677db6925dcfbfa11c93980bea45379d7277",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/ui/input.tsx",
+      "sha256": "aa7d45bfb5cff98663124a091a5fcd86735b9b037e8e84d9bfd3a54aba2a6f77",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/ui/select.tsx",
+      "sha256": "657744288a464a3127549407aab6c65667fd62acd64312ccfa7b8cdb57af4a4e",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/ui/sonner.tsx",
+      "sha256": "46251f3ff7659ebc91a58155966df4a04e269cbd0e94aa02f704142f5d337010",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/components/ui/tooltip.tsx",
+      "sha256": "540410931db0f62be82ed48a21376fa3f3749fa752efcd711d5b64b4ef14d452",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/hooks/useSpeech.ts",
+      "sha256": "bb9e10e84d488a01d3863e7e68431fa92a96e15506ca05fad7655092db75498c",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/index.css",
+      "sha256": "166d23a6fb373cab47ba2c6640c3904c62cc4a680851d90f942753be3961e4d6",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/agent-schedule.test.ts",
+      "sha256": "cd8776ac951ad06d59dd4dfc17c3854ecd8b63c81aa5af9d02d3d9c125bd8412",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/agent-schedule.ts",
+      "sha256": "b87d599087f74558ba80deb8a4959a7f541f6c6a9932005b9b33539b42a5a84b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/analytics.ts",
+      "sha256": "87235421408a3027a5cc842f18368e097f9830c50f8cfcb1d68a09b3f965a069",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/api.auth.test.ts",
+      "sha256": "9d4874542cfaa041ce96079aaa608e81e5aa0e493ef20dbcb3746714323fdab7",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/api.ts",
+      "sha256": "0d01baf075eabc0ad76fa1f166737c835648a54976b0eba2b41bec854883fc38",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/chat-telemetry.test.ts",
+      "sha256": "5197524ee3cc0e820f8ee5fd46e9c9732f8b175ecdfd38e06c3c239aef50e51e",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/chat-telemetry.ts",
+      "sha256": "7922d27b2208484cddce5527e6978225b62bc7ffb5ba7286754593822bd8052a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/connectors-api.auth.test.ts",
+      "sha256": "cec4a6f01e39cb4861818e9d034205335b7c43491a664502f7a439e86548fb3b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/connectors-api.ts",
+      "sha256": "3a37c4fcdd9d62a609663b43646308769182eaa20b339f3582748dd03fc3b617",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/deep-link.ts",
+      "sha256": "afcb75be5be115e09cc1637cf9ad00414bfe52c5742974977d9a8fcf146d246e",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/hud-runtime.ts",
+      "sha256": "fd77721ceedec6d4e389f1a2dd6cf7d85bfe3fbcad37ce013f3e0dfddf178d4c",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "frontend/src/lib/model-capabilities.test.ts",
+      "sha256": "dd13097fa7f37de867c7b83e170e86f0a85f2356b1e85f296a595442922ab730",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/model-capabilities.ts",
+      "sha256": "8a0fbea35a1670861b872e86f33efc5347829ebd6fbca4a4ce8ac29c245f89b1",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/profanity.ts",
+      "sha256": "6cf6142854cbac3fb9f2db6f80e34d535d8a03861260e7ccc46bc3087307592b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/rehype-citations.ts",
+      "sha256": "c1e3ce8b44683c222f5d721b5d1e7bbd16a8af48759b513a977793297dc8acb1",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/sse-runtime.test.ts",
+      "sha256": "e9f38d05b09843bc98fea1084576109759493d5d9b7120db8a45dd138c85e9c0",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "frontend/src/lib/sse.ts",
+      "sha256": "15d21cb4b7d870fc4e7f6bfcd51c43f4648bb3aa375bdacf4ee4a6aa0e2bf656",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "frontend/src/lib/store.models.test.ts",
+      "sha256": "1c3c14b4b63bed365abe2a3df3ad59f8ded39ddfb6994b1b86e1d5a2fc7b794b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/store.stream-ownership.test.ts",
+      "sha256": "061a9ac6c4312d903edb96c5dde73790f6a27566c7730b2f97914003c119cb34",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/store.tool-call-repair.test.ts",
+      "sha256": "90585ce1df54fb998a3df5c1e25a3b7b1c2c5a8c215b7714a71f6e174f1f1d9e",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/store.ts",
+      "sha256": "cecd881b1c6bec18608250cd1bcab178f82b2c827aaacbffb6a3bf642fc17e1b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/supabase.ts",
+      "sha256": "94a79db1e4d92969ea6a587df4e7c677adc8aad2ea55fbb936c2d40a8eb67e6f",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/theme.test.ts",
+      "sha256": "27669686f41539af05acd018f8a80af0b104259ebfb95e88752d5841326cea87",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/theme.ts",
+      "sha256": "59442eaa69f6d70df43891f3e9e1d8f3aef72c7ad4154c2c8dec7e932d9b11a9",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/tool-call.test.ts",
+      "sha256": "c23c8ff30f1ccb1015b23d85ec4ec40b08056a127899263aeb1a5a43a9911124",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/tool-call.ts",
+      "sha256": "457ae3d464eb3fa3bc989c6a9ad5f0a46a2d6a5f951f8e3f9975fade75b9ad6f",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/useAgentEvents.test.ts",
+      "sha256": "1894ecc2209c949217a663e43431e0848d129ce35ebb0eb42c43f90f4d1428cf",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/useAgentEvents.ts",
+      "sha256": "6a064ef2631297ce743cb7570889d37c8b99cd63913aee3c650b3d62dfd0c171",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/lib/utils.ts",
+      "sha256": "74a147991a119f1c4cdc25a4d9b22713632fa32eb136e55ab6939b006d71b9d6",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/main.tsx",
+      "sha256": "bab10cf117e611a67e80697ca111c616369202ba731d35e88cc551dc23d38648",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/pages/AgentsPage.tsx",
+      "sha256": "df7e5aa8ad85a4706349951c3a5782f3c27cd6d3270a1ccc67636ba6d7237a7a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/pages/ChatPage.tsx",
+      "sha256": "3474e23ee3e7fc89f6a547ec10d46d91b9782d1a94872f838ff8bd1cac9a1043",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/pages/DashboardPage.tsx",
+      "sha256": "9dd3be8b55e9cf480d67cd9855f1063f6ae4b5c87eb3f238da33355fd8597e8a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/pages/DataSourcesPage.lifecycle.test.tsx",
+      "sha256": "b19790046206b02ab0aa470b8caea26000985f9f0a4ed50e152fbbed94c0acc5",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/pages/DataSourcesPage.tsx",
+      "sha256": "491372bcdd3ca0e45fce4fb48526ecc215d8f6c6ce71124960006dbbe1b53e40",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/pages/GetStartedPage.tsx",
+      "sha256": "6fa26e0ad361f5e172d34e6c31eb600ac01496c0227655da4468945c36fb75df",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/pages/LogsPage.tsx",
+      "sha256": "fb1d8066480ca4ae561d6e21d7b43c889f6afc1879569a35f6968f89dc9dcf03",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/pages/SettingsPage.tsx",
+      "sha256": "f444e01d7cd0a70987cd84fbef84d57d10cae74edfdfdf633fba7140fd93a867",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/types/connectors.ts",
+      "sha256": "d6cd9b8c4108a2fcc4dde8c6d7fda29366fbe23477f6846730b8e096e6645bf8",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/types/index.ts",
+      "sha256": "d902eeb7ce90da6c0caf296082103ef17ea73e6454e0bea3ac47ecdedba71f7a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "frontend/src/vite-env.d.ts",
+      "sha256": "a7b43e2013b31af7faf0fd84775f59e0ee08baf42e1e22ff14f8442feb7f887d",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/GESTOS_S7.md",
+      "sha256": "032f50e7478fa0c94c1df479f5241d7f338849f642e72f988d62320251702c38",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/hud/alvos-mesa.js",
+      "sha256": "6f5c5c42142afa773d294d2c5e91df49a866b2f23aa7b19969ae6f495f680920",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/hud/capacete.css",
+      "sha256": "162fbe6f76943d817fac626169d402d8222affbd0bdbd627cacc20a253df61f1",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud/capacete.js",
+      "sha256": "d3e4f6f5485219b0a850519aeccfc1bd8b7bab03d72398ef7f69b1c6c76da86a",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud/cliente.js",
+      "sha256": "157c2180afe716a79cee4ea85459ce3a9cee4a1f23e6585e23ebbe273b4ed547",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud/gestos.js",
+      "sha256": "b2892e7e3c30095e1074f9086d32331c618a513f8044b75d362e5c9d616e9637",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/hud/holograma.css",
+      "sha256": "50de6d1c9e48f0b0924cc4d866352a96bd216a0502b0399eb093144e4e10c70c",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud/holograma.html",
+      "sha256": "0f201844f6b062bb44733de27273e3341d02b7f0c5cba15a39ee549c56e01272",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud/holograma.js",
+      "sha256": "125b36bed9ce9cbdbdd3ab08eea0bc177cbecc76dcb2444a3632ee226b125f1c",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud/hud.css",
+      "sha256": "e529d45cd9faffaafb319ccf0d8b4ddec04096a69cc5131e51d25b9e4659f4b9",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud/jarvis.css",
+      "sha256": "ed87bd43ec91c0623625b8eb2bf0044870ee3710bb42b3273723347592076264",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud/jarvis.html",
+      "sha256": "506679820677bf15a0abc1c0042c2c308e4d5cf47840d50d60bb0036606a48ab",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud/jarvis.js",
+      "sha256": "347f8efa8ab5d4094c8b325cf0da31698c772d0799b451272ce6a331ef87f705",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud/nucleo.js",
+      "sha256": "809d6cecb64caf2bd4d0662d4a2f6b1cdaab1c35cbfce58b7ec9d3ee1b894b90",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud/painel.css",
+      "sha256": "34a5659150d338072a4e3d96a96666022faac4ee9679f87845a81c5e8b99caee",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud/painel.html",
+      "sha256": "33b143ca35ec03209f76955cac858e897ca599a0d31d40b7971ada054a670139",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud/painel.js",
+      "sha256": "a4f182ae3a3ca80ccef5912b0d77416b85594f72ab6a4535f487f4153457a00c",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/__init__.py",
+      "sha256": "194bd55cb03d0a6d9e4984302430e28b6d7b589276296cdb683f7b57bb8ef30d",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/agenda.py",
+      "sha256": "9a7a02c918a6a8d0fab3409bbdad6abc9c77ca27bbadb831cf47b5e3cb30b967",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/agenda_analise.py",
+      "sha256": "cebc2e496069a860b2263048cf42485afbe3c9e714f772d5411fdce4cff91885",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/anunciador.py",
+      "sha256": "8afd8dafe615d0971de2a7a5bd0915b3e17d16419b99e711ae9a33d6e478fa68",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/apresentacao.py",
+      "sha256": "c63d20d15aa4d8fa72641b8cfa037edfac01435d1c8b7c069a39b7de454d16bd",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/atalhos.py",
+      "sha256": "8bf7298f2a0f32149d1ffdc668f5fdf09fb0893fc081a50824ab63afc7f9fe8b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/audio.py",
+      "sha256": "97f1a5f39d5abc0d1cb80e9c3d23875a3dcac618153438f15c28693183eae806",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/avisos_windows.py",
+      "sha256": "028c18685f03f3b68cc35f672d48a7f8f1c8374f2353dd2a51928af66d32ba96",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/boot.py",
+      "sha256": "824dffc7f1356527b300d480fdaacb8b7c4b913877af7eea7780a9c184233c08",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/cad.py",
+      "sha256": "24813e99a70f7d4c5cf19944e172b1b9dd66ab9bdeefb426e0bc9718b41ee421",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/camera.py",
+      "sha256": "c86cea506fe24a904d368ebf1b0f289a39e956828dfc7d0566a8953557ff3a6b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/capacidades.py",
+      "sha256": "2bb99a93c8b87e967cc82b70a04b639286cf3e5c67c81611b5cbeb6e88ac2943",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/casa.py",
+      "sha256": "eee058753d55c1d6da0eb5b2624e0c443dcf68b68b0fc0b0c79fa477045a0a45",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/clima.py",
+      "sha256": "6073c9d5d32e5a5f94283aa04a1fab262c103017988628986c4b415234eef1b7",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/comandos.py",
+      "sha256": "88489e9170fccefc4810f0bd98766608052e1b2a62acf868df8f4b8a7bc40069",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/conhecimento.py",
+      "sha256": "908878f0677e1d463599d06480c36da4a43ec343516a662ec29e1ec44df0b805",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/contexto.py",
+      "sha256": "c8f0beacb27fba8dc8bf99216a464fa9bb7929ffd2d590575370585275befea4",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/correcoes.py",
+      "sha256": "821c46956c1f481a205c3f18ee8e87c6ee39ac93597d02a5056e597407c33721",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/cotacoes.py",
+      "sha256": "a4100abaf5287b2bdcee1ed3bbd2c2d5b771cd85b909a8287156b5d60653ffb0",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/deteccao.py",
+      "sha256": "f7a22828754661d7b6f809a6a00476660773708e3d26b25cf8bd5d78d3697600",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/discordancia.py",
+      "sha256": "19569cb305eeef25e58e146d415be8c0b0faf156d7c067375ea37f7f5c4184ee",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/documentos.py",
+      "sha256": "18c1006593c591527a9c9f6fe83b1e84a7ab73bd5c21a65c3bd1f0ce096083ae",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/engenharia.py",
+      "sha256": "efcc41028dbc4e729ba459b5a7c24163ae4e785145648b12e5a5aa599aaf430a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/entrada.py",
+      "sha256": "1edc219b6b60a8a98d6ea0e1a02b6ab58a429fff45444c86840991ff67f7add0",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/estado.py",
+      "sha256": "17e9fa047d2189e1891b8227351aaee4f4583c62617cdf1087b51ce0cf7eb5ad",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/execucao_modelo.py",
+      "sha256": "2fa1ae29eefd5fb5cf7d4c1bf603b6b69a2508901b6de4957485bd8a05919caf",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/fala_fluxo.py",
+      "sha256": "b629f49aed8da844c78481de1162e6641f4ac201e75989c2972b6761d01de226",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/fala_variantes.py",
+      "sha256": "d61493b55282fa16e0dff7faa79729ef309e244d998b300041bf1ea240bdb24d",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/gestos.py",
+      "sha256": "180689f0bccb72696c55235dbb0209cd371bfd9bc788e7ce7fe9692280dfa4fc",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/google_agenda.py",
+      "sha256": "59110fa49d62fc1552cfe2db66bbd204292ecd9e5d5781de43ce092425e8e44e",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/holograma.py",
+      "sha256": "c1fd0b921a1302dd6aa94169848f4d0e18bd2bb914f4838bdcf7cf5dd21a22eb",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/identidade.py",
+      "sha256": "7f3f49ff611025baad1e298eab4e6d3df7c72b94cc05b75465ae3fe61d50801a",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/identificacao.py",
+      "sha256": "8cb3daf4ed3eacd005166bfad090189b04d70f14a41577c52c8c5e78b8a70ae7",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/inventario.py",
+      "sha256": "6265a7ee1cffa02b5f179bb0f24d6a0db2dbe95d4a2280b0ec117e18717c4504",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/janelas.py",
+      "sha256": "037d3979a12192d47785581e23a8d2586dadaf3e76db35e99e6b567782efdd9f",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/listas.py",
+      "sha256": "3f3136d361ec070cd80201a8cd44f6e2fd050583abb280f240d41830b3ad3043",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/memoria.py",
+      "sha256": "b50d97574031e40c06b4d579f056cb20a0a75198477868e54a2a51ceaa8948ab",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/midia.py",
+      "sha256": "87ec414e885eb980c953bba9f67b3df11ffa5eb7b1967687d4081369be103052",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/midia_arquivos.py",
+      "sha256": "ca2e4a43866656777a0ce73f7d4ce0f35eb783f784b36a2ba062301001782d61",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/modelo.py",
+      "sha256": "92129b8379a1570ce2338ef58d00f22441dd9d447b8fb196feed00d2d96bd251",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/modelos_ia.py",
+      "sha256": "336028b4fb0ae0465caaf82efc7f7b471810864f7f636edfa48bfcb8282c02fa",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/monitores.py",
+      "sha256": "f9a7d7f577097b711737da798236feadd939677901922893d28ed61f445c88b9",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/montagem.py",
+      "sha256": "6b54ea6d3485c421d5e7157c0f21f86300117617a54efa9dcb8b7dd37662c1a8",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/noticias.py",
+      "sha256": "118a794d2e0f6685587f22b3e6ef37829d134362ad519ca3e1ffedf1a980f157",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/notificacoes.py",
+      "sha256": "c491ebc5b3dd5468e539a5b7dc55ca60302a929751a4e212ebe583383f602409",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/ocorrencias.py",
+      "sha256": "97d2ae71b6ebe01f7c8bd82b680c8f683118585835d355239b6df02d785c9ba6",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/olhar.py",
+      "sha256": "296de7a9deb3ea73d499e6eed01f525fa7984fbe49a9c94d64cde79b14d6d504",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/openjarvis_info.py",
+      "sha256": "c52a87efbb886cef362fd7c7c9a51bdcd3171b7cba0fa1f683eb193d7b0460d4",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/palmas.py",
+      "sha256": "670d50fc9b1baace84c17b4258285f8083a6b6d08d07368312f00ee7b012c243",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/pecas.py",
+      "sha256": "d8d3937a76c2af924df211b5b189c556056848b25b05a2605fbac2664541f500",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/percepcao.py",
+      "sha256": "1bca64474e6015247d7c635f26374292f944cf2e3b4b972f0fc0445d4996f111",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/pesquisa.py",
+      "sha256": "369948ded5138ffb8cc7ee0def0fcde2e45f06159b8c542f48b639b1169437a4",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/planilhas.py",
+      "sha256": "b0af1e0886827b2e78e335134c46604f1424f4c209ef3ec6fc138964277553dd",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/ponte.py",
+      "sha256": "51731f6e096d45b9811e617a3d9e9c92c333c8f5598e3ccdd3914733752eb4f9",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/preferencias.py",
+      "sha256": "5aaf4faf1d6f07b637457ce43986107a0b2fd56f37877bf53edb88e466dcd0b4",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/programas.py",
+      "sha256": "9843bdf41793dbd01ee25a7a1a75f652b2d081d5926bd53e4fbf0d3952b215f4",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/projetos.py",
+      "sha256": "e071c2b67ead75f57f9c6ed352da05c7b49e388ad7ffa76cda3605222f080d37",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/protocolos.py",
+      "sha256": "5ad9a9375d2134be6e6998fc99d69354d1ef0e8857791264a1ebbe4804bf62f8",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/rascunhos.py",
+      "sha256": "963fecc73598582c1458b4d661c99e90748d1d886f74b09f1058afa46188ddb5",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/rastreador.py",
+      "sha256": "f4ff56d277fc471daaca16f010f969c062133697ff2321101a52fb578f05bedb",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/rede.py",
+      "sha256": "81ca3b313341c0af147d91a2369e9e8f01e3f81dea28d13194dacd8b9c8f31b5",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/regua.py",
+      "sha256": "fa0a5fca8858494de341fab7f97ced490a6c35e3f8ae6983eac8a564dfb40a1a",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/reunioes.py",
+      "sha256": "17009a6a5596194a78244698f92d285ba9e9e5d8e4911d89271f0582359ca065",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/rotinas.py",
+      "sha256": "d234b4499b460e2f8232dfb093a9d7cc9f034949c4bbafccdbd34bdd84b1b9a5",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/secretario.py",
+      "sha256": "141c60278ce207429f90c7e449303113116489ea40724aed2b995f686cc73dab",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/selecao.py",
+      "sha256": "be8d0778d8e29884444f0f0dae6072df7f6be699a11b83b469717edec7eae015",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/servidor_http.py",
+      "sha256": "7b81fda47df780b86db06663baa7c25f9e8f79a846b661f415ea78bb8b978989",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/sistema.py",
+      "sha256": "0e417ea9abf42abad1007060d1a57b8cb33b70cddfc4aca0400f514012c556bf",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/tarefas.py",
+      "sha256": "6691ed515785c32e6157e66d1603d72381e30019869b0d7b6fe5d5320b849858",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/tela.py",
+      "sha256": "ca3736d327a9fa08bdd3299732faa2138019f298b0542c0ea1021d3414533f8e",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/telegram.py",
+      "sha256": "6e5967e73ac1b7011a5b1497f759a5a14656380ad62b9dc07b868e49843fdf71",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/telemetria.py",
+      "sha256": "fc4fe02fd9134b2094ee4a1665d4896a6e0429dc12628e5ee7f7874950d1624e",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/utilidades.py",
+      "sha256": "9e09767f447a016636a3841958b314f103a0ae0dbf8b570b8b0cf11c08956cae",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/varredura.py",
+      "sha256": "11f60f1cb9cd534f8f655383d99420d0f535f63c05c4c03460903b4ce79f0d94",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/visao.py",
+      "sha256": "0b4da1c7dfbbfaff7a99e881c05e511c0b586de6e3bd7cb7e00ab744b3587007",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/voz.py",
+      "sha256": "38036ec3d4c548d38d24a0dc2826fbd35cde32aaac04a37ffbff9bdbc1be5c07",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/hud_runtime/vozes.py",
+      "sha256": "ffcd66b43879bd135e09951ed314787473697abe1ae3a19c2980c93498a2c552",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/INVENTARIO.md",
+      "sha256": "a5561dba36f4bf3250447b114eb01e0eb4a572e0df5544b11a2e8f11a8cf0fb1",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/jarvis_runtime.py",
+      "sha256": "db327e25d05843ffefe754281ad95493bcbdd8da797935d2d6ad7e441e783d2c",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/MATRIZ_FILME.md",
+      "sha256": "fbb87281c2bbc69e5385feaf96eaf23e7858b7cb1c304e2ab54085f62f891b0e",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/requirements-s7.txt",
+      "sha256": "dc78b02b45265e35f5671dc4cc8d91be2882963e8a5aa88ff3f3c76f96da4e12",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/tela1_rosto.html",
+      "sha256": "15f327621d765c9db5cb5d65eefdda9c311165b977dffb093f891b0430b1254b",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/tela2_painel.html",
+      "sha256": "b73e6a6e5cdd578bfc15fd6442b8600ffdd29756a7b07790aa2170013cd65c4d",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/conftest.py",
+      "sha256": "b9b3dcce904ebb31c3d94fa7a1c363533d501ab69b25fc4a4d3f657466a9ee7f",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/integracao_voz.py",
+      "sha256": "5dbf7cf579c0b2e4ff90b284eaa99b59c244ebbe75fee3beaba9cadcddf3c563",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_aceitacao.py",
+      "sha256": "86e489c1f71626df7bb63448630a7c09330dadc45e750408caf97446f734c2cd",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_alexa_percepcao.py",
+      "sha256": "113a2ec2717945c9016885fd3207d8b1c4cfbe5596081f47d0f4539f25bf211a",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_apresentacao.py",
+      "sha256": "b5f357a688a3969b8aeecb7fbd5b639c5814dbe236f32372918be534526ebf87",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/test_arquivos.py",
+      "sha256": "afbc8738a3bb17e85a7f544162cd5022129b2a0df755fe5a7acf4b24010cd931",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_automacao.py",
+      "sha256": "9015740cf25cb33482213def3c5c1be8ee878d0d4240f2b6a04c79f29096c36a",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_cadastro_integrado.py",
+      "sha256": "f026d380b17f5f1c0b107fc1c81b77c5e75f4bb8366d70f132a65c9f1c2e3468",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/test_capacidades_reunioes.py",
+      "sha256": "cfd6e1eac5878c0edb024c7982cd6cd80c52c46f83369ac8ea36edbdca463050",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/test_casa_comunicacao.py",
+      "sha256": "7d5060a3cedf3bbcf2f2045272019b65bc3dae7bfc54f24aa64fe75db3aa2a5e",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_conhecimento.py",
+      "sha256": "73bc1ed0697c943aee0fe9989b8fa7d1db2aea14e9bce18cec0ff7c98d35423e",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_consultas.py",
+      "sha256": "8b3334c4d5d77fcc5e6f9c05cca82ba387946c473e29c6c7b732ab37b6e4edff",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_continuidade_contratos.py",
+      "sha256": "eadcf61a18651c015d664f059e94df83d6a75c990d92271ac654a4ea0f9f1d02",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/test_conversa_visao.py",
+      "sha256": "f962b07386dfe29be16e96a32345f61cbc07caa24f15295b36e01a7745a2a115",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_correcoes.py",
+      "sha256": "ba95e00c40b95aa192259e1108cd397a59ab881b70f0fa3bdc7d42545b86d89d",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_discordancia.py",
+      "sha256": "7a0f2a27b7a3c9c0815cc78af581b7cbf89fb50859b7372397d4e4ec0b45b829",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_engenharia.py",
+      "sha256": "a39cdd084c7686f2541bbe6787d55d26dd11546fe20989303534d90ec3c12b46",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_execucao_integrada.py",
+      "sha256": "2e7d5473a49a4683fbd4304a2438897c2e751142c57adac982b9e07ef0e1f188",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/test_extras_finais.py",
+      "sha256": "e38f61baf51376119369529493e48c889ec0005b1ffe4eaf1a091d26f108aea3",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_fala_variantes.py",
+      "sha256": "97efbee35fc96c6b002d80c4d71b90c5d1cb5c7e6a5360ea6fdff4d27b0deda3",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_gestos.py",
+      "sha256": "1696a57c248210854d15343ac937310d16d76becf2c5c1cc6a477560af902cdf",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/test_holograma_integracao.mjs",
+      "sha256": "eb1cfe00f7b7f67834eea3d6ce15572b483be892d021183b6c61e4c083094689",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/test_identidade.py",
+      "sha256": "7476c1e258bc3b6ea4b27baf3afef4811f853ff7d93eca911d70b3cf1d2e7524",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_identificacao.py",
+      "sha256": "0b7e8de2857620cf2a506abcf8b19def3045dec2aef1c3b8dddde7e493513909",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_instancia_unica.py",
+      "sha256": "6207b4c7669d482090765b9b3f654cc8824758d9ee0f31fa7e19e7a29eac3610",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_inteligencia.py",
+      "sha256": "8f8d24e5de0514ee847ecccd3c3fe821fbf87d3d62e50927901d9bf9cb69105d",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_inventario.py",
+      "sha256": "89398c0ac732fa964ba9c7fa6272f45c24935eb9eb39030b1eae449dc783b054",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_lembretes.py",
+      "sha256": "82432f3e6337c869b4ae115b4cf912551a5a5386dcde9545959c5f92a9c1b66d",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_memoria.py",
+      "sha256": "553d88f1c446648400a30d8444457fcb726899efc710a19a65df0aff853f500a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_microfone.py",
+      "sha256": "d8b5591e9c9ab52f55a05f793cfdb1d0d7e407fb61b8b3248db7ea2919c2f7e2",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_midia_trava.py",
+      "sha256": "eaf453737e79f1930f1389d8ef5e199bc9b955ab0daaa0ff7e8377db51abe061",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_modelo_reserva.py",
+      "sha256": "cbf719981243640fe6f69fb650e5b4e49fa23f86fd5793c819d13cc5f36f2b24",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_monitores.py",
+      "sha256": "d8502b180a4f18cc4bb11b4e24bb4fdd3010cfcf6ec24a3fe39ee3168317789d",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_montagem.py",
+      "sha256": "9352934b618130b4645c5b7d542f6e5b92253fb5a319a62f5223d911b47f766f",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_novidades.py",
+      "sha256": "eb98cbf1d80771acf2ecd2b9a37208b87090276d4b2b5d14ae080d107891490f",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_novos_downloads.py",
+      "sha256": "9d20314ccdc5f600dafbd7116f2ab11abcbf08f863e2238e7b116256798e9816",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_ocorrencias.py",
+      "sha256": "066899689572dee7a08d196b39e2e4ab6022934301ab395bca957e472a64e831",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_olhar.py",
+      "sha256": "8480d8981282664a37fef1f46c96af93e91c2d507b4bd87874c43be91371b777",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_pecas.py",
+      "sha256": "228adf3c75cf7f2a633e2bf45d96aae883de794dca5edfe5eccef850c4c80d69",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_pedidos_compostos.py",
+      "sha256": "851802eb07a4f63a27be440f3fb985dd0adcf863bbeebedaae16a68487244e72",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/test_percepcao.py",
+      "sha256": "1fa3cf079a0815c3f918649b303925bcd5d33dbde014b0c973dae3d7dc0df750",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_percepcao_confiavel.py",
+      "sha256": "f48034f917b14802cc30d552b8e1e9293aaca831d67bf7d7ca1541e59c59d1e3",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/test_pesquisa_integrada.py",
+      "sha256": "8c43d364308ccca59698bee6e1b5e26f1e153ba70d174b801faa6a29639c7dcc",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/test_proatividade_contextual.py",
+      "sha256": "53a42e90c3b224579ad0bd36f4cbee51b2db50d68013dc301443bb2034896e15",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/test_projeto_peca_foco.py",
+      "sha256": "b163f18f5ebc46ef19e9098686c9b5bee5d815e0c36f0e4d346a1c73d84c2c29",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/test_projetos.py",
+      "sha256": "42567e105782a8b822190931177ac1595945d98b536feda5c901458cf22dbb43",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_protocolos_parametrizados.py",
+      "sha256": "14f744a3ef83db68f09ab75be5a4a50046d04ae38af555df61ad7ce00f4a3f9d",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/test_rascunhos.py",
+      "sha256": "8e1a819080e1767fee1013d8b5c7f1220f9203ede6829f18fcbe50b4a07dc0ac",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_rastreador.py",
+      "sha256": "a9139977a20d21d8d9a3479795f4bd8fefca4394c5fa92ec95604d2fef06fff4",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_regua.py",
+      "sha256": "94fe44e5218f05cd87035b9ad718e0c6d1ccd29f6fe6fed6029f2dc3686d1ec0",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_rotinas.py",
+      "sha256": "d21b5d9acdc465d4959e02a219d59c7b8759a8f747740bb2196a3f5b0a8493ce",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_runtime.py",
+      "sha256": "872c7bcb2bba3fbf387b2c9304da3ee3f175c7b953aa47a5bbf566f91b819d64",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_runtime_nomes.py",
+      "sha256": "c524bccc6c955918211503b0547b1de61b0c2e4ce9dd79e417736d4952b3dc56",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_secretario.py",
+      "sha256": "252999cb0de313afdf2940125c78b241b8aa05cef7d45a90f3e5fdf40ba6af3a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_selecao.py",
+      "sha256": "ecaeca7600123220e10de84a50d91861c41894e86563e0bef939724fb7f39666",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_selecao_visual.py",
+      "sha256": "265c7e8546ba99dff6e0d1064fd74a0e16399b0d5fd24fef05e7ce5b6085893d",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "modo-show/testes/test_varredura.py",
+      "sha256": "75ba02555210898521f8f000ea4e29f7ce7296741616fac194b161a0365174ba",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_visao_tempo_real.py",
+      "sha256": "6292a22612bb78b64c49d626507c5c0cb1ba6f466a239e155a457c895201fac4",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_voz_catalogo.py",
+      "sha256": "e9d2846909bcc13c5b165b78aca607a838ec8fa3178b9c2938004121af130512",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "modo-show/testes/test_widgets.py",
+      "sha256": "81261914fd42666b79c0fcae10aa35a7f79df5e9f379f8078efc51f4786b3fae",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/__init__.py",
+      "sha256": "8a0c52f1d83beb848de7d56bd08d5fd8e8e7493e911b0da254f21e4c99bddd48",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/agent_manager_routes.py",
+      "sha256": "a31223fcf214e1db5db71c6d062845952616b856f49778fbc58ef251294d3556",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/analytics_routes.py",
+      "sha256": "9a7c9aed0cca8396ea56f9ae5112faf2e6fedd1f9f09e5fd6566c4be6305240a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/api_routes.py",
+      "sha256": "7ff7b40739ebcadcd49697bb894bf0a11c998cc231e232504f6f7be4b4f519dc",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/app.py",
+      "sha256": "d690ee09ddfd25cbd8a76e360863cd05a80e52f5d67b0c4fd8cd8d3e9eba3238",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/approval_routes.py",
+      "sha256": "a93c7704d8abda4b59fb179ecf2fb87c57386ae1aacd16685d220779c88b1c28",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/auth_middleware.py",
+      "sha256": "764afb5470ce98d5f69b654939bd834aef811e9c7c89002912d527d8defcc6ce",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/channel_bridge.py",
+      "sha256": "b328755afcd99c6a850cc7cf23c910d51bb228b7aca71f8d9974430fc48eb157",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/cloud_router.py",
+      "sha256": "a8b2ae3cbec3946edf222b261c3753cfd0d86fde8248de47fc8042cabd8ec89b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/comparison.py",
+      "sha256": "ee80fe4e648d5a3309c44e2e8ffe49889fdab3c2d1e06715aebafa60178a75a0",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/connectors_router.py",
+      "sha256": "066cba5f99753701030df2c15ca4a514f36b75d871671d2d57313af37c240381",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/cost_calculator.py",
+      "sha256": "e67c4c736b6b1a4b1571dbd0c7147eaccb6d0e791d0fe26db7033bf9eb6e7b86",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/daemon.py",
+      "sha256": "a0557b988f4a7b2dcd56ed3dace69fefd5f6ca5c7fc3f9cdf9861a94eec76047",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/dashboard.py",
+      "sha256": "936c81eb8ee0f3c7afada8497662524fa66a24ef2e80126ca82c646fac28349a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/digest_routes.py",
+      "sha256": "6ed3e0298ea5a4eadd2b3aeff8d69916f9873c3ae5c1f127f728a0f6a286efe6",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/middleware.py",
+      "sha256": "8a0755a08bf61958044593dcd8ffbd94df767e5afdbcf87b4cb6a7c871f38110",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/model_capabilities.py",
+      "sha256": "3ceb64d3405ae27beec4f48e2753cae95468175bbbf6a622cbf24b9760c2539b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/models.py",
+      "sha256": "23e7b762ecdeb6678f3f82eb9a5c74613af8041db0f5b27beeb6be64131c155a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/research_router.py",
+      "sha256": "9632708055969fbcbc0e2e5a057055b3d2f55bc290ab5a43c52bde78b3d863c1",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/routes.py",
+      "sha256": "44b74e0375c403f87264ce68a380ec0dc0f0bab5432ec7c8f2448c185007d2fe",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/runtime_bridge.py",
+      "sha256": "f85dbb242881c906555eadfd79d129d597dab1f01dbb72e71903c6e57343d9f1",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "src/openjarvis/server/savings.py",
+      "sha256": "34c36f3759af06cce732271e17a7149b00f4cd1587a82dacbbb50ff9e8d17614",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/session_store.py",
+      "sha256": "ac8f2cc41e16ff50331e8f338ed12f657f5fd4e0e875e7cb76cbc60c4f5adb8f",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/apple-touch-icon.png",
+      "sha256": "1b64d0d1f2c4bf66f949fe8ee96060d54a0c90cc3ae90f4e95bac1472328d0e6",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/charts-D5JARnc3.js",
+      "sha256": "c07aeef2fea746c1c78163c3234a5fb5e976e7a869c5080044d9cc691a5a082d",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/core-DLU9e1nn.js",
+      "sha256": "5684940ac4caebb26c15bdb17ad2e603fbfb5eef55030009d25210190ab250bd",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/dist-js-B24acY6J.js",
+      "sha256": "5b15aa9891873e49b973b717c96e5f44b4fc8275d713359849a0e93b81e6dd48",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/dist-js-Dh24RgZQ.js",
+      "sha256": "70735a076325c496ec78e6b49cd9ea30f5767621e07861b599668a5a30ef712f",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/dist-js-tYDosM5r.js",
+      "sha256": "28b322a26edd9331ec0d04048e89f729ac0b98bd70b49d2225e26f96e06dac29",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/dist-js-xpmFqu3B.js",
+      "sha256": "97306f523b043a6519c0a1b11c4726525dda9f0c8f71929bfea914d8bc506710",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/index-CNVUle75.css",
+      "sha256": "57c3d3eacd717c552e6e947e38de8555863db146deaeeaaac7b0f4a9bdfe281a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/index-D4sCWbvW.js",
+      "sha256": "52e075fb12a784f6b692fc5136ce004969c11b46403836786bfbae4d09741511",
+      "comparacao_checkpoint": "novo"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_AMS-Regular-BQhdFMY1.woff2",
+      "sha256": "0cdd387c9590a1a9f9794560022dbb59654a7d86f187aa0c81495ad42d3a7308",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_AMS-Regular-DMm9YOAa.woff",
+      "sha256": "30da91e84c893f875e252689faebdc590b2871145e8adc7f9a9d4dbd8ce0b251",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_AMS-Regular-DRggAlZN.ttf",
+      "sha256": "68534840bcfdd2bffb6f0e8deb48684dd01e7f04ea2813267577afb906de1d13",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Caligraphic-Bold-ATXxdsX0.ttf",
+      "sha256": "07d8e303ce4fc12b4bb54f1004170dd190a1f3db45d400fe68060df3e0897268",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Caligraphic-Bold-BEiXGLvX.woff",
+      "sha256": "1ae6bd7475590e97e7f145a89e09ccde322f7a6bc0b91607b1c8b8ee28290fed",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Caligraphic-Bold-Dq_IR9rO.woff2",
+      "sha256": "de7701e42cf1f4cf0b766c03fb27977207eee2f4fd5d76fa82188406da43ea4c",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Caligraphic-Regular-CTRA-rTL.woff",
+      "sha256": "3398dd02302557a793f2863f88e02d96ce10df2abffa07c8e9fa90775116e65c",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Caligraphic-Regular-Di6jR-x-.woff2",
+      "sha256": "5d53e70ad607c2352162dec9e0923fb54ecdafaccbf604cd8dcf7d00facb989b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Caligraphic-Regular-wX97UBjC.ttf",
+      "sha256": "ed0b74372feefcbb9c0666b2e210da37b7e49fa7fbbf3eeb11db5f693dacfbb7",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Fraktur-Bold-BdnERNNW.ttf",
+      "sha256": "9163df9c7122432e6495b4229fa9071cf9ae86a758ae5efc4924ec2e1a6dbce1",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Fraktur-Bold-BsDP51OF.woff",
+      "sha256": "9be7ceb88004ab8ad124082246fbfcca4091e36385d4ec6ed1df67375dad50fb",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Fraktur-Bold-CL6g_b3V.woff2",
+      "sha256": "74444efd593c005e3f4573b44524704c0af0a937fe911cca9e94068d0d140d3f",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Fraktur-Regular-CB_wures.ttf",
+      "sha256": "1e6f9579e90e2cac37f8f60a597c436e075c114385652b7cbeb0dec0421291b3",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Fraktur-Regular-CTYiF6lA.woff2",
+      "sha256": "51814d270d06ff0255dba0799994fa4d8c84d11f09951d47595f4abb1f3602dc",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Fraktur-Regular-Dxdc4cR9.woff",
+      "sha256": "5e28753be717dac97f559f49bc10be9cf3c124ddcabda6659d11cb68febc6463",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Main-Bold-Cx986IdX.woff2",
+      "sha256": "0f60d1b897938ec918c8ce073092411baf9438f6739465693ff18b0f9d20b021",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Main-Bold-Jm3AIy58.woff",
+      "sha256": "c76c5d696297d51b9cb1639c7da4334f0e7dec81b42b11213b5e25ef671bb822",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Main-Bold-waoOVXN0.ttf",
+      "sha256": "138ac28d1663b3037e9c5f52371fa5c63d8324f4a38d22cd573e6ea3a3fd0cf8",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Main-BoldItalic-DxDJ3AOS.woff2",
+      "sha256": "99cd42a3c072d918f2f44984a807cf7aa16e13545fd0875fc07c6c65f99e715b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Main-BoldItalic-DzxPMmG6.ttf",
+      "sha256": "70ee1f64a20f2048c21940ef46d0144fd215baa953ca69afd1e31e98544f708f",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Main-BoldItalic-SpSLRI95.woff",
+      "sha256": "a6f7ec0d846ac7ad975adb8959c37ed49b94acbc4ae436db9ce9e20287e4a64c",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Main-Italic-3WenGoN9.ttf",
+      "sha256": "0d85ae7cc30f23790a7f1a58c4a112fdca8aae769b6ba11429af1d98b1b6cb3a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Main-Italic-BMLOBm91.woff",
+      "sha256": "f1d6ef86f3b11a528bd5185199bd2443ecb2b0dead96d88674b5a2c12be24bdf",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Main-Italic-NWA7e6Wa.woff2",
+      "sha256": "97479ca6cce906abc961ecac96faa5f9ca2e61b8e7670d475826bcdee9a7c267",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Main-Regular-B22Nviop.woff2",
+      "sha256": "c2342cd8b869e01752a9321dc17213fc40d4d04c79688c1d43f2cf316abd7866",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Main-Regular-Dr94JaBh.woff",
+      "sha256": "c6368d87e8a1a3a5d337623d83d8dc4b868f242a9ad476237d6f8d1e0f168cdc",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Main-Regular-ypZvNtVU.ttf",
+      "sha256": "d0332f52868370fd83ae7fa46470f90c8f2eab2fcf12bc4f88080b340c95a830",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Math-BoldItalic-B3XSjfu4.ttf",
+      "sha256": "f9377ab0271cda59af24bcffbd46a4d0c8a3572ffafdbb38de2ad5ea7b0d5ee5",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Math-BoldItalic-CZnvNsCZ.woff2",
+      "sha256": "dc47344dbb6cb5b655c8460d561f4df5f501b90c804ad3c6cec65fe322351ab1",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Math-BoldItalic-iY-2wyZ7.woff",
+      "sha256": "850c0af5c2238497febaf5e461d880bf458c341f42f4f330f1b1ab5698b1998e",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Math-Italic-DA0__PXp.woff",
+      "sha256": "8a8d244581371912b8f3f5a23e2437cb2a59cd9bcaebb0346e722c05737a2571",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Math-Italic-flOr_0UB.ttf",
+      "sha256": "08ce98e51b04d58945a301e639e02b6998af29fdfd61a7b8afdd07bbfc479d4a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Math-Italic-t53AETM-.woff2",
+      "sha256": "7af58c5ec8f132a2ddde9027c6d7814decce4d3b822a11192a42a20e2e973264",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_SansSerif-Bold-CFMepnvq.ttf",
+      "sha256": "1ece03f79f95277d57dc7f6b435a74e1379b0d46104a8530286b60ff49369ea0",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_SansSerif-Bold-D1sUS0GD.woff2",
+      "sha256": "e99ae51144bf1232efcc1bfe5add36262c6866b0faab24fa75740e1b98577a62",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_SansSerif-Bold-DbIhKOiC.woff",
+      "sha256": "ece03cfd83e22c212cdef66feb8442d25a083beb988db3f1883f3f9738d750ba",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_SansSerif-Italic-C3H0VqGB.woff2",
+      "sha256": "00b26ac825e2095056396e0553b8ac26d3f8ad158c3826e28b4c45b385c4714a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_SansSerif-Italic-DN2j7dab.woff",
+      "sha256": "91ee67500cc0129aa0ace3ac5c61ff1692102f0f31d02b69347fba35dcb75bf2",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_SansSerif-Italic-YYjJ1zSn.ttf",
+      "sha256": "3931dd81faed86ba021bb2bbdc36f5bed9a38d6b4f4077aca59b265aa1b02083",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_SansSerif-Regular-BNo7hRIc.ttf",
+      "sha256": "f36ea897e19f4a2e571d1e900e4e3710e438deb05a842486045ba0a3e616a4ad",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_SansSerif-Regular-CS6fqUqJ.woff",
+      "sha256": "11e4dc8a6471ff6d6ee561d53d10fde8f7489e798257ff449c5d37c197435605",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_SansSerif-Regular-DDBCnlJ7.woff2",
+      "sha256": "68e8c73ef42afd3ccec58bf0fba302cce448938e7fc020a5e31f8a952eee1342",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Script-Regular-C5JkGWo-.ttf",
+      "sha256": "1c67f068fea8bb09bf099c088b1cf64bd27516a6e07f4684344873564bb66a67",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Script-Regular-D3wIWfF6.woff2",
+      "sha256": "036d4e95149b69ff9bcc0cd55771efeb25ffa3947293e69acd78d5ac328c684b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Script-Regular-D5yQViql.woff",
+      "sha256": "d96cdf2b3bdd4d64a8fd5f74a4c467f123a8a73931cd435889f08ffaf9bf947a",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Size1-Regular-C195tn64.woff",
+      "sha256": "c943cc986384f59e86bea5fd7dc50a9c4dfe567a7c05eb40d6790720dead97c9",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Size1-Regular-Dbsnue_I.ttf",
+      "sha256": "95b6d2f1a50173bfedb8c63e1d1c99b10427d0a4df4201cb44513b226951a22b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Size1-Regular-mCD8mA8B.woff2",
+      "sha256": "6b47c40166b6dbe21a5dfca7718413f2147fd2399be1ba605d8ad39cedf25dfe",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Size2-Regular-B7gKUWhC.ttf",
+      "sha256": "a6b2099fb555c60e3a0db3a08842ebf1d732c6eb4e4bf44913613bed4fc4e39b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Size2-Regular-Dy4dx90m.woff2",
+      "sha256": "d04c54219f9eaec6d4d4fd42dfb28785975a4794d6b2fc71e566b9cd6db842dd",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Size2-Regular-oD1tc_U0.woff",
+      "sha256": "2014c523c3210bcc166648c4d4cc57f05b747df07a24277bf71c51e67dc79e3d",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Size3-Regular-CTq5MqoE.woff",
+      "sha256": "6ab6b62e9b62dae2c00dd90f791bd10950be0ecc3490d7d6045f51c2e8fe0949",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Size3-Regular-DgpXs0kz.ttf",
+      "sha256": "500e04d54f0d51666332c9d2089aa803be22aa878eca539e59fa53c6e522b082",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Size4-Regular-BF-4gkZK.woff",
+      "sha256": "99f9c6750b489c9462bf04900bd3f939df9b829339daaaaa99ef5495cdddea58",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Size4-Regular-Dl5lxZxV.woff2",
+      "sha256": "a4af7d414440a1c1790825cfb700cf9cf43b0f2c4b04f0ebc523011ad9853ec0",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Size4-Regular-DWFBv043.ttf",
+      "sha256": "c647367d1dd4e162468717d020e1fc0f1dc5c26ebfdffbe55261713bf88c5877",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Typewriter-Regular-C0xS9mPB.woff",
+      "sha256": "e14fed02b1aba7ce9f5afd5844b5d0321b22351febc720e0de8b8723527609f7",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Typewriter-Regular-CO6r4hn1.woff2",
+      "sha256": "71d517d67827787cfabdf186914cc3358eda539e37931941f2b2fd4a21f68c0b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/KaTeX_Typewriter-Regular-D3Ib7_Hf.ttf",
+      "sha256": "f01f3e87d9c6a61c0c081ceb577abd864eb00a612f7ac1620dd6915fad2ef5aa",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/markdown-Dv7GvOYk.js",
+      "sha256": "48b2564b4686eabf08efa3b2a47c279a7cd4ee0026a858f8b363104ef91255fb",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/react-DZJ-o54e.js",
+      "sha256": "6dbc2195b5397344123437f39d5daa480526aa41c32d6d50715faf672535bc8c",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/rolldown-runtime-B0Z9INg1.js",
+      "sha256": "5e9b0d884d2ebb14e241ab38b43e41efb61bce2e74d71507b0b95b264fba4047",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/assets/router-BBX3aUmU.js",
+      "sha256": "34d0fc192b0e9e0a5c46b8c103b7daa33952cbe0fd3acd719442ecf40c7c953b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/favicon.ico",
+      "sha256": "893a625ed0b2e2c0d5cc889b113d98da90e75f2c9273a819fb3435eb7e836ab0",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/index.html",
+      "sha256": "532d5761bb88b85284d3b3dfcc30253d5f9935c02bdc26e3cd493a55abe5cd09",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/manifest.webmanifest",
+      "sha256": "f6720f162d78fed3d3824fecb3fd39460f0264bc873183312717533130b8df0e",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/pwa-192x192.png",
+      "sha256": "e00a436f8e5dd126785e0c65f483554777b1600fe3dfa70ced596b66b273539b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/pwa-512x512.png",
+      "sha256": "670a017fb9d286e01d027cc6873df36f9c3b860c10f9148318fede4eab3da1ce",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/registerSW.js",
+      "sha256": "9742073ef7fc795e7673d98f272992843298426a0ffd8cb3507784df5143608b",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/sw.js",
+      "sha256": "9bfad54144f9c78a541e923bc44c0b9a390ed05d49feec70f82520d6a9a71973",
+      "comparacao_checkpoint": "alterado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/static/workbox-9c191d2f.js",
+      "sha256": "04b086f1b2f4215ee4b659a7bc9c76162894abdb43fa876247bc7c0bd6fd1c37",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/stream_bridge.py",
+      "sha256": "a084f04f50060153877c00035336dc0ba7ad0d09256c794f42c269a14f3f92bd",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/upload_router.py",
+      "sha256": "9af6cbd20fb17441ffd4409120bf251aa1cd8f70dc302f798cb7874bf97d9b4e",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/webhook_routes.py",
+      "sha256": "9bb3ee94f37d85bace56b6f0d541a0d5dd769ee297ca9a7272eb1df1920226d7",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "src/openjarvis/server/ws_bridge.py",
+      "sha256": "1b5d42974eb9362dae6f27458a5608c83e2363945b1583bf0feff8b92af30f20",
+      "comparacao_checkpoint": "preservado"
+    },
+    {
+      "arquivo": "tests/server/test_runtime_bridge.py",
+      "sha256": "388a32c52ff7696bd13057db484617ff4c0c12af32b6f81b086ea66881d4b2dd",
+      "comparacao_checkpoint": "novo"
+    }
+  ]
+}

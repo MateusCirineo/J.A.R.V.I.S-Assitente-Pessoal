@@ -1,0 +1,61 @@
+{
+  "html_http": 200,
+  "assets": [
+    {
+      "url": "/assets/index-D4sCWbvW.js",
+      "http": 200,
+      "sha256": "52e075fb12a784f6b692fc5136ce004969c11b46403836786bfbae4d09741511",
+      "igual_ao_disco": true,
+      "tem_ponte_runtime": true
+    },
+    {
+      "url": "/assets/rolldown-runtime-B0Z9INg1.js",
+      "http": 200,
+      "sha256": "5e9b0d884d2ebb14e241ab38b43e41efb61bce2e74d71507b0b95b264fba4047",
+      "igual_ao_disco": true,
+      "tem_ponte_runtime": false
+    },
+    {
+      "url": "/assets/react-DZJ-o54e.js",
+      "http": 200,
+      "sha256": "6dbc2195b5397344123437f39d5daa480526aa41c32d6d50715faf672535bc8c",
+      "igual_ao_disco": true,
+      "tem_ponte_runtime": false
+    },
+    {
+      "url": "/assets/charts-D5JARnc3.js",
+      "http": 200,
+      "sha256": "c07aeef2fea746c1c78163c3234a5fb5e976e7a869c5080044d9cc691a5a082d",
+      "igual_ao_disco": true,
+      "tem_ponte_runtime": false
+    },
+    {
+      "url": "/assets/router-BBX3aUmU.js",
+      "http": 200,
+      "sha256": "34d0fc192b0e9e0a5c46b8c103b7daa33952cbe0fd3acd719442ecf40c7c953b",
+      "igual_ao_disco": true,
+      "tem_ponte_runtime": false
+    },
+    {
+      "url": "/assets/markdown-Dv7GvOYk.js",
+      "http": 200,
+      "sha256": "48b2564b4686eabf08efa3b2a47c279a7cd4ee0026a858f8b363104ef91255fb",
+      "igual_ao_disco": true,
+      "tem_ponte_runtime": false
+    },
+    {
+      "url": "/assets/index-CNVUle75.css",
+      "http": 200,
+      "sha256": "57c3d3eacd717c552e6e947e38de8555863db146deaeeaaac7b0f4a9bdfe281a",
+      "igual_ao_disco": true,
+      "tem_ponte_runtime": false
+    },
+    {
+      "url": "/registerSW.js",
+      "http": 200,
+      "sha256": "9742073ef7fc795e7673d98f272992843298426a0ffd8cb3507784df5143608b",
+      "igual_ao_disco": true,
+      "tem_ponte_runtime": false
+    }
+  ]
+}

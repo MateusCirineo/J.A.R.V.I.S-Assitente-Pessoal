@@ -13,6 +13,7 @@ import { SetupScreen } from './components/SetupScreen';
 import { Toaster } from './components/ui/sonner';
 import { useAppStore } from './lib/store';
 import { fetchModels, fetchServerInfo, fetchSavings, submitSavings, isTauri } from './lib/api';
+import { applyThemeClass, themeFromUrl } from './lib/theme';
 import { OptInModal } from './components/OptInModal';
 import { UpdateChecker } from './components/Desktop/UpdateChecker';
 import { track, hashId } from './lib/analytics';
@@ -49,11 +50,20 @@ export default function App() {
 
   // Apply theme class to <html>
   useEffect(() => {
-    const root = document.documentElement;
-    root.classList.remove('dark', 'light');
-    if (settings.theme === 'dark') root.classList.add('dark');
-    else if (settings.theme === 'light') root.classList.add('light');
+    applyThemeClass(settings.theme);
   }, [settings.theme]);
+
+  // One-time theme request from the HUD runtime (?tema=hud): persist it as the
+  // user's setting, then drop the parameter so later changes are not overridden.
+  const updateSettings = useAppStore((s) => s.updateSettings);
+  useEffect(() => {
+    const requested = themeFromUrl(window.location.search);
+    if (!requested) return;
+    updateSettings({ theme: requested });
+    const url = new URL(window.location.href);
+    url.searchParams.delete('tema');
+    window.history.replaceState(window.history.state, '', url.toString());
+  }, [updateSettings]);
 
   // Sync overlay conversations into the main app
   const importOverlay = useAppStore((s) => s.importOverlayConversation);

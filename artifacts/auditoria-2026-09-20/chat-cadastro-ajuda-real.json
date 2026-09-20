@@ -1,0 +1,93 @@
+{
+  "via": "HTTP real chat 8000 -> runtime 8765; sem navegador",
+  "runtime": {
+    "ok": true,
+    "servico": "jarvis-hud",
+    "versao_codigo": "68dc34703323caa2",
+    "boot_concluido": false
+  },
+  "servidor": {
+    "status": "ok"
+  },
+  "entrada": "Como memorizar meu rosto e minha voz?",
+  "http": 200,
+  "primeira": {
+    "id": "chatcmpl-2cc59c08eae44bf583482bcea2796cad",
+    "created": 1789878675,
+    "model": "jarvis-runtime",
+    "runtime": {
+      "ok": true,
+      "estado": "respondida",
+      "pedido_id": "c1c8c976c0cd4e569b0fb2666bb560da",
+      "modelos": [],
+      "modelo_solicitado": "gemma4:e4b"
+    },
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Diga: memorize meu rosto e minha voz. O rosto usa a câmera local; a voz precisa de três frases no microfone. Só guardo os vetores neste computador. Você pode cancelar ou pedir para esquecer os cadastros."
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  },
+  "duracao_s": 0.203,
+  "http_repeticao": 200,
+  "repeticao": {
+    "id": "chatcmpl-fea1c282adcf44dc9f3bddb2e21bf60f",
+    "created": 1789878675,
+    "model": "jarvis-runtime",
+    "runtime": {
+      "ok": true,
+      "pedido_id": "c1c8c976c0cd4e569b0fb2666bb560da",
+      "estado": "respondida",
+      "repetido": true,
+      "modelos": [],
+      "modelo_solicitado": "gemma4:e4b"
+    },
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Diga: memorize meu rosto e minha voz. O rosto usa a câmera local; a voz precisa de três frases no microfone. Só guardo os vetores neste computador. Você pode cancelar ou pedir para esquecer os cadastros."
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  },
+  "sucesso": true,
+  "origem_alheia_http": 403,
+  "runtime_sem_token_http": 403,
+  "cancelar_http": 200,
+  "cancelar": {
+    "ok": true,
+    "estado": "sem_execucao_ativa"
+  },
+  "cancelado_http": 200,
+  "cancelado": {
+    "id": "chatcmpl-f818f2450c8945d593355fe20ad1ab30",
+    "created": 1789878676,
+    "model": "jarvis-runtime",
+    "runtime": {
+      "ok": true,
+      "estado": "cancelada",
+      "modelo_solicitado": "gemma4:e4b"
+    },
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Pedido cancelado antes de executar."
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  }
+}

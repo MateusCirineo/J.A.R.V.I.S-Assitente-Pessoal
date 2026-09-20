@@ -5,20 +5,15 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import App from './App';
 import { initApiBase } from './lib/api';
 import { initAnalytics } from './lib/analytics';
+import { applyThemeClass, themeFromUrl } from './lib/theme';
 import './index.css';
 
 function applyTheme() {
   try {
     const raw = localStorage.getItem('openjarvis-settings');
     const settings = raw ? JSON.parse(raw) : {};
-    const theme = settings.theme || 'system';
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
-    } else if (theme === 'light') {
-      document.documentElement.classList.add('light');
-      document.documentElement.classList.remove('dark');
-    }
+    // ?tema= wins for the first paint; App.tsx persists it into settings.
+    applyThemeClass(themeFromUrl(window.location.search) ?? settings.theme ?? 'system');
   } catch { /* use system default */ }
 }
 

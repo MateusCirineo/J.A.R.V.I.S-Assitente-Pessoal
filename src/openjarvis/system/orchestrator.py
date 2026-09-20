@@ -14,6 +14,78 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
+def _direct_messages(
+    messages: List[Message],
+    system_prompt: Optional[str],
+    prior_messages: Optional[List[Message]],
+) -> List[Message]:
+    """Messages for the no-agent path: persona and history are not dropped.
+
+    A system message already present (e.g. injected memory context) is merged
+    with ``system_prompt`` so the engine receives a single leading system turn.
+    """
+    rest = list(messages)
+    system_parts: List[str] = []
+    if system_prompt:
+        system_parts.append(system_prompt)
+    if rest and rest[0].role == Role.SYSTEM:
+        system_parts.append(rest.pop(0).content or "")
+    out: List[Message] = []
+    if system_parts:
+        out.append(Message(role=Role.SYSTEM, content="\n\n".join(p for p in system_parts if p)))
+    out.extend(m for m in (prior_messages or []) if m.role != Role.SYSTEM)
+    out.extend(rest)
+    return out
+
+
+def _mentions_only_in_quotes(query: str) -> bool:
+    """'o que significa "morning briefing"?' asks about the phrase, not for it."""
+    import re
+
+    sem_citacoes = re.sub(r"[\"“”'‘’][^\"“”'‘’]*[\"“”'‘’]", " ", query)
+    return sem_citacoes != query and not re.search(
+        r"briefing|digest|resumo do dia|meu dia|atualiz|good\s+morning", sem_citacoes, re.IGNORECASE
+    )
+
+
+def _is_negated_request(query: str) -> bool:
+    import re
+
+    return bool(re.search(
+        r"\b(?:n[aã]o|sem|nada\s+de|don'?t|do\s+not|no|without|skip)\b[^.!?]{0,25}"
+        r"(?:briefing|digest|resumo|atualiz|meu\s+dia)",
+        query, re.IGNORECASE,
+    ))
+
+
+def _construct_agent(agent_cls, engine, model, agent_kwargs: Dict[str, Any], agent_name: str):
+    """Build the agent without silently discarding persona/tools/security.
+
+    Only keyword arguments the constructor does not declare are dropped, and
+    each drop is logged. A TypeError raised *inside* the constructor is not
+    swallowed: it propagates so the failure is diagnosable.
+    """
+    import inspect
+
+    try:
+        sig = inspect.signature(agent_cls)
+    except (TypeError, ValueError):
+        return agent_cls(engine, model, **agent_kwargs)
+    params = sig.parameters.values()
+    if any(p.kind == p.VAR_KEYWORD for p in params):
+        return agent_cls(engine, model, **agent_kwargs)
+    accepted = {p.name for p in params if p.kind in (p.POSITIONAL_OR_KEYWORD, p.KEYWORD_ONLY)}
+    dropped = sorted(set(agent_kwargs) - accepted)
+    if dropped:
+        logger.warning("Agent %r does not accept %s; building it without them", agent_name, dropped)
+    kwargs = {k: v for k, v in agent_kwargs.items() if k in accepted}
+    positional = [p for p in sig.parameters.values()
+                  if p.kind in (p.POSITIONAL_ONLY, p.POSITIONAL_OR_KEYWORD) and p.name not in kwargs]
+    if len(positional) >= 2 or any(p.kind == p.VAR_POSITIONAL for p in sig.parameters.values()):
+        return agent_cls(engine, model, **kwargs)
+    return agent_cls(**kwargs)
+
+
 class QueryOrchestrator:
     def __init__(self, system: OrchestratorDeps) -> None:
         self._system = system
@@ -83,7 +155,7 @@ class QueryOrchestrator:
             )
 
         result = s.engine.generate(
-            messages,
+            _direct_messages(messages, system_prompt, prior_messages),
             model=s.model,
             temperature=temperature,
             max_tokens=max_tokens,
@@ -96,13 +168,23 @@ class QueryOrchestrator:
         }
 
     def _detect_agent_intent(self, query: str) -> Optional[str]:
-        """Detect if a query should be routed to a specific agent."""
+        """Detect if a query should be routed to a specific agent.
+
+        English keeps the upstream contract ("good morning" -> digest). In
+        Portuguese only an *explicit* request routes ("resumo do dia", "prepare
+        meu dia", "me atualize"); a plain "bom dia" stays a greeting. Negated
+        or quoted mentions never route.
+        """
         import re
 
         from openjarvis.core.registry import AgentRegistry
 
+        if _mentions_only_in_quotes(query) or _is_negated_request(query):
+            return None
         if re.search(
-            r"\b(good\s+morning|morning\s+digest|daily\s+briefing|morning\s+briefing)\b",
+            r"\b(good\s+morning|morning\s+digest|daily\s+briefing|morning\s+briefing"
+            r"|resumo\s+do\s+dia|prepar[ae]\s+(?:o\s+)?meu\s+dia|me\s+atualiz[ae]"
+            r"|briefing\s+(?:do\s+dia|matinal|da\s+manh[aã]))\b",
             query,
             re.IGNORECASE,
         ):
@@ -209,13 +291,7 @@ class QueryOrchestrator:
             existing = agent_kwargs.get("tools", [])
             agent_kwargs["tools"] = digest_tools + list(existing)
 
-        try:
-            ag = agent_cls(s.engine, s.model, **agent_kwargs)
-        except TypeError:
-            try:
-                ag = agent_cls(s.engine, s.model)
-            except TypeError:
-                ag = agent_cls()
+        ag = _construct_agent(agent_cls, s.engine, s.model, agent_kwargs, agent_name)
 
         from openjarvis.security.runtime import wire_agent_security
 

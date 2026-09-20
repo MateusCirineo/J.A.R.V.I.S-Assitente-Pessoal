@@ -467,6 +467,33 @@ class TestChatCompletions:
         # And the agent was NOT called (proves the bypass worked).
         assert not agent.run.called
 
+    def test_direct_header_bypasses_agent(self):
+        """`X-OpenJarvis-Direct: 1` is the explicit opt-in for clients that
+        need the engine directly (e.g. a voice loop on a CPU-only machine)."""
+        engine = _make_engine()
+        agent = _make_agent(content="FROM AGENT")
+        app = create_app(engine, "test-model", agent=agent, config=_test_config())
+        client = TestClient(app)
+
+        resp = client.post(
+            "/v1/chat/completions",
+            headers={"X-OpenJarvis-Direct": "1"},
+            json={"model": "test-model", "messages": [{"role": "user", "content": "Hi"}]},
+        )
+        assert resp.status_code == 200
+        assert resp.json()["choices"][0]["message"]["content"] != "FROM AGENT"
+        assert engine.generate.called
+        assert not agent.run.called
+
+    def test_direct_header_other_values_keep_agent(self, client_with_agent):
+        resp = client_with_agent.post(
+            "/v1/chat/completions",
+            headers={"X-OpenJarvis-Direct": "no"},
+            json={"model": "test-model", "messages": [{"role": "user", "content": "Hello"}]},
+        )
+        assert resp.status_code == 200
+        assert resp.json()["choices"][0]["message"]["content"] == "Hello from agent"
+
     def test_without_tools_still_uses_agent(self, client_with_agent):
         """Counterpart to test_with_tools_bypasses_agent: when no tools
         are requested, the agent path is still used (preserves existing

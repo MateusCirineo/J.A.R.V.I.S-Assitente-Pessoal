@@ -138,6 +138,29 @@ def _merge_context_message(
     return [combined] + [m for m in messages if m.role != Role.SYSTEM]
 
 
+def _append_context_message(
+    messages: List[Message],
+    context_message: Message,
+) -> List[Message]:
+    """Return a copy with context folded into the LAST user message.
+
+    Retrieval depends on the query, so folding it into the leading system
+    prompt changes the start of the prompt on every turn and defeats the
+    inference server's prefix cache. Keeping it next to the question leaves
+    everything before it byte-identical between turns: on a CPU-only machine
+    that reprocessing costs ~16 s per question.
+    """
+    for index in range(len(messages) - 1, -1, -1):
+        message = messages[index]
+        if message.role != Role.USER:
+            continue
+        content = "\n\n".join(
+            part for part in (context_message.text, message.text) if part
+        )
+        return [*messages[:index], replace(message, content=content), *messages[index + 1 :]]
+    return [*messages, context_message]
+
+
 def inject_context(
     query: str,
     messages: List[Message],
@@ -145,6 +168,7 @@ def inject_context(
     *,
     config: Optional[ContextConfig] = None,
     facts: Sequence[Fact] = (),
+    at_end: bool = False,
 ) -> List[Message]:
     """Retrieve relevant context and prepend it to *messages*.
 
@@ -168,6 +192,11 @@ def inject_context(
         Durable facts captured by the automatic memory service. Quarantined
         provenance tiers are excluded before budgeting or prompt construction,
         as are retrieved documents carrying the same quarantined tiers.
+    at_end:
+        Place the context next to the last user message instead of folding it
+        into the system prompt, so the prompt prefix stays stable across turns
+        and the inference server can reuse its cache. Used by latency-sensitive
+        direct callers (see ``/v1/chat/completions``).
     """
     cfg = config or ContextConfig()
     if not cfg.enabled:
@@ -232,8 +261,10 @@ def inject_context(
         },
     )
 
-    # Build context message and prepend
+    # Build context message and place it
     ctx_msg = build_context_message(truncated, selected_facts)
+    if at_end:
+        return _append_context_message(messages, ctx_msg)
     return _merge_context_message(messages, ctx_msg)
 
 

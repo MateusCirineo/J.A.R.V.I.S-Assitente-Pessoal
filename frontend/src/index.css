@@ -754,3 +754,126 @@
   background: var(--color-accent);
   text-decoration: none;
 }
+/* ==========================================================================
+   HUD theme (settings.theme === 'hud'). <html> carries `dark hud`, so every
+   dark variant still applies and these rules only retune it.
+   `html:root.hud` (0,2,1) outranks `:root:not(.light)` from the
+   prefers-color-scheme block, which would otherwise win on a dark-OS machine.
+   ========================================================================== */
+@layer base {
+  html:root.hud {
+    --color-bg: #03080d;
+    --color-bg-secondary: #06131d;
+    --color-bg-tertiary: #0b2130;
+    --color-surface: #081a25;
+    --color-sidebar: rgba(4, 13, 20, 0.86);
+    --color-border: rgba(50, 232, 243, 0.16);
+    --color-border-subtle: rgba(50, 232, 243, 0.08);
+
+    --color-text: #e5f8ff;
+    --color-text-secondary: #8fb5c5;
+    --color-text-tertiary: #5f8798;
+    --color-text-inverse: #03080d;
+
+    --color-accent: #32e8f3;
+    --color-accent-hover: #86f3f8;
+    --color-accent-subtle: rgba(50, 232, 243, 0.1);
+    --color-accent-glow: rgba(50, 232, 243, 0.32);
+
+    --color-accent-amber: #ffb547;
+    --color-accent-amber-hover: #ffc978;
+    --color-accent-amber-subtle: rgba(255, 181, 71, 0.12);
+    --color-accent-purple: #169ddf;
+    --color-accent-purple-hover: #4fb8ea;
+    --color-accent-purple-subtle: rgba(22, 157, 223, 0.12);
+    --color-accent-blue-subtle: rgba(22, 157, 223, 0.12);
+
+    --color-success: #3de6b0;
+    --color-warning: #ffb547;
+    --color-error: #ff5964;
+
+    --color-code-bg: #040e16;
+    --color-input-bg: #050f17;
+    --color-input-border: rgba(50, 232, 243, 0.24);
+
+    --color-user-bubble: rgba(22, 157, 223, 0.16);
+    --color-user-bubble-text: #e5f8ff;
+    --color-on-accent: #03080d;
+    --color-disabled-bg: #0a1a26;
+
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+    --shadow-md: 0 4px 14px -2px rgb(0 0 0 / 0.6), 0 0 0 1px rgba(50, 232, 243, 0.06);
+    --shadow-lg: 0 18px 40px -12px rgb(0 0 0 / 0.75), 0 0 0 1px rgba(50, 232, 243, 0.1);
+
+    --font-hud-title: "Bahnschrift", "Segoe UI", system-ui, sans-serif;
+    color-scheme: dark;
+  }
+}
+
+@layer components {
+  html.hud body { background: #03080d; }
+
+  /* Reuses the original backdrop. Adds one static circular instrument, faint
+     enough to sit behind messages and code without competing with them. */
+  html.hud .hud-backdrop {
+    background-image:
+      radial-gradient(circle at 18% 0%, rgba(50, 232, 243, 0.09), transparent 44%),
+      radial-gradient(circle at 92% 104%, rgba(22, 157, 223, 0.1), transparent 48%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' fill='none' stroke='%2332e8f3'%3E%3Ccircle cx='200' cy='200' r='192' stroke-opacity='.1' stroke-dasharray='1 5'/%3E%3Ccircle cx='200' cy='200' r='172' stroke-opacity='.07'/%3E%3Ccircle cx='200' cy='200' r='152' stroke-width='7' stroke-opacity='.04' stroke-dasharray='26 12'/%3E%3Ccircle cx='200' cy='200' r='122' stroke-opacity='.06'/%3E%3Cpath d='M200 28a172 172 0 0 1 172 172' stroke='%23ffb547' stroke-opacity='.12' stroke-width='2'/%3E%3Ccircle cx='200' cy='200' r='92' stroke-opacity='.05' stroke-dasharray='56 18'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 0 0, 0 0, calc(100% + 12vmin) 55%;
+    background-size: auto, auto, min(86vmin, 900px);
+  }
+  html.hud .hud-backdrop::before { opacity: 0.85; }
+
+  html.hud h1,
+  html.hud h2,
+  html.hud h3 {
+    font-family: var(--font-hud-title);
+    letter-spacing: 0.05em;
+  }
+
+  /* chat input: technical frame with two corner marks, brighter on focus */
+  html.hud [data-hud-frame] { position: relative; }
+  html.hud [data-hud-frame]::before,
+  html.hud [data-hud-frame]::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    border-color: rgba(50, 232, 243, 0.6);
+    border-style: solid;
+  }
+  html.hud [data-hud-frame]::before { top: -4px; left: -4px; border-width: 1px 0 0 1px; }
+  html.hud [data-hud-frame]::after { bottom: -4px; right: -4px; border-width: 0 1px 1px 0; }
+  html.hud [data-hud-frame]:focus-within {
+    box-shadow: 0 0 0 1px rgba(50, 232, 243, 0.4), 0 0 22px -8px rgba(50, 232, 243, 0.55);
+  }
+
+  html.hud :focus-visible { outline: 2px solid #ffb547; outline-offset: 2px; }
+  html.hud ::selection { background: rgba(50, 232, 243, 0.28); color: #e5f8ff; }
+  html.hud * { scrollbar-color: rgba(50, 232, 243, 0.25) transparent; }
+}
+
+/* shadcn tokens are unlayered above, so their HUD values must be too */
+html:root.hud {
+  --background: #03080d;
+  --foreground: #e5f8ff;
+  --card: #081a25;
+  --card-foreground: #e5f8ff;
+  --popover: #081a25;
+  --popover-foreground: #e5f8ff;
+  --primary: #32e8f3;
+  --primary-foreground: #03080d;
+  --secondary: #0b2130;
+  --secondary-foreground: #e5f8ff;
+  --muted: #0b2130;
+  --muted-foreground: #8fb5c5;
+  --accent: #0b2130;
+  --accent-foreground: #e5f8ff;
+  --destructive: #ff5964;
+  --border: rgba(50, 232, 243, 0.16);
+  --input: rgba(50, 232, 243, 0.24);
+  --ring: #32e8f3;
+}

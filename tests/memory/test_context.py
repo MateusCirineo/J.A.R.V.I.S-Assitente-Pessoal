@@ -498,3 +498,39 @@ def test_build_context_message_filters_untrusted_documents():
     # Defensive filtering protects direct callers that skip inject_context.
     msg = build_context_message([_doc("hostile", TRUST_UNTRUSTED)])
     assert "hostile" not in msg.content
+
+
+def test_inject_context_at_end_keeps_prompt_prefix_stable():
+    """Direct callers get context next to the question, not in the system prompt.
+
+    Retrieval depends on the query, so context at the front changes the prompt
+    prefix every turn and the inference server has to re-read the whole prompt
+    (~16 s per question on a CPU-only machine).
+    """
+    backend = _FakeMemory(
+        [RetrievalResult(content="relevant info", score=0.9, source="doc.md")]
+    )
+    messages = [
+        Message(role=Role.SYSTEM, content="you are jarvis"),
+        Message(role=Role.USER, content="first question"),
+        Message(role=Role.ASSISTANT, content="first answer"),
+        Message(role=Role.USER, content="hello"),
+    ]
+    augmented = inject_context("query", messages, backend, at_end=True)
+
+    assert len(augmented) == len(messages)
+    assert [m.content for m in augmented[:3]] == [m.content for m in messages[:3]]
+    assert "relevant info" in augmented[-1].content
+    assert augmented[-1].content.endswith("hello")
+    assert augmented[-1].role == Role.USER
+
+
+def test_inject_context_at_end_without_user_message_appends():
+    backend = _FakeMemory(
+        [RetrievalResult(content="relevant info", score=0.9, source="doc.md")]
+    )
+    messages = [Message(role=Role.SYSTEM, content="you are jarvis")]
+    augmented = inject_context("query", messages, backend, at_end=True)
+
+    assert len(augmented) == 2
+    assert "relevant info" in augmented[-1].content

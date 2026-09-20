@@ -74,6 +74,10 @@ export function SystemPanel() {
 
   const promptK = (savings?.total_prompt_tokens ?? 0) / 1000;
   const completionK = (savings?.total_completion_tokens ?? 0) / 1000;
+  // Without an energy monitor the backend reports 0 for every energy field,
+  // so a zero here means "not measured", not "used no power".
+  const energyMeasured =
+    (liveEnergy?.power_w ?? 0) > 0 || (liveEnergy?.energy_j ?? 0) > 0 || (energy?.total_energy_j ?? 0) > 0;
 
   return (
     <div
@@ -130,26 +134,34 @@ export function SystemPanel() {
             <MiniStat
               icon={Zap}
               label="Power"
-              value={(liveEnergy?.power_w ?? energy?.avg_power_w ?? 0).toFixed(1)}
-              unit="W"
+              value={energyMeasured ? (liveEnergy?.power_w ?? energy?.avg_power_w ?? 0).toFixed(1) : '—'}
+              unit={energyMeasured ? 'W' : undefined}
             />
             <MiniStat
               icon={Activity}
               label="Energy"
-              value={(
-                ((liveEnergy?.energy_j ?? energy?.total_energy_j ?? 0) / 1000)
-              ).toFixed(1)}
-              unit="kJ"
+              value={energyMeasured
+                ? ((liveEnergy?.energy_j ?? energy?.total_energy_j ?? 0) / 1000).toFixed(1)
+                : '—'}
+              unit={energyMeasured ? 'kJ' : undefined}
             />
           </div>
+          {!energyMeasured && (
+            <p className="text-[11px] mt-1.5" style={{ color: 'var(--color-text-tertiary)' }}>
+              No energy monitor on this device.
+            </p>
+          )}
         </section>
 
 
         {/* Cost Comparison */}
         <section>
           <h4 className="text-[11px] font-medium uppercase tracking-wide mb-2" style={{ color: 'var(--color-text-tertiary)' }}>
-            Cost Comparison
+            Cost Comparison · estimate
           </h4>
+          <p className="text-[11px] -mt-1 mb-2" style={{ color: 'var(--color-text-tertiary)' }}>
+            API list prices. Local excludes electricity.
+          </p>
 
           {/* Local */}
           <div

@@ -1,0 +1,12 @@
+{
+  "entrada": "calcule 23 vezes 7 e depois calcule 12,5 por cento de 640",
+  "modelo_solicitado": "qwen3.5:4b",
+  "modelos_pedido": [
+    "qwen3.5:4b"
+  ],
+  "trocas": [],
+  "execucoes": [],
+  "resultado": "O servidor do OpenJarvis nao respondeu.",
+  "duracao_s": 56.578,
+  "ambiente": "Windows/Python3.10; backend8000/Ollama reais; HOME temporário; sem câmera, microfone, contas ou dados pessoais"
+}

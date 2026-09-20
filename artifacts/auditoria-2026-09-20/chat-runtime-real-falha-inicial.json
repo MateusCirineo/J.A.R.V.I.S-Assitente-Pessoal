@@ -1,0 +1,63 @@
+{
+  "via": "HTTP real chat8000 -> runtime8765 -> Ollama qwen3.5:4b (reserva configurada); nenhuma ferramenta executada",
+  "servidor": {
+    "status": "ok"
+  },
+  "runtime": {
+    "ok": true,
+    "servico": "jarvis-hud",
+    "versao_codigo": "fba1d4ef2e511f48",
+    "boot_concluido": true
+  },
+  "entrada": "calcule 17 vezes 19 e depois calcule 25 por cento de 480",
+  "pedido_id": "b7bd7ec286824a2ab76be5ddc1da455d",
+  "http": 200,
+  "primeira": {
+    "id": "chatcmpl-9bafaa41c49c43b295b9a14af9306d0f",
+    "created": 1789878231,
+    "model": "gemma4:e4b",
+    "runtime": {
+      "ok": true,
+      "estado": "respondida",
+      "pedido_id": "b7bd7ec286824a2ab76be5ddc1da455d"
+    },
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Usando o modelo reserva, Senhor: o modelo principal (9.6 GB) não cabe na memória livre (2.1 GB). Nenhuma ferramenta foi executada neste pedido. Senhor, dezessete vezes dezenove é trinta e três e onze, o quarenta e oito. Vinte e cinco por cento de quatrocentos e oitenta é duzentos e quatro."
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  },
+  "duracao_s": 127.609,
+  "http_repeticao": 200,
+  "repeticao": {
+    "id": "chatcmpl-40597e8523834de98dc73f4872340482",
+    "created": 1789878231,
+    "model": "gemma4:e4b",
+    "runtime": {
+      "ok": true,
+      "pedido_id": "b7bd7ec286824a2ab76be5ddc1da455d",
+      "estado": "respondida",
+      "repetido": true
+    },
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Usando o modelo reserva, Senhor: o modelo principal (9.6 GB) não cabe na memória livre (2.1 GB). Nenhuma ferramenta foi executada neste pedido. Senhor, dezessete vezes dezenove é trinta e três e onze, o quarenta e oito. Vinte e cinco por cento de quatrocentos e oitenta é duzentos e quatro."
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  },
+  "sucesso": false,
+  "modelo_efetivo_observado": "qwen3.5:4b",
+  "erro_metadado_modelo": "A ponte antiga devolveu o modelo solicitado gemma4:e4b; n?o foi o modelo realmente usado."
+}

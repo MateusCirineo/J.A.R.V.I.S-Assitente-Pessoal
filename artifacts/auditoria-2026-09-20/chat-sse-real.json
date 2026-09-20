@@ -1,0 +1,50 @@
+{
+  "http": 200,
+  "sse": "text/event-stream; charset=utf-8",
+  "final_done": true,
+  "chunks": [
+    {
+      "id": "chatcmpl-9b88f0fa68c345bf826e83ec86e06445",
+      "created": 1789878825,
+      "model": "jarvis-runtime",
+      "runtime": {
+        "ok": true,
+        "estado": "respondida",
+        "pedido_id": "dde8e44baec5422192a6e7ba6cdb4171",
+        "modelos": [],
+        "modelo_solicitado": "gemma4:e4b"
+      },
+      "object": "chat.completion.chunk",
+      "choices": [
+        {
+          "index": 0,
+          "delta": {
+            "role": "assistant",
+            "content": "Diga: memorize meu rosto e minha voz. O rosto usa a câmera local; a voz precisa de três frases no microfone. Só guardo os vetores neste computador. Você pode cancelar ou pedir para esquecer os cadastros."
+          },
+          "finish_reason": null
+        }
+      ]
+    },
+    {
+      "id": "chatcmpl-9b88f0fa68c345bf826e83ec86e06445",
+      "created": 1789878825,
+      "model": "jarvis-runtime",
+      "runtime": {
+        "ok": true,
+        "estado": "respondida",
+        "pedido_id": "dde8e44baec5422192a6e7ba6cdb4171",
+        "modelos": [],
+        "modelo_solicitado": "gemma4:e4b"
+      },
+      "object": "chat.completion.chunk",
+      "choices": [
+        {
+          "index": 0,
+          "delta": {},
+          "finish_reason": "stop"
+        }
+      ]
+    }
+  ]
+}

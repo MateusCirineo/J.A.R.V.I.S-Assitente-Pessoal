@@ -33,6 +33,15 @@ from openjarvis.server.models import (
 router = APIRouter()
 
 
+@router.post("/v1/runtime/cancel")
+async def cancel_runtime(request: Request):
+    from openjarvis.server.runtime_bridge import call_runtime, identity, local_client
+
+    local_client(request)
+    session, operation = identity(request)
+    return await call_runtime("/api/chat/cancelar", {"sessao_id": session, "pedido_id": operation}) or {"ok": False}
+
+
 def _to_messages(chat_messages) -> list[Message]:
     """Convert Pydantic ChatMessage objects to core Message objects."""
     messages = []
@@ -158,11 +167,22 @@ def _ensure_identity_prompt(messages: list[Message], app_config) -> list[Message
 @router.post("/v1/chat/completions")
 async def chat_completions(request_body: ChatCompletionRequest, request: Request):
     """Handle chat completion requests (streaming and non-streaming)."""
+    from openjarvis.server.runtime_bridge import dispatch_chat
+
+    runtime_response = await dispatch_chat(request_body, request)
+    if runtime_response is not None:
+        return runtime_response
     engine = request.app.state.engine
     agent = getattr(request.app.state, "agent", None)
     model = request_body.model
+    # Explicit opt-in for latency-sensitive clients (e.g. a voice loop on a
+    # CPU-only machine): answer with the engine directly, skipping the agent
+    # loop and its large tool prompt. Telemetry, identity prompt and memory
+    # context still apply; nothing is re-routed silently.
+    direct_requested = request.headers.get("x-openjarvis-direct", "").strip().lower() in {"1", "true"}
     use_server_agent = (
         agent is not None
+        and not direct_requested
         and not request_body.tools
         and (not request_body.stream or bool(getattr(agent, "_tools", None)))
     )
@@ -207,6 +227,11 @@ async def chat_completions(request_body: ChatCompletionRequest, request: Request
                     memory_backend,
                     config=ctx_cfg,
                     facts=facts,
+                    # Direct callers are latency-sensitive and re-send the same
+                    # history every turn; query-dependent context at the front
+                    # would change the prompt prefix each time and force a full
+                    # re-read (~16 s per question on a CPU-only machine).
+                    at_end=direct_requested,
                 )
                 # Rebuild after identity/context merging so downstream engine
                 # adapters always receive exactly one system message.

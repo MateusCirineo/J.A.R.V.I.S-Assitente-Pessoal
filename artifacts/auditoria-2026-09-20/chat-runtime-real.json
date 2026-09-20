@@ -1,0 +1,82 @@
+{
+  "via": "HTTP real chat 8000 -> runtime 8765; sem navegador",
+  "runtime": {
+    "ok": true,
+    "servico": "jarvis-hud",
+    "versao_codigo": "68dc34703323caa2",
+    "boot_concluido": true
+  },
+  "servidor": {
+    "status": "ok"
+  },
+  "entrada": "calcule 17 vezes 19 e depois calcule 25 por cento de 480",
+  "http": 200,
+  "primeira": {
+    "id": "chatcmpl-3c9eeef533ef4cbe8dc8eaa9c0a35988",
+    "created": 1789878795,
+    "model": "qwen3.5:4b",
+    "runtime": {
+      "ok": true,
+      "estado": "respondida",
+      "pedido_id": "e3c4d5a737ef4a70877985ccbc89b6a1",
+      "modelos": [
+        "qwen3.5:4b"
+      ],
+      "modelo_solicitado": "gemma4:e4b"
+    },
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Usando o modelo reserva, Senhor: o modelo principal (9.6 GB) não cabe na memória livre (0.6 GB). Dá 323. 25 por cento de 480 é 120."
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  },
+  "duracao_s": 102.219,
+  "http_repeticao": 200,
+  "repeticao": {
+    "id": "chatcmpl-b67c74e5a9f74b1790cbd0517fd80780",
+    "created": 1789878796,
+    "model": "qwen3.5:4b",
+    "runtime": {
+      "ok": true,
+      "pedido_id": "e3c4d5a737ef4a70877985ccbc89b6a1",
+      "estado": "respondida",
+      "repetido": true,
+      "modelos": [
+        "qwen3.5:4b"
+      ],
+      "modelo_solicitado": "gemma4:e4b"
+    },
+    "object": "chat.completion",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "Usando o modelo reserva, Senhor: o modelo principal (9.6 GB) não cabe na memória livre (0.6 GB). Dá 323. 25 por cento de 480 é 120."
+        },
+        "finish_reason": "stop"
+      }
+    ]
+  },
+  "sucesso": true,
+  "eventos_ferramenta": [
+    {
+      "em": 1789878778.6142426,
+      "tipo": "comando",
+      "texto": "ferramenta 1/5: executar_comando",
+      "nivel": "info"
+    },
+    {
+      "em": 1789878778.616267,
+      "tipo": "comando",
+      "texto": "ferramenta 2/5: executar_comando",
+      "nivel": "info"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "entrada": "calcule 23 vezes 7 e depois calcule 12,5 por cento de 640",
+  "modelo_solicitado": "qwen3.5:4b",
+  "estado": "ensaio_interferido",
+  "resultado_verificado": false,
+  "motivo": "O backend foi encerrado pelo coordenador para reiniciar a instalação enquanto este ensaio aguardava resposta HTTP. O processo do ensaio terminou com servidor indisponível após 56.578 segundos, sem iniciar nova inferência.",
+  "registro_bruto": "modelo-ferramentas-real-reserva-independente.json",
+  "evidencia": "Nenhuma resposta HTTP ou resultado de ferramenta desta segunda amostra foi recebido antes da interrupção. Este registro não conta como aprovação nem reprovação da capacidade matemática.",
+  "ensaio_concluido_separado": "modelo-ferramentas-real-reserva.json"
+}

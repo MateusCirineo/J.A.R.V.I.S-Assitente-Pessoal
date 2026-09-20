@@ -378,6 +378,8 @@ export function InputArea() {
       for await (const sseEvent of streamChat(
         { model: selectedModel, messages: apiMessages, stream: true, temperature, max_tokens: maxTokens },
         controller.signal,
+        ['127.0.0.1', 'localhost', '[::1]'].includes(new URL(getBase(), window.location.href).hostname)
+          ? { sessionId: convId, requestId: userMsg.id } : undefined,
       )) {
         const eventName = sseEvent.event;
 
@@ -596,6 +598,7 @@ export function InputArea() {
         )}
       </div>
       <div
+        data-hud-frame=""
         className="flex items-center gap-2 rounded-2xl px-4 py-3 transition-shadow"
         style={{
           background: 'var(--color-input-bg)',

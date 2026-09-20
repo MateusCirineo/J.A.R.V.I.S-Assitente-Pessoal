@@ -269,6 +269,37 @@ def trust_fact(index: int) -> None:
     console.print(f"  {fact.text}")
 
 
+@memory.command(name="forget")
+@click.argument("index", type=int)
+def forget_fact(index: int) -> None:
+    """Forget the single fact INDEX (as shown by `memory list`)."""
+    console = Console()
+
+    store = _get_fact_store()
+    facts = store.list()
+    if not 1 <= index <= len(facts):
+        console.print(
+            f"[red]No fact #{index}.[/red] "
+            f"{len(facts)} fact(s) stored — see [bold]jarvis memory list[/bold]."
+        )
+        raise SystemExit(1)
+
+    fact = facts[index - 1]
+    try:
+        removed = store.remove_reviewed(index - 1, fact.text)
+    except NotImplementedError:
+        console.print("[red]This memory backend cannot forget a single fact.[/red]")
+        raise SystemExit(1)
+    if not removed:
+        console.print(
+            f"[red]Fact #{index} changed before it could be removed.[/red] "
+            "Run [bold]jarvis memory list[/bold] and try again."
+        )
+        raise SystemExit(1)
+    console.print(f"[green]Forgot fact #{index}:[/green]")
+    console.print(f"  {fact.text}")
+
+
 @memory.command()
 @click.option(
     "--yes",

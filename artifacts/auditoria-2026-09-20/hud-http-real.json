@@ -1,0 +1,110 @@
+{
+  "em_utc": "2026-09-20T04:22:59.406918+00:00",
+  "origem": "http://127.0.0.1:8765",
+  "metodo": "GET",
+  "validacao": "HTTP real; sem navegador/renderizacao visual",
+  "sem_ativacao_camera_gestos_ou_modelo": true,
+  "saude": {
+    "status": 200,
+    "ok": true,
+    "servico": "jarvis-hud",
+    "versao_codigo": "fba1d4ef2e511f48",
+    "boot_concluido": true
+  },
+  "privadas_sem_sessao": [
+    {
+      "rota": "/api/estado",
+      "status": 403
+    },
+    {
+      "rota": "/api/eventos",
+      "status": 403
+    },
+    {
+      "rota": "/api/preferencias",
+      "status": 403
+    },
+    {
+      "rota": "/api/telemetria",
+      "status": 403
+    },
+    {
+      "rota": "/classico/dados.js",
+      "status": 403
+    }
+  ],
+  "holograma": {
+    "status": 200,
+    "token_injetado": true,
+    "template_igual_ao_disco": true,
+    "cookie": {
+      "presente": true,
+      "http_only": true,
+      "same_site": "Strict",
+      "path": "/"
+    },
+    "sha256_template_sem_segredos": "0f201844f6b062bb44733de27273e3341d02b7f0c5cba15a39ee549c56e01272",
+    "csp_presente": true
+  },
+  "assets": [
+    {
+      "rota": "/hud/holograma.js",
+      "status": 200,
+      "bytes": 23547,
+      "content_type": "text/javascript; charset=utf-8",
+      "sha256_servido": "125b36bed9ce9cbdbdd3ab08eea0bc177cbecc76dcb2444a3632ee226b125f1c",
+      "sha256_disco": "125b36bed9ce9cbdbdd3ab08eea0bc177cbecc76dcb2444a3632ee226b125f1c",
+      "igual_ao_disco": true
+    },
+    {
+      "rota": "/hud/holograma.css",
+      "status": 200,
+      "bytes": 1543,
+      "content_type": "text/css; charset=utf-8",
+      "sha256_servido": "50de6d1c9e48f0b0924cc4d866352a96bd216a0502b0399eb093144e4e10c70c",
+      "sha256_disco": "50de6d1c9e48f0b0924cc4d866352a96bd216a0502b0399eb093144e4e10c70c",
+      "igual_ao_disco": true
+    },
+    {
+      "rota": "/hud/gestos.js",
+      "status": 200,
+      "bytes": 3459,
+      "content_type": "text/javascript; charset=utf-8",
+      "sha256_servido": "b2892e7e3c30095e1074f9086d32331c618a513f8044b75d362e5c9d616e9637",
+      "sha256_disco": "b2892e7e3c30095e1074f9086d32331c618a513f8044b75d362e5c9d616e9637",
+      "igual_ao_disco": true
+    },
+    {
+      "rota": "/hud/alvos-mesa.js",
+      "status": 200,
+      "bytes": 658,
+      "content_type": "text/javascript; charset=utf-8",
+      "sha256_servido": "6f5c5c42142afa773d294d2c5e91df49a866b2f23aa7b19969ae6f495f680920",
+      "sha256_disco": "6f5c5c42142afa773d294d2c5e91df49a866b2f23aa7b19969ae6f495f680920",
+      "igual_ao_disco": true
+    },
+    {
+      "rota": "/hud/cliente.js",
+      "status": 200,
+      "bytes": 10544,
+      "content_type": "text/javascript; charset=utf-8",
+      "sha256_servido": "157c2180afe716a79cee4ea85459ce3a9cee4a1f23e6585e23ebbe273b4ed547",
+      "sha256_disco": "157c2180afe716a79cee4ea85459ce3a9cee4a1f23e6585e23ebbe273b4ed547",
+      "igual_ao_disco": true
+    }
+  ],
+  "estado_com_sessao": {
+    "status": 200,
+    "gestos": {
+      "ativo": false,
+      "fase": "desativado",
+      "calibrado": false
+    },
+    "camera": {
+      "ativa": false,
+      "presente": false,
+      "fps": null
+    }
+  },
+  "resultado": "PASS"
+}

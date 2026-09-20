@@ -200,6 +200,16 @@ class FactStore(ABC):
         del expected_text
         return self.set_trust(index, TRUST_TRUSTED)
 
+    def remove_reviewed(self, index: int, expected_text: str) -> bool:
+        """Forget the fact at *index* (0-based, as returned by :meth:`list`)
+        only while it still reads *expected_text*. Returns True if removed.
+
+        Backends that cannot delete a single fact keep this default; callers
+        must treat ``NotImplementedError`` as "not supported", never fall back
+        to :meth:`clear`.
+        """
+        raise NotImplementedError
+
     @abstractmethod
     def list(self) -> List[Fact]:
         """Return all stored facts, oldest first."""
@@ -361,6 +371,18 @@ class LocalFactStore(FactStore):
             if fact.text != expected_text or fact.trusted_for_recall:
                 return False
             fact.trust = TRUST_TRUSTED
+            self._flush()
+        return True
+
+    def remove_reviewed(self, index: int, expected_text: str) -> bool:
+        """Atomically forget exactly the fact a user reviewed."""
+        with self._lock, _cross_process_lock(self._lock_path()):
+            self._sync_from_disk_locked()
+            if not 0 <= index < len(self._facts):
+                return False
+            if self._facts[index].text != expected_text:
+                return False
+            del self._facts[index]
             self._flush()
         return True
 

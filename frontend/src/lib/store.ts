@@ -91,7 +91,7 @@ function saveConversations(store: ConversationStore): void {
   localStorage.setItem(CONVERSATIONS_KEY, JSON.stringify(store));
 }
 
-export type ThemeMode = 'light' | 'dark' | 'system';
+export type ThemeMode = 'light' | 'dark' | 'system' | 'hud';
 
 interface Settings {
   theme: ThemeMode;
