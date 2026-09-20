@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-perfil="equilibrado" data-movimento="normal" data-nucleo="reator">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="jarvis-token" content="{{TOKEN}}">
+<title>J.A.R.V.I.S.</title>
+<link rel="stylesheet" href="/hud/hud.css">
+<link rel="stylesheet" href="/hud/jarvis.css">
+<link rel="stylesheet" href="/hud/capacete.css">
+<script type="module" src="/hud/jarvis.js"></script>
+<link rel="stylesheet" href="/hud/trabalho.css">
+<script type="module" src="/hud/trabalho.js"></script>
+</head>
+<body>
+<div class="grade" aria-hidden="true"></div>
+
+<header class="topo">
+  <div class="marca"><span class="titulo">J.A.R.V.I.S.</span><span class="rotulo">núcleo</span></div>
+  <div class="chips" aria-label="Estado dos componentes">
+    <span class="chip" id="c-mic" data-s="off">Microfone</span>
+    <span class="chip" id="c-inf" data-s="off">Inferência</span>
+    <span class="chip" id="c-aud" data-s="off">Áudio</span>
+    <span class="chip" id="c-srv" data-s="off">Servidor</span>
+    <span class="chip" id="c-evt" data-s="off">Eventos</span>
+    <span class="chip oculto" id="c-pres" data-s="ok">Presença</span>
+  </div>
+  <div class="topo-dir">
+    <button class="chip botao-chip" id="c-not" data-s="off" type="button" title="Avisos (abre o Painel)">0 avisos</button>
+    <span class="chip" id="c-rt" data-s="aviso">Conectando</span>
+  </div>
+</header>
+
+<main class="layout">
+  <aside class="lateral" aria-label="Instrumentos de inferência">
+    <section class="moldura" id="boot" aria-live="polite">
+      <div class="cabecalho">
+        <span class="rotulo">Inicialização</span>
+        <button class="botao mini" id="b-pular" type="button">Pular animação</button>
+      </div>
+      <ol class="etapas" id="etapas"></ol>
+      <p class="resumo-boot" id="resumo-boot"></p>
+    </section>
+
+    <section class="moldura" id="w-agora">
+      <div class="cabecalho"><span class="rotulo">Agora</span><span class="fraco pequeno" id="ag-local"></span></div>
+      <div class="relogio-grande num" id="ag-hora">--:--</div>
+      <div class="fraco pequeno" id="ag-data"></div>
+      <div class="clima-mini" id="ag-clima"></div>
+    </section>
+
+    <section class="moldura">
+      <div class="cabecalho"><span class="rotulo">Modelos</span></div>
+      <div class="linha-dado"><span>Voz</span><span class="mono" id="m-voz">—</span></div>
+      <div class="linha-dado"><span>Chat</span><span class="mono" id="m-chat">—</span></div>
+      <div class="linha-dado"><span>Em memória</span><span class="mono" id="m-carregado">—</span></div>
+    </section>
+
+    <section class="moldura">
+      <div class="cabecalho"><span class="rotulo">Motor</span></div>
+      <div class="linha-dado"><span>Servidor</span><span id="e-srv">—</span></div>
+      <div class="linha-dado"><span>Ollama</span><span id="e-oll">—</span></div>
+      <div class="linha-dado"><span>Eventos</span><span id="e-evt">—</span></div>
+    </section>
+  </aside>
+
+  <section class="palco" id="palco" aria-label="Núcleo do assistente">
+    <canvas id="nucleo" aria-hidden="true"></canvas>
+    <div class="centro">
+      <div class="nome">J.A.R.V.I.S.</div>
+      <div class="estado" id="estado" role="status">Conectando…</div>
+      <div class="sub" id="sub"></div>
+    </div>
+    <figure class="camera oculto" id="camera" aria-label="Câmera">
+      <div class="camera-quadro">
+        <img id="cam-img" alt="Imagem da câmera">
+        <canvas id="cam-overlay" aria-hidden="true"></canvas>
+        <span class="cam-rec" aria-hidden="true">● AO VIVO</span>
+      </div>
+      <figcaption>
+        <span class="chip" id="c-cam" data-s="off">Ninguém à frente</span>
+        <button class="botao mini" id="b-cam-ampliar" type="button" aria-pressed="false">Ampliar</button>
+      </figcaption>
+    </figure>
+    <aside class="contexto oculto" id="w-contexto" aria-live="polite" aria-label="Painel de contexto">
+      <div class="cabecalho"><span class="rotulo" id="ctx-titulo">—</span>
+        <button class="botao mini" id="ctx-fechar" type="button" aria-label="Fechar painel">✕</button></div>
+      <ol class="ctx-lista" id="ctx-lista"></ol>
+    </aside>
+  </section>
+
+  <aside class="lateral" aria-label="Instrumentos de áudio e sistema">
+    <section class="moldura">
+      <div class="cabecalho"><span class="rotulo">Microfone</span><span class="chip" id="c-mic2" data-s="off">—</span></div>
+      <div class="linha-dado"><span>Dispositivo</span><span id="mic-disp">—</span></div>
+      <div class="linha-dado"><span>Ruído / limiar</span><span class="mono" id="mic-lim">—</span></div>
+      <div class="barra-nivel" aria-hidden="true"><i id="mic-nivel"></i></div>
+    </section>
+
+    <section class="moldura">
+      <div class="cabecalho"><span class="rotulo">Saída de áudio</span><span class="chip" id="c-aud2" data-s="off">—</span></div>
+      <div class="linha-dado"><span>Dispositivo</span><span id="out-disp">—</span></div>
+      <div class="linha-dado"><span>Volume da voz</span><span class="mono" id="out-vol">—</span></div>
+      <div class="barra-nivel" aria-hidden="true"><i id="out-nivel"></i></div>
+    </section>
+
+    <section class="moldura" id="w-energia">
+      <div class="cabecalho"><span class="rotulo">Energia</span><span class="chip" id="c-bat" data-s="off">—</span></div>
+      <div class="barra-nivel grossa" aria-hidden="true"><i id="bat-nivel"></i></div>
+      <div class="linha-dado"><span>Bateria</span><span class="mono" id="bat-pct">—</span></div>
+      <div class="linha-dado"><span>Situação</span><span id="bat-det">—</span></div>
+    </section>
+
+    <section class="moldura" id="w-midia">
+      <div class="cabecalho"><span class="rotulo">Música</span><span class="fraco pequeno" id="md-app"></span></div>
+      <div class="md-titulo" id="md-titulo">Nada tocando</div>
+      <div class="fraco pequeno" id="md-artista"></div>
+      <div class="md-controles">
+        <button class="botao mini" id="md-ant" type="button" aria-label="Faixa anterior">◀◀</button>
+        <button class="botao mini" id="md-play" type="button" aria-label="Tocar ou pausar">▶ ❚❚</button>
+        <button class="botao mini" id="md-prox" type="button" aria-label="Próxima faixa">▶▶</button>
+      </div>
+    </section>
+
+    <section class="moldura">
+      <div class="cabecalho"><span class="rotulo">Última inferência</span></div>
+      <div class="linha-dado"><span>Modelo</span><span class="mono" id="u-mod">—</span></div>
+      <div class="linha-dado"><span>Latência</span><span class="mono" id="u-lat">—</span></div>
+      <div class="linha-dado"><span>1º token</span><span class="mono" id="u-ttft">—</span></div>
+      <div class="linha-dado"><span>Tokens gerados</span><span class="mono" id="u-tok">—</span></div>
+      <div class="linha-dado"><span>Quando</span><span id="u-em">—</span></div>
+      <p class="fonte" id="u-fonte"></p>
+    </section>
+  </aside>
+</main>
+
+<section class="faixa-onda" id="w-onda" aria-label="Forma de onda do áudio">
+  <canvas id="onda" aria-hidden="true"></canvas>
+  <div class="legenda-onda">
+    <span class="leg-voce">Você</span>
+    <span class="leg-jarvis">Jarvis</span>
+  </div>
+</section>
+
+<section class="transcricao moldura" aria-live="polite" aria-label="Conversa recente">
+  <p><span class="rotulo">Você</span><span id="t-voce" class="fraco">Nada dito ainda. Diga “Jarvis” antes de falar.</span></p>
+  <p><span class="rotulo">Jarvis</span><span id="t-jarvis" class="fraco">—</span></p>
+</section>
+
+<form class="comando-texto" id="f-comando" autocomplete="off">
+  <input type="text" id="cmd-texto" maxlength="300" aria-label="Comando para o Jarvis"
+         placeholder="Fale com o Jarvis… ou digite aqui (ex.: me lembre de beber água em 30 minutos)">
+  <button class="botao mini" type="submit">Enviar</button>
+</form>
+
+<div class="faixa-noticias oculto" id="w-noticias" aria-label="Manchetes">
+  <span class="rot">Notícias</span><div class="trilho"><p id="nt-texto"></p></div>
+</div>
+
+<nav class="controles" aria-label="Controles">
+  <button class="botao" id="b-mic" type="button" aria-pressed="false" disabled>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+    <span id="b-mic-t">Microfone</span>
+  </button>
+  <label class="volume"><span class="rotulo">Volume</span>
+    <input type="range" id="vol" min="0" max="100" step="1" aria-label="Volume da voz do Jarvis">
+  </label>
+  <button class="botao" id="b-parar" type="button" disabled title="Interrompe só o áudio; a geração em andamento não é cancelada">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12"/></svg>
+    Parar áudio
+  </button>
+  <button class="botao" id="b-cam" type="button" aria-pressed="false" title="Liga a câmera: detecta presença e rosto localmente; nada é gravado">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg>
+    <span id="b-cam-t">Câmera</span>
+  </button>
+  <button class="botao" id="b-capacete" type="button" aria-pressed="false" title="Visão do capacete: HUD em volta do seu rosto (abre sozinho quando a câmera vê você)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>
+    Capacete
+  </button>
+  <span class="separador" aria-hidden="true"></span>
+  <button class="botao" id="b-chat" type="button">Chat</button>
+  <button class="botao" id="b-painel" type="button">Painel</button>
+  <button class="botao" id="b-tela" type="button" aria-pressed="false">Tela cheia</button>
+  <button class="botao" id="b-prefs" type="button" aria-expanded="false" aria-controls="gaveta">Preferências</button>
+  <button class="botao" id="b-desligar" type="button" data-alerta="true">Desligar</button>
+</nav>
+
+<section class="capacete" id="capacete" data-ativo="false" data-imagem="true" data-espelho="true" aria-label="Visão do capacete" aria-hidden="true">
+  <img id="cap-img" alt="">
+  <div class="cap-luz" id="cap-luz" aria-hidden="true"></div>
+  <div class="cap-vinheta" aria-hidden="true"></div>
+  <canvas id="cap-tela" aria-hidden="true"></canvas>
+
+  <p class="cap-ticker" id="cap-ticker" aria-hidden="true"></p>
+
+  <!-- coluna esquerda -->
+  <div class="cap-painel esq" id="cap-alerta"><div class="cap-in">
+    <div class="cap-rot"><span class="cap-chev" aria-hidden="true"></span><span id="cap-alerta-rot">Avisos</span></div>
+    <ul id="cap-alerta-lista"></ul>
+  </div></div>
+  <div class="cap-painel esq" id="cap-armadura"><div class="cap-in">
+    <div class="cap-rot">Armadura · sistema</div>
+    <div class="cap-arm">
+      <svg viewBox="0 0 120 230" aria-hidden="true">
+        <ellipse class="cap-base" cx="60" cy="222" rx="40" ry="6"/>
+        <!-- capacete com a mascara -->
+        <path data-parte="cabeca" d="M60 4 C49 4 44 11 44 22 L45 32 C46 38 51 43 56 45 L64 45 C69 43 74 38 75 32 L76 22 C76 11 71 4 60 4 Z"/>
+        <path class="cap-risco" d="M49 17 L55 15 L60 17 L65 15 L71 17 M49 18 L49 33 L54 40 L66 40 L71 33 L71 18 M55 35.5 L65 35.5 M49 28 L53 31 M71 28 L67 31 M60 4 L60 12"/>
+        <path class="cap-olho" d="M50 21 L56 22.2 L55.2 24.2 L50.4 23.2 Z M70 21 L64 22.2 L64.8 24.2 L69.6 23.2 Z"/>
+        <!-- tronco: pescoco, peitoral, abdomen e cintura -->
+        <path data-parte="tronco" d="M54 45 L66 45 L67 50 L53 50 Z M40 52 L80 52 L86 60 L84 78 L76 90 L44 90 L36 78 L34 60 Z M46 92 L74 92 L72 99 L48 99 Z M47 101 L73 101 L71 108 L49 108 Z M44 110 L76 110 L78 118 L42 118 Z"/>
+        <path class="cap-risco" d="M40 60 L55 62 L57 75 M80 60 L65 62 L63 75 M46 82 L74 82 M60 76 L60 90 M50 114 L70 114"/>
+        <!-- reator: circulo com o triangulo -->
+        <circle data-parte="reator" cx="60" cy="68" r="6.2"/>
+        <path class="cap-tri" d="M60 63 L64.6 71 L55.4 71 Z"/>
+        <!-- bracos: ombreira, braco, cotovelo, manopla e mao com repulsor -->
+        <path data-parte="braco-e" d="M34 52 C27 52 22 57 22 64 L24 70 L33 68 L36 58 Z M24 72 L33 70 L32 94 L24 94 Z M23 96 L33 96 L32 101 L24 101 Z M23 103 L33 103 L34 128 L22 128 Z M22 130 L34 130 L33 140 L28 143 L23 140 Z"/>
+        <path data-parte="braco-d" d="M86 52 C93 52 98 57 98 64 L96 70 L87 68 L84 58 Z M96 72 L87 70 L88 94 L96 94 Z M97 96 L87 96 L88 101 L96 101 Z M97 103 L87 103 L86 128 L98 128 Z M98 130 L86 130 L87 140 L92 143 L97 140 Z"/>
+        <path class="cap-risco" d="M24 60 L33 62 M96 60 L87 62 M25 110 L32 110 M25 118 L33 118 M95 110 L88 110 M95 118 L87 118"/>
+        <circle class="cap-repulsor" cx="28" cy="135.5" r="2.1"/>
+        <circle class="cap-repulsor" cx="92" cy="135.5" r="2.1"/>
+        <!-- pernas: coxa, joelho, canela e bota -->
+        <path data-parte="pernas" d="M44 120 L58 120 L57 160 L46 160 Z M46 162 L57 162 L56 170 L47 170 Z M46 172 L56 172 L55 204 L47 204 Z M44 206 L56 206 L58 214 L42 214 Z M76 120 L62 120 L63 160 L74 160 Z M74 162 L63 162 L64 170 L73 170 Z M74 172 L64 172 L65 204 L73 204 Z M76 206 L64 206 L62 214 L78 214 Z"/>
+        <path class="cap-risco" d="M50 126 L51 154 M70 126 L69 154 M51 176 L51 200 M69 176 L69 200 M47 166 L56 166 M73 166 L64 166"/>
+        <rect class="cap-varre" x="14" y="0" width="92" height="3"/>
+      </svg>
+      <ul class="cap-legenda" id="cap-legenda"></ul>
+    </div>
+  </div></div>
+  <div class="cap-painel esq" id="cap-hora"><div class="cap-in">
+    <div class="cap-relogio num"><span id="cap-hh">--:--</span><small id="cap-ss">--</small></div>
+    <div class="cap-data"><span class="cap-dia num" id="cap-dia">--</span><span><b id="cap-semana"></b><br><span id="cap-mes"></span></span></div>
+    <div id="cap-clima"></div>
+  </div></div>
+
+  <!-- coluna direita -->
+  <div class="cap-painel dir" id="cap-com"><div class="cap-in">
+    <div class="cap-rot">Comunicação</div>
+    <p class="cap-fala"><b>Você</b><span id="cap-voce">—</span></p>
+    <p class="cap-fala jarvis"><b>Jarvis</b><span id="cap-jarvis">—</span></p>
+    <canvas id="cap-onda" aria-hidden="true"></canvas>
+    <div class="cap-linha"><span>Análise de áudio</span><span id="cap-audio-est">—</span></div>
+  </div></div>
+  <div class="cap-painel dir" id="cap-diag"><div class="cap-in">
+    <div class="cap-rot"><span class="cap-chev" aria-hidden="true"></span><span id="cap-diag-rot">Diagnóstico</span></div>
+    <ul id="cap-diag-lista"></ul>
+  </div></div>
+  <div class="cap-painel dir" id="cap-radar"><div class="cap-in">
+    <div class="cap-rot">Radar · câmera</div>
+    <canvas id="cap-radar-cv" aria-hidden="true"></canvas>
+    <div class="cap-linha"><span>Pessoas na imagem</span><span id="cap-pessoas">—</span></div>
+  </div></div>
+
+  <div class="cap-alvo" id="cap-alvo">
+    <div class="cap-rot" id="cap-alvo-rot">Usuário presente</div>
+    <div id="cap-alvo-det"></div>
+  </div>
+
+  <div class="cap-base-inferior" id="cap-base">
+    <div class="cap-estado">
+      <div class="cap-nome">J.A.R.V.I.S.</div>
+      <div id="cap-estado" role="status">—</div>
+      <div class="cap-sub" id="cap-sub"></div>
+    </div>
+    <ul class="cap-dock" id="cap-dock" aria-label="Estado dos componentes">
+      <li data-k="mic"><i></i><b>Mic</b><span>—</span></li>
+      <li data-k="voz"><i></i><b>Voz</b><span>—</span></li>
+      <li data-k="ia"><i></i><b>IA</b><span>—</span></li>
+      <li data-k="cam"><i></i><b>Câmera</b><span>—</span></li>
+      <li data-k="rede"><i></i><b>Rede</b><span>—</span></li>
+    </ul>
+  </div>
+
+  <div class="cap-analise oculto" id="cap-analise" role="status" aria-live="polite">
+    <img id="cap-analise-img" alt="Quadro analisado">
+    <div><div class="cap-rot" id="cap-analise-rot">Analisando…</div><p id="cap-analise-txt"></p></div>
+  </div>
+
+  <div class="cap-contexto oculto" id="cap-contexto" aria-live="polite">
+    <div class="cap-rot" id="cap-ctx-titulo">—</div>
+    <ol id="cap-ctx-lista"></ol>
+  </div>
+
+  <div class="cap-noticias oculto" id="cap-noticias" aria-label="Manchetes">
+    <span class="cap-noticias-rot">Notícias</span>
+    <div class="cap-noticias-trilho"><p id="cap-noticias-txt"></p></div>
+  </div>
+
+  <div class="cap-barra">
+    <button class="botao mini" id="cap-b-analisar" type="button" title="Mostre um objeto para a câmera">O que é isso?</button>
+    <button class="botao mini" id="cap-b-imagem" type="button" aria-pressed="true">Ocultar rosto</button>
+    <button class="botao mini" id="cap-b-sair" type="button">Sair do capacete</button>
+  </div>
+</section>
+
+<aside class="gaveta" id="gaveta" data-aberta="false" aria-label="Preferências" tabindex="-1">
+  <div class="cabecalho-gaveta">
+    <span class="titulo">Preferências</span>
+    <button class="botao mini" id="b-fechar" type="button">Fechar</button>
+  </div>
+  <form id="f-prefs">
+    <fieldset><legend class="rotulo">Aparência</legend>
+      <label>Tema <select name="tema"><option value="hud">HUD</option><option value="classico">Clássico (original)</option></select></label>
+      <label>Núcleo <select name="estilo_nucleo"><option value="reator">Reator (como no filme)</option><option value="abstrato">Abstrato</option><option value="olhos">Com olhos</option><option value="orbe">Orbe de partículas (projeto C)</option></select></label>
+      <label>Cores <select name="cor_tema"><option value="ciano">Ciano (como no filme)</option><option value="dourado">Dourado (alternativa)</option></select></label>
+      <label>Perfil gráfico <select name="perfil_grafico"><option value="economico">Econômico (~15 fps)</option><option value="equilibrado">Equilibrado (~30 fps)</option><option value="cinematografico">Cinematográfico (até 60 fps)</option></select></label>
+      <label>Brilho <input type="range" name="brilho" min="0.2" max="1" step="0.05"></label>
+      <label>Movimento <select name="movimento"><option value="normal">Normal</option><option value="reduzido">Reduzido</option></select></label>
+      <label>Animação de boot <input type="checkbox" name="boot_animado"></label>
+      <label>Sons da interface <input type="checkbox" name="sons_interface"></label>
+    </fieldset>
+    <fieldset><legend class="rotulo">Voz</legend>
+      <label>Saudação ao abrir <input type="checkbox" name="saudacao"></label>
+      <label>Como o Jarvis te chama <input type="text" name="nome_usuario" maxlength="40"></label>
+      <label>Escutar ao abrir <input type="checkbox" name="escuta_automatica"></label>
+      <label>Só responder quando chamado de “Jarvis” <input type="checkbox" name="exigir_nome"></label>
+      <label>Voz do Jarvis <select name="voz_tts"><option value="pm_alex">Alex (masculina, como no filme)</option><option value="pm_santa">Santa (masculina)</option><option value="pf_dora">Dora (feminina)</option></select></label>
+      <label>Executar o que eu pedir (câmera, lembretes, música, sites…) <input type="checkbox" name="ferramentas_voz"></label>
+      <label>Falar sozinho <select name="modo_proativo">
+        <option value="sob_demanda">Só o que eu pedir (lembretes, meus monitores)</option>
+        <option value="assistido">Assistido: + compromissos, boas-vindas, avisos</option>
+        <option value="proativo">Proativo: + e-mails novos, visitas, observações</option></select></label>
+      <label>Resumo do dia quando me vir pela primeira vez <input type="checkbox" name="resumo_diario"></label>
+      <label>"Bem-vindo de volta" ao voltar para a câmera <input type="checkbox" name="boas_vindas"></label>
+      <label>Silêncio das falas sozinhas: das <input type="number" name="silencio_inicio" min="0" max="23" step="1"> às <input type="number" name="silencio_fim" min="0" max="23" step="1"> h</label>
+      <label>Avisos também no Windows <input type="checkbox" name="notificacoes_windows"></label>
+      <label>Resposta rápida por voz (sem as ferramentas do agente) <input type="checkbox" name="voz_rapida"></label>
+      <label>Manter o modelo da voz carregado com o microfone ligado <input type="checkbox" name="manter_modelo_voz"></label>
+      <label>Modelo da voz <select name="modelo_voz" id="sel-modelo"></select></label>
+      <label>Reconhecimento da fala <select name="stt_motor"><option value="whisper">Whisper (mais preciso)</option><option value="vosk">VOSK (projeto B: mais leve)</option></select></label>
+      <label>Precisão do Whisper <select name="stt_modelo"><option value="small">Small: entende melhor (~3 s)</option><option value="base">Base: mais rápido, erra mais</option></select></label>
+    </fieldset>
+    <fieldset><legend class="rotulo">Câmera</legend>
+      <label>Ligar a câmera ao abrir <input type="checkbox" name="camera_ao_iniciar"></label>
+      <label>Reconhecer rostos e vozes cadastrados <input type="checkbox" name="reconhecer_pessoas"></label>
+      <label>Só atender a voz do dono <input type="checkbox" name="so_o_dono"></label>
+      <label>Estilo da conversa <select name="estilo_conversa"><option value="natural">Natural (como o Copilot)</option><option value="breve">Breve (1 ou 2 frases)</option></select></label>
+      <label>Falar enquanto pensa (frase a frase) <input type="checkbox" name="fala_em_fluxo"></label>
+      <label>Imagem da câmera na conversa <select name="visao_na_conversa"><option value="auto">Quando a pergunta é sobre o que ele vê</option><option value="sempre">Sempre, com a câmera ligada</option><option value="nunca">Nunca</option></select></label>
+      <label>Visão em tempo real: caixas com o nome dos objetos <input type="checkbox" name="visao_tempo_real"></label>
+      <label>Olhar automático: mostro um objeto e ele diz o que é <input type="checkbox" name="visao_automatica"></label>
+      <label>Região de visão <select name="visao_regiao"><option value="centro">Centro</option><option value="mesa">Mesa (parte de baixo)</option><option value="inteira">Quadro inteiro</option></select></label>
+      <label>Visão do capacete <select name="capacete"><option value="automatico">Automática (ao ver seu rosto)</option><option value="sempre">Sempre com a câmera ligada</option><option value="desligado">Desligada</option></select></label>
+      <label>Mostrar a imagem da câmera no capacete <input type="checkbox" name="capacete_imagem"></label>
+      <label>Imagem espelhada <input type="checkbox" name="espelhar_camera"></label>
+      <p class="fraco pequeno">Detecta presença e rosto localmente. Não identifica pessoas; nada é gravado nem enviado.</p>
+    </fieldset>
+    <fieldset><legend class="rotulo">Abrir ao iniciar</legend>
+      <label>Tela Jarvis <input type="checkbox" name="abrir.jarvis"></label>
+      <label>Painel <input type="checkbox" name="abrir.painel"></label>
+      <label>Chat <input type="checkbox" name="abrir.chat"></label>
+    </fieldset>
+    <fieldset><legend class="rotulo">Widgets desta tela</legend>
+      <label>Relógio <input type="checkbox" name="widgets_jarvis.relogio"></label>
+      <label>Clima <input type="checkbox" name="widgets_jarvis.clima"></label>
+      <label>Energia <input type="checkbox" name="widgets_jarvis.energia"></label>
+      <label>Música <input type="checkbox" name="widgets_jarvis.midia"></label>
+      <label>Forma de onda <input type="checkbox" name="widgets_jarvis.onda"></label>
+    </fieldset>
+    <fieldset><legend class="rotulo">Widgets do painel</legend>
+      <label>Projeto <input type="checkbox" name="widgets_painel.projeto"></label>
+      <label>Clima <input type="checkbox" name="widgets_painel.clima"></label>
+      <label>Agenda <input type="checkbox" name="widgets_painel.agenda"></label>
+      <label>Secretário <input type="checkbox" name="widgets_painel.secretario"></label>
+      <label>E-mail <input type="checkbox" name="widgets_painel.email"></label>
+      <label>Notícias <input type="checkbox" name="widgets_painel.noticias"></label>
+      <label>Tarefas <input type="checkbox" name="widgets_painel.tarefas"></label>
+      <label>Notificações <input type="checkbox" name="widgets_painel.notificacoes"></label>
+      <label>Música e volume <input type="checkbox" name="widgets_painel.midia"></label>
+      <label>Rede <input type="checkbox" name="widgets_painel.rede"></label>
+      <label>Modelos <input type="checkbox" name="widgets_painel.modelos"></label>
+      <label>Inferência <input type="checkbox" name="widgets_painel.inferencia"></label>
+      <label>Custos <input type="checkbox" name="widgets_painel.custos"></label>
+      <label>Histórico <input type="checkbox" name="widgets_painel.historico"></label>
+      <label>Automações <input type="checkbox" name="widgets_painel.automacoes"></label>
+      <label>Serviços <input type="checkbox" name="widgets_painel.servicos"></label>
+      <label>Voz e áudio <input type="checkbox" name="widgets_painel.voz"></label>
+      <label>Apps abertos <input type="checkbox" name="widgets_painel.apps"></label>
+      <label>Downloads <input type="checkbox" name="widgets_painel.downloads"></label>
+      <label>Pastas <input type="checkbox" name="widgets_painel.pastas"></label>
+      <label>Dispositivos <input type="checkbox" name="widgets_painel.dispositivos"></label>
+      <label>Eventos <input type="checkbox" name="widgets_painel.eventos"></label>
+    </fieldset>
+    <p class="fraco pequeno" id="prefs-msg" role="status"></p>
+    <p class="fraco pequeno">Cidade do clima, agenda e pastas monitoradas: nos próprios cartões do Painel.</p>
+    <p class="fraco pequeno">Desempenho medido: <span class="mono" id="fps">—</span> quadros/s nesta janela.</p>
+  </form>
+</aside>
+
+<details id="trabalho-painel" class="trabalho">
+  <summary id="tr-resumo">Trabalho e evidências</summary>
+  <div class="tr-conteudo">
+    <div class="tr-botoes">
+      <button id="tr-fixar" type="button" aria-pressed="false">Fixar leitura</button>
+      <button id="tr-foco" type="button" aria-pressed="false">Ampliar painel</button>
+      <button id="tr-parar" type="button">Interromper Jarvis</button>
+    </div>
+    <label for="tr-historico">Rever evidências desta sessão</label>
+    <select id="tr-historico"><option value="">Estado atual</option></select>
+    <button id="tr-limpar" type="button">Limpar histórico desta tela</button>
+    <small>Até 20 registros de texto, só na memória desta tela. Sem fotos salvas.</small>
+    <p id="tr-status" role="status"></p>
+    <section id="tr-leitura" hidden aria-label="Leitura em voz alta">
+      <p id="tr-leitura-estado"></p>
+      <div class="tr-botoes">
+        <button id="tr-leitura-pausar" type="button">Pausar leitura</button>
+        <button id="tr-leitura-retomar" type="button">Retomar leitura</button>
+        <button id="tr-leitura-parar" type="button">Encerrar leitura</button>
+      </div>
+    </section>
+    <div id="tr-corpo" class="tr-corpo"></div>
+    <details><summary>Selecionar área fixa da câmera</summary>
+      <p>Coordenadas em porcentagem do quadro. A seleção não acompanha o objeto quando ele se move e não liga a câmera.</p>
+      <form id="tr-regiao-form">
+        <label>Esquerda (%)<input id="tr-regiao-x" type="number" min="0" max="99" step="1" value="25" required></label>
+        <label>Topo (%)<input id="tr-regiao-y" type="number" min="0" max="99" step="1" value="25" required></label>
+        <label>Largura (%)<input id="tr-regiao-w" type="number" min="1" max="100" step="1" value="50" required></label>
+        <label>Altura (%)<input id="tr-regiao-h" type="number" min="1" max="100" step="1" value="50" required></label>
+        <button type="submit">Selecionar região</button>
+      </form>
+    </details>
+  </div>
+</details>
+</body>
+</html>

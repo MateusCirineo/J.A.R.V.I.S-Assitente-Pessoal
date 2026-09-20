@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="jarvis-token" content="{{TOKEN}}">
+<title>J.A.R.V.I.S. · Mesa holográfica</title>
+<link rel="stylesheet" href="/hud/holograma.css">
+<script type="module" src="/hud/holograma.js"></script>
+<link rel="stylesheet" href="/hud/trabalho.css">
+<script type="module" src="/hud/trabalho.js"></script>
+</head>
+<body>
+<!-- Feita para projetor: fundo preto (nao acende na mesa), so o HUD brilha.
+     Tudo desenhado num canvas: visao ao vivo, modelo 3D, graficos e a conversa. -->
+<canvas id="holo" aria-label="Mesa holográfica do Jarvis"></canvas>
+<p id="apresentacao-status" role="status">Nenhum carregamento confirmado nesta sessão.</p>
+<section id="gestos-controles" aria-label="Controle de gestos no ar">
+  <button id="gestos-ligar" type="button">Ativar gestos</button>
+  <button id="gestos-calibrar" type="button" disabled>Marcar canto superior esquerdo</button>
+  <label>Manipulação <select id="gestos-modo" disabled><option value="girar">Girar</option><option value="zoom">Zoom</option></select></label>
+  <p id="gestos-status" role="status">Desativado · câmera compartilhada. Mouse e teclado continuam disponíveis.</p>
+  <small>Gesto no ar: indicador aponta; pinça seleciona. Marque os cantos com a mão aberta. Não é toque físico.</small>
+</section>
+<span id="gestos-cursor" hidden aria-hidden="true"></span>
+<p class="dica" id="dica">Arraste para girar · roda do mouse para zoom · duplo clique: tela cheia</p>
+
+<details id="trabalho-painel" class="trabalho">
+  <summary id="tr-resumo">Trabalho e evidências</summary>
+  <div class="tr-conteudo">
+    <div class="tr-botoes">
+      <button id="tr-fixar" type="button" aria-pressed="false">Fixar leitura</button>
+      <button id="tr-foco" type="button" aria-pressed="false">Ampliar painel</button>
+      <button id="tr-parar" type="button">Interromper Jarvis</button>
+    </div>
+    <label for="tr-historico">Rever evidências desta sessão</label>
+    <select id="tr-historico"><option value="">Estado atual</option></select>
+    <button id="tr-limpar" type="button">Limpar histórico desta tela</button>
+    <small>Até 20 registros de texto, só na memória desta tela. Sem fotos salvas.</small>
+    <p id="tr-status" role="status"></p>
+    <section id="tr-leitura" hidden aria-label="Leitura em voz alta">
+      <p id="tr-leitura-estado"></p>
+      <div class="tr-botoes">
+        <button id="tr-leitura-pausar" type="button">Pausar leitura</button>
+        <button id="tr-leitura-retomar" type="button">Retomar leitura</button>
+        <button id="tr-leitura-parar" type="button">Encerrar leitura</button>
+      </div>
+    </section>
+    <div id="tr-corpo" class="tr-corpo"></div>
+    <details><summary>Selecionar área fixa da câmera</summary>
+      <p>Coordenadas em porcentagem do quadro. A seleção não acompanha o objeto quando ele se move e não liga a câmera.</p>
+      <form id="tr-regiao-form">
+        <label>Esquerda (%)<input id="tr-regiao-x" type="number" min="0" max="99" step="1" value="25" required></label>
+        <label>Topo (%)<input id="tr-regiao-y" type="number" min="0" max="99" step="1" value="25" required></label>
+        <label>Largura (%)<input id="tr-regiao-w" type="number" min="1" max="100" step="1" value="50" required></label>
+        <label>Altura (%)<input id="tr-regiao-h" type="number" min="1" max="100" step="1" value="50" required></label>
+        <button type="submit">Selecionar região</button>
+      </form>
+    </details>
+  </div>
+</details>
+</body>
+</html>

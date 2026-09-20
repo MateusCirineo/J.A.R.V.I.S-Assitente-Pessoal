@@ -1,0 +1,197 @@
+/* ==========================================================================
+   Tema HUD do Jarvis - tokens e componentes compartilhados (Jarvis e Painel)
+   Fontes locais do Windows; nenhuma dependencia de CDN.
+   ========================================================================== */
+
+:root {
+  --fundo-0: #03080d;
+  --fundo-1: #06131d;
+  --superficie: rgba(8, 26, 37, 0.72);
+  --superficie-forte: rgba(8, 26, 37, 0.92);
+  --ciano: #32e8f3;
+  --azul: #169ddf;
+  --texto: #e5f8ff;
+  --texto-2: #8fb5c5;
+  --ambar: #ffb547;
+  --vermelho: #ff5964;
+  --verde: #3de6b0;
+
+  --linha: rgba(50, 232, 243, 0.22);
+  --linha-forte: rgba(50, 232, 243, 0.5);
+  --brilho: 0.8;                                   /* preferencia 0.2..1 */
+  --brilho-ciano: rgba(50, 232, 243, calc(0.35 * var(--brilho)));
+
+  --f-titulo: "Bahnschrift", "Segoe UI", system-ui, sans-serif;
+  --f-texto: "Segoe UI", system-ui, sans-serif;
+  --f-mono: "Cascadia Mono", "Cascadia Code", Consolas, monospace;
+
+  --corte: 10px;                                   /* canto recortado */
+  color-scheme: dark;
+}
+
+/* tema alternativo dourado (orbe do projeto C): so troca os tokens de cor */
+html[data-cor="dourado"] {
+  --ciano: #ffcf6b;
+  --azul: #d9962b;
+  --texto: #fff6e6;
+  --texto-2: #c8b28c;
+  --ambar: #ff8a4c;
+  --linha: rgba(255, 207, 107, 0.22);
+  --linha-forte: rgba(255, 207, 107, 0.5);
+  --brilho-ciano: rgba(255, 207, 107, calc(0.35 * var(--brilho)));
+  --superficie: rgba(30, 20, 6, 0.72);
+  --superficie-forte: rgba(30, 20, 6, 0.92);
+  --fundo-0: #0a0703;
+  --fundo-1: #150e05;
+}
+html[data-cor="dourado"] body {
+  background: radial-gradient(ellipse at 50% 38%, rgba(217, 150, 43, 0.10), transparent 62%),
+              linear-gradient(180deg, var(--fundo-1), var(--fundo-0) 70%);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(22, 157, 223, 0.10), transparent 62%),
+    linear-gradient(180deg, var(--fundo-1), var(--fundo-0) 70%);
+  color: var(--texto);
+  font: 14px/1.5 var(--f-texto);
+  overflow: hidden;
+}
+
+/* grade tecnica de fundo: decorativa, nunca intercepta clique */
+.grade {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(50, 232, 243, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(50, 232, 243, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+}
+
+/* -------------------------------------------------------------------------
+   tipografia
+   ------------------------------------------------------------------------- */
+.titulo {
+  font: 600 13px/1 var(--f-titulo);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--texto);
+}
+.rotulo {
+  font: 500 10.5px/1.2 var(--f-titulo);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--texto-2);
+}
+.mono, .num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.fraco { color: var(--texto-2); }
+.ambar { color: var(--ambar); }
+.verde { color: var(--verde); }
+.vermelho { color: var(--vermelho); }
+
+/* -------------------------------------------------------------------------
+   moldura com cantos recortados e marcacoes tecnicas
+   ------------------------------------------------------------------------- */
+.moldura {
+  position: relative;
+  background: var(--superficie);
+  border: 1px solid var(--linha);
+  clip-path: polygon(var(--corte) 0, 100% 0, 100% calc(100% - var(--corte)),
+                     calc(100% - var(--corte)) 100%, 0 100%, 0 var(--corte));
+  padding: 12px 14px;
+}
+.moldura::before, .moldura::after {
+  content: ""; position: absolute; width: 14px; height: 14px; pointer-events: none;
+  border-color: var(--linha-forte); border-style: solid;
+}
+.moldura::before { top: 4px; right: 4px; border-width: 1px 1px 0 0; }
+.moldura::after  { bottom: 4px; left: 4px; border-width: 0 0 1px 1px; }
+.moldura > .cabecalho {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding-bottom: 8px; margin-bottom: 8px;
+  border-bottom: 1px solid var(--linha);
+}
+
+/* -------------------------------------------------------------------------
+   indicadores de estado
+   ------------------------------------------------------------------------- */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font: 600 10.5px/1 var(--f-titulo); letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 5px 9px; border: 1px solid var(--linha); color: var(--texto-2);
+  background: rgba(3, 8, 13, 0.55);
+}
+.chip::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor;
+  opacity: 0.7;
+}
+.chip[data-s="ok"]       { color: var(--verde);    border-color: rgba(61, 230, 176, 0.35); }
+.chip[data-s="ativo"]    { color: var(--ciano);    border-color: var(--linha-forte); }
+.chip[data-s="aviso"]    { color: var(--ambar);    border-color: rgba(255, 181, 71, 0.4); }
+.chip[data-s="erro"]     { color: var(--vermelho); border-color: rgba(255, 89, 100, 0.45); }
+.chip[data-s="off"]      { color: var(--texto-2);  opacity: 0.75; }
+
+.linha-dado {
+  display: flex; justify-content: space-between; gap: 12px; align-items: baseline;
+  padding: 3px 0; font-size: 12.5px;
+}
+.linha-dado > span:first-child { color: var(--texto-2); }
+.linha-dado > span:last-child { text-align: right; overflow-wrap: anywhere; }
+
+.barra-nivel { height: 4px; background: rgba(50, 232, 243, 0.1); overflow: hidden; }
+.barra-nivel > i { display: block; height: 100%; width: 0%; background: var(--ciano); }
+
+/* -------------------------------------------------------------------------
+   botoes e controles
+   ------------------------------------------------------------------------- */
+.botao {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  min-height: 36px; padding: 0 14px;
+  font: 600 11px/1 var(--f-titulo); letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--texto); background: rgba(8, 26, 37, 0.8);
+  border: 1px solid var(--linha); cursor: pointer;
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+.botao:hover { border-color: var(--linha-forte); background: rgba(22, 157, 223, 0.14); }
+.botao[aria-pressed="true"] { color: var(--fundo-0); background: var(--ciano); border-color: var(--ciano); }
+.botao[data-alerta="true"] { color: var(--ambar); border-color: rgba(255, 181, 71, 0.5); }
+.botao:disabled { opacity: 0.4; cursor: not-allowed; }
+.botao svg { width: 15px; height: 15px; }
+
+:focus-visible { outline: 2px solid var(--ambar); outline-offset: 2px; }
+
+input[type="range"] { accent-color: var(--ciano); }
+select, input[type="text"] {
+  background: var(--fundo-0); color: var(--texto); border: 1px solid var(--linha);
+  font: 13px var(--f-texto); padding: 6px 8px; min-height: 32px;
+}
+
+/* -------------------------------------------------------------------------
+   gaveta de preferencias
+   ------------------------------------------------------------------------- */
+.gaveta {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(380px, 100vw);
+  background: var(--superficie-forte); border-left: 1px solid var(--linha-forte);
+  padding: 18px; overflow-y: auto; z-index: 30;
+  transform: translateX(100%); transition: transform 0.22s ease;
+}
+.gaveta[data-aberta="true"] { transform: none; }
+.gaveta fieldset { border: 1px solid var(--linha); margin: 0 0 12px; padding: 10px 12px; }
+.gaveta legend { padding: 0 6px; }
+.gaveta label { display: flex; justify-content: space-between; align-items: center;
+                gap: 10px; padding: 5px 0; font-size: 13px; }
+
+.oculto { display: none !important; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* -------------------------------------------------------------------------
+   movimento reduzido: preferencia do HUD ou do sistema
+   ------------------------------------------------------------------------- */
+html[data-movimento="reduzido"] *, html[data-movimento="reduzido"] *::before {
+  animation: none !important; transition: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

@@ -1,0 +1,190 @@
+/* Tela Jarvis - layout do nucleo e instrumentos */
+
+/* minmax(0, 1fr): a linha do meio nunca cresce por causa do conteudo */
+body { display: grid; grid-template-rows: auto minmax(0, 1fr) auto auto auto; height: 100vh; }
+
+.topo {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 18px; border-bottom: 1px solid var(--linha);
+  background: linear-gradient(180deg, rgba(3, 8, 13, 0.85), rgba(3, 8, 13, 0.4));
+}
+.topo { flex-wrap: wrap; }
+.marca { display: flex; align-items: baseline; gap: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; min-width: 0; }
+
+.layout {
+  position: relative; z-index: 1; min-height: 0;
+  display: grid; grid-template-columns: minmax(210px, 250px) 1fr minmax(210px, 250px);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 14px; padding: 12px 18px 8px;
+}
+.lateral { display: flex; flex-direction: column; gap: 10px; min-height: 0; overflow-y: auto; }
+
+/* palco: o nucleo e sempre um quadrado centrado. Canvas e texto ficam fora do
+   fluxo (absolutos): se o canvas participasse do layout, a grade cresceria para
+   caber nele e o nucleo nunca encolheria ao reduzir a janela. */
+.palco { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+.palco > canvas, .centro {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+.centro {
+  z-index: 1; text-align: center; pointer-events: none;
+  width: calc(var(--tam-nucleo, 400px) * 0.7);
+}
+.nome {
+  font: 600 calc(var(--tam-nucleo, 400px) * 0.072) / 1 var(--f-titulo);
+  letter-spacing: 0.24em; padding-left: 0.24em;     /* compensa o espacamento final */
+  color: #eafdff;
+  text-shadow: 0 0 calc(18px * var(--brilho)) rgba(50, 232, 243, calc(0.55 * var(--brilho)));
+}
+html[data-nucleo="olhos"] .nome { visibility: hidden; }
+.estado {
+  margin-top: calc(var(--tam-nucleo, 400px) * 0.028);
+  font: 600 calc(max(11px, var(--tam-nucleo, 400px) * 0.028)) / 1.2 var(--f-titulo);
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--ciano);
+}
+.estado[data-id="erro"], .estado[data-id="mic-off"] { color: var(--ambar); }
+.estado[data-id="erro"] { color: var(--vermelho); }
+.sub { margin-top: 4px; font-size: max(11px, calc(var(--tam-nucleo, 400px) * 0.024));
+       color: var(--texto-2); min-height: 1.3em; }
+
+/* boot */
+.etapas { list-style: none; margin: 0; padding: 0; font-size: 12px; }
+.etapas li { display: grid; grid-template-columns: 16px 1fr; gap: 6px; padding: 2px 0; }
+.etapas li::before { content: "·"; color: var(--texto-2); text-align: center; }
+.etapas li[data-s="verificando"]::before { content: "◌"; color: var(--ciano); }
+.etapas li[data-s="ok"]::before { content: "✓"; color: var(--verde); }
+.etapas li[data-s="falha"]::before { content: "✕"; color: var(--vermelho); }
+.etapas li[data-s="aviso"]::before { content: "⚠"; color: var(--ambar); }
+.etapas li small { grid-column: 2; color: var(--texto-2); font-size: 11px; overflow-wrap: anywhere; }
+.resumo-boot { margin: 6px 0 0; font-size: 12px; color: var(--texto-2); }
+#boot[data-fechado="true"] .etapas { display: none; }
+
+.botao.mini { min-height: 26px; padding: 0 9px; font-size: 9.5px; }
+.fonte { margin: 6px 0 0; font-size: 10.5px; color: var(--texto-2); }
+.pequeno { font-size: 12px; }
+
+/* transcricao */
+.transcricao { margin: 0 18px; z-index: 1; display: grid; gap: 4px; }
+.transcricao p { margin: 0; display: grid; grid-template-columns: 64px 1fr; gap: 10px;
+                 align-items: baseline; font-size: 14px; }
+.transcricao p > span:last-child { overflow: hidden; text-overflow: ellipsis;
+                                   display: -webkit-box; -webkit-line-clamp: 2;
+                                   -webkit-box-orient: vertical; }
+
+/* controles */
+.controles { z-index: 2; display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+             gap: 8px; padding: 10px 18px 12px; }
+.volume { display: inline-flex; align-items: center; gap: 8px; padding: 0 6px; }
+.volume input { width: 110px; }
+.separador { width: 1px; height: 24px; background: var(--linha); margin: 0 4px; }
+
+.desligado { margin: 40vh auto 0; text-align: center; }
+
+/* topo */
+.topo-dir { display: flex; gap: 6px; align-items: center; }
+.botao-chip { cursor: pointer; font: inherit; font: 600 10.5px/1 var(--f-titulo); }
+.estado[data-id="online"] { color: var(--verde); letter-spacing: 0.34em; }
+.estado[data-id="limitado"] { color: var(--ambar); }
+
+/* agora: relogio + clima */
+.relogio-grande { font-size: 30px; line-height: 1.05; color: var(--texto); letter-spacing: 0.04em; }
+.clima-mini { display: flex; align-items: center; gap: 8px; margin-top: 8px; color: var(--ciano); }
+.clima-mini .temp { font: 600 20px/1 var(--f-mono); color: var(--texto); }
+.clima-mini .desc { font-size: 12px; color: var(--texto-2); }
+
+/* energia e midia */
+.barra-nivel.grossa { height: 8px; margin: 2px 0 6px; }
+.md-titulo { font-size: 13.5px; color: var(--texto); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.md-controles { display: flex; gap: 6px; margin-top: 8px; }
+.md-controles .botao { flex: 1; }
+
+/* camera: janela flutuante no canto do nucleo; "ampliar" centraliza */
+.camera {
+  position: absolute; right: 8px; bottom: 8px; z-index: 3; margin: 0;
+  width: min(34%, 300px); background: var(--superficie-forte);
+  border: 1px solid var(--linha-forte); padding: 6px;
+}
+.camera[data-ampliada="true"] { width: min(78%, 760px); right: 50%; bottom: 50%; transform: translate(50%, 50%); }
+.camera-quadro { position: relative; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
+.camera-quadro img, .camera-quadro canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.camera-quadro img { object-fit: cover; filter: saturate(0.6) contrast(1.05); }
+.cam-rec { position: absolute; top: 6px; left: 8px; font: 600 9.5px/1 var(--f-titulo);
+           letter-spacing: 0.16em; color: var(--vermelho); text-shadow: 0 0 6px #000; }
+.camera figcaption { display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-top: 6px; }
+
+/* painel de contexto: noticias listadas, fontes da pesquisa, cotacoes (some em 90 s) */
+.contexto {
+  position: absolute; left: 8px; top: 8px; z-index: 3; width: min(42%, 400px); max-height: calc(100% - 16px);
+  overflow: auto; background: var(--superficie-forte); border: 1px solid var(--linha-forte); padding: 8px 10px;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  animation: ctx-entrar 0.35s ease-out both;
+}
+.contexto.oculto { display: none; }
+@keyframes ctx-entrar { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
+.ctx-lista { margin: 6px 0 0; padding-left: 22px; display: grid; gap: 7px; }
+.ctx-lista li { font-size: 13px; line-height: 1.35; }
+.ctx-lista li::marker { color: var(--ciano); font: 600 12px var(--f-titulo); }
+.ctx-lista a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--linha-forte); }
+.ctx-lista a:hover, .ctx-lista a:focus-visible { color: var(--ciano); }
+.ctx-lista small { display: block; color: var(--texto-2); font-size: 11px; }
+html[data-movimento="reduzido"] .contexto { animation: none; }
+
+/* forma de onda */
+.faixa-onda { position: relative; z-index: 1; margin: 0 18px 8px; height: 58px;
+              border: 1px solid var(--linha); background: rgba(3, 8, 13, 0.55); }
+.faixa-onda canvas { display: block; width: 100%; height: 100%; }
+.legenda-onda { position: absolute; top: 5px; left: 10px; display: flex; gap: 14px;
+                font: 600 9.5px/1 var(--f-titulo); letter-spacing: 0.16em; text-transform: uppercase; }
+.leg-voce { color: var(--ciano); }
+.leg-jarvis { color: var(--ambar); }
+
+.cabecalho-gaveta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+
+/* janela media (ex.: 60% de 1536): tres colunas, laterais mais estreitas */
+@media (max-width: 1200px) {
+  .layout { grid-template-columns: minmax(170px, 205px) 1fr minmax(170px, 205px); gap: 10px; padding: 10px 12px 6px; }
+  .lateral .moldura { padding: 9px 10px; }
+  .linha-dado { font-size: 11.5px; }
+  .relogio-grande { font-size: 24px; }
+  .botao { padding: 0 10px; font-size: 10px; letter-spacing: 0.12em; }
+  .volume input { width: 80px; }
+}
+
+/* telas estreitas: instrumentos viram uma faixa compacta; o nucleo tem prioridade */
+@media (max-width: 880px) {
+  .layout { grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1fr) auto; }
+  .palco { grid-column: 1 / -1; grid-row: 1; min-height: 240px; }
+  .lateral { grid-row: 2; flex-direction: row; overflow-x: auto; overflow-y: hidden; align-items: flex-start;
+             max-height: 150px; scrollbar-width: thin; }
+  .lateral > .moldura { flex: 1 0 180px; max-height: 146px; overflow: hidden; }
+  .faixa-onda { height: 44px; }
+}
+@media (max-width: 640px) {
+  .chips { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  .lateral { grid-row: auto; }
+}
+@media (max-height: 700px) {
+  .transcricao p { font-size: 13px; }
+  .topo { padding: 6px 14px; }
+}
+
+/* comando digitado */
+.comando-texto { display: flex; gap: 8px; margin: 6px 18px 0; z-index: 1; }
+.comando-texto input { flex: 1; min-width: 0; background: rgba(3, 14, 22, 0.75); color: var(--texto);
+                       border: 1px solid var(--linha); padding: 7px 10px; font: 13px var(--f-texto); }
+.comando-texto input:focus { outline: 1px solid var(--ciano); border-color: var(--ciano); }
+
+/* manchetes correndo */
+.faixa-noticias { display: flex; align-items: center; gap: 10px; margin: 6px 18px 0; height: 22px;
+                  overflow: hidden; font-size: 12px; z-index: 1; border-top: 1px solid var(--linha); }
+.faixa-noticias.oculto { display: none; }
+.faixa-noticias .rot { flex: none; font: 600 10px var(--f-titulo); letter-spacing: 0.3em; text-transform: uppercase;
+                       color: #02080d; background: var(--ciano); padding: 2px 8px; }
+.faixa-noticias .trilho { flex: 1; overflow: hidden; white-space: nowrap; }
+.faixa-noticias p { display: inline-block; margin: 0; padding-left: 100%; color: var(--texto-2);
+                    animation: correr-noticias 60s linear infinite; }
+@keyframes correr-noticias { to { transform: translateX(-100%); } }
+html[data-movimento="reduzido"] .faixa-noticias p { animation: none; padding-left: 0; }

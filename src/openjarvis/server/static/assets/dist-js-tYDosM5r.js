@@ -1,0 +1,1 @@
+import{invoke as e}from"./core-DLU9e1nn.js";async function t(t,n){await e(`plugin:shell|open`,{path:t,with:n})}export{t as open};

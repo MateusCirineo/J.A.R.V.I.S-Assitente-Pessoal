@@ -1,0 +1,30 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #000;          /* projetor: preto nao acende */
+  overflow: hidden;
+  color: #bfefff;
+  font-family: Bahnschrift, "Segoe UI", sans-serif;
+  cursor: grab;
+}
+body:active { cursor: grabbing; }
+#holo { display: block; width: 100vw; height: 100vh; }
+.dica {
+  position: fixed; left: 50%; bottom: 6px; transform: translateX(-50%);
+  margin: 0; font-size: 11px; letter-spacing: .08em; color: rgba(95, 211, 255, .35);
+  pointer-events: none; transition: opacity 1s;
+}
+.dica.sumir { opacity: 0; }
+#gestos-controles { position: fixed; left: 28%; right: 28%; bottom: 42px; z-index: 5;
+  padding: 8px; border: 1px solid #326780; border-radius: 6px; background: #061019ee;
+  font-size: 12px; cursor: default; }
+#gestos-controles button, #gestos-controles select { color: #d9f7ff; background: #122b38;
+  border: 1px solid #5fd3ff; border-radius: 4px; padding: 5px; margin: 2px; cursor: pointer; }
+#gestos-controles :disabled { opacity: .5; cursor: default; }
+#gestos-status { margin: 4px 0; }
+#apresentacao-status { position: fixed; top: 42px; left: 28%; right: 28%; text-align: center;
+  color: #bfefff; font-size: 12px; pointer-events: none; }
+#gestos-cursor { position: fixed; z-index: 6; width: 20px; height: 20px;
+  border: 2px solid #5fd3ff; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+#gestos-cursor[data-pinca="true"] { background: #39ff6a88; border-color: #39ff6a; }
+@media (max-width: 900px) { #gestos-controles { left: 10px; right: 10px; bottom: 35px; } }

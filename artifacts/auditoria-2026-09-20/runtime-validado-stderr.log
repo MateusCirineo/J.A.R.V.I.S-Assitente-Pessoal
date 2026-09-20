@@ -1,0 +1,47 @@
+C:\Linguagem_C\projeto pessoal\Jarvis\.venv\lib\site-packages\torch\nn\modules\rnn.py:990: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.2 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+C:\Linguagem_C\projeto pessoal\Jarvis\.venv\lib\site-packages\torch\nn\utils\weight_norm.py:144: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+[ WARN:0@7.655] global net_impl_backend.cpp:345 cv::dnn::dnn5_v20260605::Net::Impl::setPreferableTarget Targets are not supported by the new graph engine for now
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 49267)
+Traceback (most recent call last):
+  File "C:\Users\mateu\AppData\Local\Programs\Python\Python310\lib\socketserver.py", line 683, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\mateu\AppData\Local\Programs\Python\Python310\lib\socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\mateu\AppData\Local\Programs\Python\Python310\lib\socketserver.py", line 747, in __init__
+    self.handle()
+  File "C:\Users\mateu\AppData\Local\Programs\Python\Python310\lib\http\server.py", line 433, in handle
+    self.handle_one_request()
+  File "C:\Users\mateu\AppData\Local\Programs\Python\Python310\lib\http\server.py", line 421, in handle_one_request
+    method()
+  File "C:\Linguagem_C\projeto pessoal\Jarvis\modo-show\hud_runtime\servidor_http.py", line 218, in do_GET
+    self._responder(200, {"ok": True, "servico": "jarvis-hud",
+  File "C:\Linguagem_C\projeto pessoal\Jarvis\modo-show\hud_runtime\servidor_http.py", line 90, in _responder
+    self.wfile.write(dados)
+  File "C:\Users\mateu\AppData\Local\Programs\Python\Python310\lib\socketserver.py", line 826, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] Uma conexão estabelecida foi anulada pelo software no computador host
+----------------------------------------
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 49287)
+Traceback (most recent call last):
+  File "C:\Users\mateu\AppData\Local\Programs\Python\Python310\lib\socketserver.py", line 683, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\mateu\AppData\Local\Programs\Python\Python310\lib\socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\mateu\AppData\Local\Programs\Python\Python310\lib\socketserver.py", line 747, in __init__
+    self.handle()
+  File "C:\Users\mateu\AppData\Local\Programs\Python\Python310\lib\http\server.py", line 433, in handle
+    self.handle_one_request()
+  File "C:\Users\mateu\AppData\Local\Programs\Python\Python310\lib\http\server.py", line 421, in handle_one_request
+    method()
+  File "C:\Linguagem_C\projeto pessoal\Jarvis\modo-show\hud_runtime\servidor_http.py", line 218, in do_GET
+    self._responder(200, {"ok": True, "servico": "jarvis-hud",
+  File "C:\Linguagem_C\projeto pessoal\Jarvis\modo-show\hud_runtime\servidor_http.py", line 90, in _responder
+    self.wfile.write(dados)
+  File "C:\Users\mateu\AppData\Local\Programs\Python\Python310\lib\socketserver.py", line 826, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] Uma conexão estabelecida foi anulada pelo software no computador host
+----------------------------------------

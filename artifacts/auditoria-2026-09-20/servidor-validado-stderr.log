@@ -1,0 +1,19 @@
+[33mA new version of OpenJarvis is available (v1.0.4.dev264+gc60a7e1 → v1.0.4)
+Update: jarvis self-update
+[0m
+  Speech: faster-whisper
+  Memory:    active
+  Scheduler: active
+Starting OpenJarvis API server
+  Engine: multi
+  Model:  gemma4:e4b
+  Agent:  orchestrator
+  URL:    http://127.0.0.1:8000
+INFO:     Started server process [32124]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:63743 - "WebSocket /v1/agents/events" [accepted]
+INFO:     connection open
+[PostHog] error uploading: HTTPSConnectionPool(host='34.231.106.201.sslip.io', port=443): Max retries exceeded with url: /batch/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='34.231.106.201.sslip.io', port=443) at 0x15def652f20>, 'Connection to 34.231.106.201.sslip.io timed out. (connect timeout=15)'))
+[PostHog] error uploading: HTTPSConnectionPool(host='34.231.106.201.sslip.io', port=443): Max retries exceeded with url: /batch/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='34.231.106.201.sslip.io', port=443) at 0x15def750e50>, 'Connection to 34.231.106.201.sslip.io timed out. (connect timeout=15)'))

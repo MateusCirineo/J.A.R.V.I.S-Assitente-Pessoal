@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-perfil="equilibrado" data-movimento="normal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="jarvis-token" content="{{TOKEN}}">
+<title>JARVIS · Central de Comando</title>
+<link rel="stylesheet" href="/hud/hud.css">
+<link rel="stylesheet" href="/hud/painel.css">
+<script type="module" src="/hud/painel.js"></script>
+<script type="module" src="/hud/memoria-painel.js"></script>
+<link rel="stylesheet" href="/hud/trabalho.css">
+<script type="module" src="/hud/trabalho.js"></script>
+</head>
+<body>
+<div class="grade" aria-hidden="true"></div>
+
+<header class="topo">
+  <div class="marca">
+    <span class="titulo">JARVIS</span><span class="barra-marca" aria-hidden="true"></span>
+    <span class="titulo fraco">Central de Comando</span>
+  </div>
+  <div class="relogio">
+    <span class="hora num" id="hora">--:--:--</span>
+    <span class="data fraco" id="data"></span>
+  </div>
+  <div class="conexao">
+    <span class="chip" id="c-rt" data-s="aviso">Conectando</span>
+    <span class="fraco pequeno" id="atualizado">—</span>
+  </div>
+</header>
+
+<main class="conteudo">
+  <section class="instrumentos" aria-label="Recursos do sistema">
+    <figure class="medidor moldura" id="g-mem"><div class="svg"></div>
+      <figcaption><span class="rotulo">Memória</span><span class="det" id="g-mem-d">—</span></figcaption></figure>
+    <figure class="medidor moldura" id="g-cpu"><div class="svg"></div>
+      <figcaption><span class="rotulo">CPU</span><span class="det" id="g-cpu-d">—</span></figcaption></figure>
+    <figure class="medidor moldura" id="g-gpu"><div class="svg"></div>
+      <figcaption><span class="rotulo">GPU</span><span class="det" id="g-gpu-d">—</span></figcaption></figure>
+    <figure class="medidor moldura" id="g-dsk"><div class="svg"></div>
+      <figcaption><span class="rotulo">Disco</span><span class="det" id="g-dsk-d">—</span></figcaption></figure>
+    <figure class="medidor moldura" id="g-bat"><div class="svg"></div>
+      <figcaption><span class="rotulo">Energia</span><span class="det" id="g-bat-d">—</span></figcaption></figure>
+    <figure class="medidor moldura oculto" id="g-tmp"><div class="svg"></div>
+      <figcaption><span class="rotulo">Temperatura</span><span class="det" id="g-tmp-d">—</span></figcaption></figure>
+  </section>
+
+  <div class="cartoes">
+    <section class="moldura cartao" id="w-agora" aria-live="polite">
+      <div class="cabecalho"><span class="rotulo">Agora</span><span class="fraco pequeno" id="a-pres"></span></div>
+      <div class="linha-dado"><span>Inferência</span><span id="a-inf">—</span></div>
+      <div class="linha-dado"><span>Microfone</span><span id="a-mic">—</span></div>
+      <div class="linha-dado"><span>Voz</span><span id="a-voz">—</span></div>
+      <div class="linha-dado"><span>Câmera</span><span id="a-cam">—</span></div>
+      <p class="nota" id="a-notas"></p>
+    </section>
+
+    <section class="moldura cartao largo" id="w-clima">
+      <div class="cabecalho"><span class="rotulo">Clima</span><span class="fraco pequeno" id="cl-local">—</span></div>
+      <div id="cl-corpo"></div>
+      <ul class="lista" id="cl-extras" aria-label="Outras cidades"></ul>
+      <form class="mini-form" id="f-cidade">
+        <input type="text" id="cl-busca" placeholder="Buscar cidade (ex.: Angatuba)" aria-label="Cidade" maxlength="80">
+        <button class="botao mini" type="submit">Buscar</button>
+      </form>
+      <ul class="opcoes" id="cl-opcoes"></ul>
+      <p class="nota">Fonte: Open-Meteo (sem conta). Só a cidade e as coordenadas saem da máquina.</p>
+    </section>
+
+    <section class="moldura cartao" id="w-agenda">
+      <div class="cabecalho"><span class="rotulo">Agenda</span><span class="fraco pequeno" id="ag-estado">—</span></div>
+      <ul class="lista" id="ag-lista"></ul>
+      <p class="nota ambar" id="ag-avisos"></p>
+      <ul class="lista" id="ag-contas" aria-label="Contas Google conectadas"></ul>
+      <div class="mini-form">
+        <button class="botao mini" type="button" id="ag-conectar">Conectar conta Google</button>
+      </div>
+      <details id="ag-cliente">
+        <summary>Credencial do Google (fazer uma vez)</summary>
+        <ol class="nota passos">
+          <li>Abra <a href="https://console.cloud.google.com/projectcreate" target="_blank" rel="noopener">console.cloud.google.com</a> e crie um projeto (ex.: Jarvis).</li>
+          <li>APIs e serviços → Biblioteca → ative a “Google Calendar API” e a “Gmail API”.</li>
+          <li>Google Auth Platform → Primeiros passos: nome “Jarvis”, seu e-mail, público “Externo”.</li>
+          <li>Em Público, adicione seus e-mails como usuários de teste. Ou clique em “Publicar app” para o login não vencer a cada 7 dias.</li>
+          <li>Clientes → Criar cliente → tipo “App para computador” → Criar. Copie o ID e a chave secreta para cá.</li>
+        </ol>
+        <form class="mini-form coluna" id="f-google">
+          <input type="password" id="gg-id" placeholder="ID do cliente (…apps.googleusercontent.com)" aria-label="ID do cliente" autocomplete="off">
+          <input type="password" id="gg-chave" placeholder="Chave secreta do cliente" aria-label="Chave secreta do cliente" autocomplete="off">
+          <button class="botao mini" type="submit">Salvar credencial</button>
+        </form>
+      </details>
+      <details id="ag-ical">
+        <summary>Alternativa: endereço iCal</summary>
+        <form class="mini-form" id="f-agenda">
+          <input type="password" id="ag-url" placeholder="Endereço secreto iCal (https://...)" aria-label="Endereço iCal" autocomplete="off">
+          <button class="botao mini" type="submit">Salvar</button>
+          <button class="botao mini" type="button" id="ag-remover">Remover</button>
+        </form>
+        <p class="nota">Google Agenda → Configurações → sua agenda → Integrar agenda → “Endereço secreto no formato iCal”.</p>
+      </details>
+      <p class="nota">Só leitura. Tokens e endereços ficam só neste computador.</p>
+    </section>
+
+    <section class="moldura cartao" id="w-secretario">
+      <div class="cabecalho"><span class="rotulo">Secretário</span><span class="fraco pequeno" id="sc-resumo">—</span></div>
+      <form class="mini-form" id="f-lembrete">
+        <input type="text" id="sc-lembrete" placeholder="Lembrete (ex.: ligar para o Pedro às 15h)" aria-label="Novo lembrete" maxlength="200">
+        <button class="botao mini" type="submit">Lembrar</button>
+      </form>
+      <ul class="lista" id="sc-lembretes" aria-label="Lembretes pendentes"></ul>
+      <form class="mini-form" id="f-nota">
+        <input type="text" id="sc-nota" placeholder="Nova nota" aria-label="Nova nota" maxlength="500">
+        <button class="botao mini" type="submit">Anotar</button>
+      </form>
+      <ul class="lista" id="sc-notas" aria-label="Notas"></ul>
+      <div class="cabecalho"><span class="rotulo">Monitores</span><span class="fraco pequeno" id="sc-mon-resumo">—</span></div>
+      <ul class="lista" id="sc-monitores" aria-label="Monitores"></ul>
+      <p class="nota">Por voz: “Jarvis, me lembre de … às 15h / em 20 minutos”, “timer de 5 minutos”, “anote: …”, “quais são meus lembretes”,
+        “me avise quando sair notícia sobre …”, “me avise quando o dólar passar de 5,50”, “pause o monitor …”.</p>
+    </section>
+
+    <section class="moldura cartao" id="w-vozcat">
+      <div class="cabecalho"><span class="rotulo">Voz do Jarvis</span><span class="fraco pequeno" id="vc-atual">—</span></div>
+      <div class="mini-form coluna">
+        <label>Motor <select id="vc-provedor" aria-label="Motor de voz"></select></label>
+        <label>Voz <input type="text" id="vc-voz" list="vc-vozes" aria-label="Voz" maxlength="120"></label>
+        <datalist id="vc-vozes"></datalist>
+      </div>
+      <p class="nota ambar" id="vc-aviso"></p>
+      <p class="nota oculto" id="vc-fish-link"><a href="https://fish.audio/app/api-keys/" target="_blank" rel="noopener noreferrer">Abrir fish.audio → API Keys</a> · crie a chave lá, cole abaixo e clique em Salvar credencial.</p>
+      <form class="mini-form coluna oculto" id="f-vc-cred" autocomplete="off">
+        <input type="password" id="vc-chave" placeholder="Chave da API" aria-label="Chave da API">
+        <input type="text" id="vc-regiao" placeholder="Região (Azure, ex.: brazilsouth)" aria-label="Região">
+        <input type="text" id="vc-modelo" placeholder="Modelo" aria-label="Modelo">
+        <input type="text" id="vc-vozid" placeholder="voice_id (ElevenLabs)" aria-label="voice_id">
+        <input type="text" id="vc-exe" placeholder="Caminho do piper.exe" aria-label="piper.exe">
+        <div class="mini-form"><button class="botao mini" type="submit">Salvar credencial</button>
+          <button class="botao mini" type="button" id="vc-remover">Remover</button></div>
+      </form>
+      <div class="mini-form">
+        <button class="botao mini" type="button" id="vc-previa">Ouvir prévia</button>
+        <button class="botao mini" type="button" id="vc-usar">Usar esta voz</button>
+      </div>
+      <label class="linha-dado"><span>Modo texto (responde só na tela)</span><input type="checkbox" id="vc-muda"></label>
+      <p class="nota">Atalhos: <b id="vc-atalhos">Ctrl+Alt+J falar · Ctrl+Alt+P parar</b>. “Jarvis, pare” interrompe a fala. Se um motor remoto falhar, ele volta para o Kokoro local.</p>
+    </section>
+
+    <section class="moldura cartao" id="w-casa">
+      <div class="cabecalho"><span class="rotulo">Casa</span><span class="fraco pequeno" id="cs-resumo">rede local</span></div>
+      <ul class="lista" id="cs-lista"></ul>
+      <div class="mini-form"><button class="botao mini" type="button" id="cs-procurar">Procurar aparelhos na rede</button>
+        <button class="botao mini" type="button" id="cs-holo">Abrir mesa holográfica</button></div>
+      <form class="mini-form coluna" id="f-cs-ha" autocomplete="off">
+        <input type="text" id="cs-ha-url" maxlength="200" placeholder="Home Assistant: http://192.168.0.10:8123" aria-label="Endereço do Home Assistant">
+        <input type="password" id="cs-ha-token" maxlength="400" placeholder="Token de acesso de longa duração" aria-label="Token do Home Assistant">
+        <div class="mini-form"><button class="botao mini" type="submit">Conectar Home Assistant</button>
+          <button class="botao mini" type="button" id="cs-ha-remover">Remover</button></div>
+      </form>
+      <p class="nota" id="cs-nota">Só rede local: TVs e caixas de som UPnP, tomadas Shelly/Tasmota e tudo do Home Assistant.
+        “Jarvis, ligue a luz da sala”, “volume da TV em 20”. Destrancar ou abrir portão pede “confirmo”.</p>
+    </section>
+
+    <section class="moldura cartao" id="w-celular">
+      <div class="cabecalho"><span class="rotulo">Celular (Telegram)</span><span class="fraco pequeno" id="tg-resumo">—</span></div>
+      <ol class="nota" id="tg-passos">
+        <li>No Telegram, fale com <b>@BotFather</b>, mande <b>/newbot</b> e copie o token que ele der.</li>
+        <li>Cole o token abaixo e clique em Salvar.</li>
+        <li>No seu bot, mande <b>/parear</b> e o código que vai aparecer aqui.</li>
+      </ol>
+      <form class="mini-form coluna" id="f-tg" autocomplete="off">
+        <input type="password" id="tg-token" maxlength="100" placeholder="Token do bot (123456:ABC...)" aria-label="Token do bot do Telegram">
+        <div class="mini-form"><button class="botao mini" type="submit">Salvar token</button>
+          <button class="botao mini" type="button" id="tg-desparear">Desparear</button></div>
+      </form>
+      <p class="nota ambar" id="tg-codigo"></p>
+      <label class="linha-dado"><span>Mandar avisos para o celular (vigia, lembretes, monitores)</span><input type="checkbox" id="tg-avisos"></label>
+      <p class="nota">Do celular, mande comandos como se digitasse aqui: “notícias do mundo”, “ative o modo vigia”. Nada perigoso roda pelo celular e nenhuma foto é enviada.</p>
+    </section>
+
+    <section class="moldura cartao" id="w-rotinas">
+      <div class="cabecalho"><span class="rotulo">Rotinas</span><span class="fraco pequeno">chegada e descanso</span></div>
+      <form class="mini-form coluna" id="f-rotinas" autocomplete="off">
+        <label>Frases de chegada <input type="text" id="rt-frases-c" maxlength="400" placeholder="cheguei, estou em casa"></label>
+        <label>Abrir ao chegar <input type="text" id="rt-apps" maxlength="600" placeholder="Spotify, Visual Studio Code, Google Chrome"></label>
+        <label>Sites ao chegar <input type="text" id="rt-sites" maxlength="1200" placeholder="https://… (separe por espaço)"></label>
+        <label class="linha-dado"><span>Resumo do dia ao chegar</span><input type="checkbox" id="rt-resumo"></label>
+        <label>Frases de descanso <input type="text" id="rt-frases-d" maxlength="400" placeholder="vou descansar, vou dormir"></label>
+        <label class="linha-dado"><span>Fechar os apps da rotina (pede para fechar; nunca força)</span><input type="checkbox" id="rt-fechar"></label>
+        <label>Depois do descanso <select id="rt-acao" aria-label="Ação depois do descanso">
+          <option value="nada">nada</option>
+          <option value="bloquear">bloquear (pede confirmação)</option>
+          <option value="suspender">suspender (pede confirmação)</option>
+          <option value="opcoes_desligar">mostrar as opções de desligar</option>
+        </select></label>
+        <button class="botao mini" type="submit">Salvar rotinas</button>
+      </form>
+      <label class="linha-dado"><span>Iniciar o Jarvis com o Windows</span><input type="checkbox" id="rt-inicio"></label>
+      <p class="nota" id="rt-nota">Diga “Jarvis, cheguei” ou “Jarvis, vou descansar”. Só a frase inteira dispara a rotina.</p>
+    </section>
+
+    <section class="moldura cartao" id="w-openjarvis">
+      <div class="cabecalho"><span class="rotulo">OpenJarvis</span><span class="fraco pequeno" id="oj-resumo">—</span></div>
+      <div class="linha-dado"><span>Persona do Chat</span><span id="oj-persona">—</span></div>
+      <button class="botao mini oculto" type="button" id="oj-criar-persona">Criar SOUL.md e USER.md (persona Jarvis)</button>
+      <div class="linha-dado"><span>Canais</span><span id="oj-ponte">—</span></div>
+      <p class="nota" id="oj-canais"></p>
+      <div class="linha-dado"><span>Agentes</span><span id="oj-agentes-n">—</span></div>
+      <p class="nota" id="oj-agentes"></p>
+      <p class="nota">Só leitura. Canal disponível não é canal conectado: conectar é escolha sua, na configuração do OpenJarvis.</p>
+    </section>
+
+    <section class="moldura cartao" id="w-email">
+      <div class="cabecalho"><span class="rotulo">E-mail</span><span class="fraco pequeno" id="em-resumo">—</span></div>
+      <ul class="lista" id="em-lista"></ul>
+      <p class="nota">Só remetente e assunto (Gmail, permissão “metadados”). Por voz: “Jarvis, tenho e-mails novos?”.</p>
+    </section>
+
+    <section class="moldura cartao largo" id="w-noticias">
+      <div class="cabecalho"><span class="rotulo">Notícias</span><span class="fraco pequeno" id="nw-fontes">—</span></div>
+      <ul class="lista" id="nw-lista"></ul>
+      <p class="nota">Manchetes por RSS público. Por voz: “Jarvis, quais as notícias?”.</p>
+    </section>
+
+    <section class="moldura cartao largo" id="w-projeto">
+      <div class="cabecalho"><span class="rotulo">Projeto</span><span class="fraco pequeno" id="pj-estado">—</span></div>
+      <p class="mono" id="pj-objetivo">Nenhum projeto aberto.</p>
+      <ul class="lista" id="pj-etapas"></ul>
+      <p class="nota" id="pj-resultados"></p>
+      <div id="pj-peca" class="oculto">
+        <div class="cabecalho"><span class="rotulo">Peça em edição</span><span class="fraco pequeno" id="pc-versao">—</span></div>
+        <p class="mono" id="pc-parametros"></p>
+        <ul class="lista" id="pc-historico"></ul>
+      </div>
+      <p class="nota">Por voz: “Jarvis, comece o projeto …”, “falta …”, “o que falta?”, “continue de ontem”,
+        “pause o projeto”, “terminei”.</p>
+    </section>
+
+    <section class="moldura cartao largo registros-locais" id="w-registros">
+      <details>
+        <summary>Memória, exemplos revisados e requisitos</summary>
+        <p class="nota">Registros locais enviados por você. Nenhuma conversa é coletada automaticamente. Remova segredos antes de enviar.</p>
+        <p id="rg-status" role="status"></p>
+        <details><summary>Episódios: registrar, corrigir e apagar</summary>
+          <form id="ep-form" class="rg-form">
+            <label>Atividade<input id="ep-atividade" type="text" maxlength="2000" required></label>
+            <label>Escopo ou projeto<input id="ep-escopo" type="text" maxlength="200" placeholder="pessoal"></label>
+            <label>Resultado observado<textarea id="ep-resultado" maxlength="4000" required></textarea></label>
+            <button class="botao mini" type="submit">Registrar episódio</button>
+          </form>
+          <button class="botao mini" type="button" id="ep-consultar">Consultar episódios</button>
+          <label>Registro<select id="ep-lista"><option value="">Selecione um registro</option></select></label>
+          <pre id="ep-detalhes">Nenhum episódio consultado.</pre>
+          <label>Resultado corrigido<textarea id="ep-correcao" maxlength="4000"></textarea></label>
+          <button class="botao mini" type="button" id="ep-corrigir" disabled>Salvar correção</button>
+          <button class="botao mini" type="button" id="ep-apagar" disabled>Apagar episódio selecionado</button>
+        </details>
+        <details><summary>Exemplos revisados — adesão voluntária</summary>
+          <p id="ap-estado">Estado ainda não consultado. Registro manual desativado nesta tela.</p>
+          <label class="rg-check"><input id="ap-optar" type="checkbox">Permitir guardar exemplos enviados manualmente</label>
+          <button class="botao mini" type="button" id="ap-opcao-salvar">Salvar opção</button>
+          <button class="botao mini" type="button" id="ap-consultar">Consultar coleções e estado</button>
+          <form id="ap-form" class="rg-form">
+            <label>Pedido revisado<textarea id="ap-pedido" maxlength="4000" required></textarea></label>
+            <label>Contexto autorizado<textarea id="ap-contexto" maxlength="4000" required></textarea></label>
+            <label>Ação executada<textarea id="ap-acao" maxlength="4000" required></textarea></label>
+            <label>Resultado conferido<textarea id="ap-resultado" maxlength="4000" required></textarea></label>
+            <label>Correção aprovada<textarea id="ap-correcao" maxlength="4000" required></textarea></label>
+            <label>Destino<select id="ap-destino"><option value="adaptacao">Adaptação futura</option><option value="avaliacao">Avaliação reservada</option></select></label>
+            <label class="rg-check"><input id="ap-verificado" type="checkbox" required>Conferi o resultado</label>
+            <label class="rg-check"><input id="ap-aprovado" type="checkbox" required>Aprovei esta correção</label>
+            <label class="rg-check"><input id="ap-sucesso" type="checkbox" required>A ação teve sucesso</label>
+            <button class="botao mini" type="submit">Guardar exemplo revisado</button>
+          </form>
+          <label>Exemplo<select id="ap-lista"><option value="">Selecione um registro</option></select></label>
+          <pre id="ap-detalhes">Nenhum exemplo consultado.</pre>
+          <button class="botao mini" type="button" id="ap-apagar" disabled>Apagar exemplo selecionado</button>
+          <details><summary>Comparações já registradas</summary><pre id="ap-avaliacoes">Ainda não consultadas.</pre></details>
+        </details>
+        <details><summary>Comparar resultados conferidos (JSON local)</summary>
+          <p>Este formulário produz um relatório dos resultados enviados. Não executa, treina ou promove modelos, nem muda permissões.</p>
+          <p>O JSON deve conter: <code>referencia, candidato, resultados_referencia, resultados_candidato, politica_referencia, politica_candidato, reversao</code>. As duas políticas devem ser iguais.</p>
+          <p>Cada lista de resultados é um objeto por id de caso reservado, com <code>correto, verificado, evidencia, repeticoes, alertas_inuteis</code>. Use os mesmos casos nos dois resultados. O limite é 14 KB.</p>
+          <form id="av-form" class="rg-form">
+            <label>Importar JSON do computador<input id="av-arquivo" type="file" accept="application/json,.json"></label>
+            <label>Confira o JSON antes de enviar<textarea id="av-json" rows="8" required></textarea></label>
+            <button class="botao mini" type="submit">Comparar resultados enviados</button>
+          </form>
+          <pre id="av-resultado">Nenhuma comparação enviada nesta tela.</pre>
+        </details>
+        <details><summary>Requisitos da tarefa ativa</summary>
+          <button class="botao mini" type="button" id="rq-carregar">Carregar tarefa ativa</button>
+          <p id="rq-tarefa">Nenhuma tarefa carregada para edição.</p>
+          <form id="rq-form" class="rg-form">
+            <label>Condição de conclusão<textarea id="rq-conclusao" maxlength="2000"></textarea></label>
+            <label>Restrições — uma por linha<textarea id="rq-restricoes"></textarea></label>
+            <label>Recursos — um por linha<textarea id="rq-recursos"></textarea></label>
+            <label>Dependências — um id de tarefa por linha<textarea id="rq-dependencias"></textarea></label>
+            <button class="botao mini" type="submit" id="rq-salvar" disabled>Salvar requisitos</button>
+          </form>
+        </details>
+      </details>
+    </section>
+
+    <section class="moldura cartao" id="w-tarefas">
+      <div class="cabecalho"><span class="rotulo">Tarefas</span><span class="fraco pequeno" id="tf-resumo">—</span></div>
+      <form class="mini-form" id="f-tarefa">
+        <input type="text" id="tf-texto" placeholder="Nova tarefa" aria-label="Nova tarefa" maxlength="200">
+        <button class="botao mini" type="submit">Adicionar</button>
+      </form>
+      <ul class="lista tarefas" id="tf-lista"></ul>
+      <button class="botao mini" type="button" id="tf-limpar">Limpar concluídas</button>
+      <p class="nota">Por voz: “Jarvis, adicione a tarefa …”, “quais são minhas tarefas”, “marque a tarefa … como feita”.</p>
+    </section>
+
+    <section class="moldura cartao" id="w-notificacoes">
+      <div class="cabecalho"><span class="rotulo">Notificações</span>
+        <span><button class="botao mini" type="button" id="nt-lidas">Marcar lidas</button>
+        <button class="botao mini" type="button" id="nt-limpar">Limpar</button></span></div>
+      <ul class="lista" id="nt-lista"></ul>
+    </section>
+
+    <section class="moldura cartao" id="w-midia">
+      <div class="cabecalho"><span class="rotulo">Música e volume</span><span class="fraco pequeno" id="md-app"></span></div>
+      <div class="md-titulo" id="md-titulo">Nada tocando</div>
+      <div class="fraco pequeno" id="md-artista"></div>
+      <div class="barra-nivel" aria-hidden="true"><i id="md-prog"></i></div>
+      <div class="md-controles">
+        <button class="botao mini" id="md-ant" type="button" aria-label="Faixa anterior">◀◀</button>
+        <button class="botao mini" id="md-play" type="button" aria-label="Tocar ou pausar">▶ ❚❚</button>
+        <button class="botao mini" id="md-prox" type="button" aria-label="Próxima faixa">▶▶</button>
+      </div>
+      <label class="linha-volume"><span class="rotulo">Volume do sistema</span>
+        <input type="range" id="vs-vol" min="0" max="100" step="1" aria-label="Volume do sistema">
+        <span class="mono" id="vs-num">—</span>
+        <button class="botao mini" type="button" id="vs-mudo" aria-pressed="false">Mudo</button>
+      </label>
+    </section>
+
+    <section class="moldura cartao" id="w-rede">
+      <div class="cabecalho"><span class="rotulo">Rede</span><span class="chip" id="rd-net" data-s="off">—</span></div>
+      <div class="grade-dados dois">
+        <div class="dado"><span class="rotulo">Recebendo</span><span class="valor num" id="rd-rec">—</span></div>
+        <div class="dado"><span class="rotulo">Enviando</span><span class="valor num" id="rd-env">—</span></div>
+      </div>
+      <svg class="sparkline" id="rd-graf" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true">
+        <polyline id="rd-l-rec" fill="none" stroke="#32e8f3" stroke-width="1.5" points=""/>
+        <polyline id="rd-l-env" fill="none" stroke="#ffb547" stroke-width="1.2" points=""/>
+      </svg>
+      <div class="linha-dado"><span>Interface</span><span id="rd-if">—</span></div>
+      <div class="linha-dado"><span>Rede</span><span id="rd-ssid">—</span></div>
+    </section>
+
+    <section class="moldura cartao largo" id="w-modelos">
+      <div class="cabecalho"><span class="rotulo">Modelos</span><span class="fraco pequeno" id="mod-resumo">—</span></div>
+      <table class="tabela">
+        <thead><tr><th>Modelo</th><th class="num">Tamanho</th><th>Estado</th></tr></thead>
+        <tbody id="mod-linhas"><tr><td colspan="3" class="fraco">—</td></tr></tbody>
+      </table>
+      <p class="nota">Instalado = listado pelo Ollama. Em memória = carregado agora (<span class="mono">/api/ps</span>).</p>
+    </section>
+
+    <section class="moldura cartao" id="w-inferencia">
+      <div class="cabecalho"><span class="rotulo">Inferência</span><span class="fraco pequeno" id="inf-escopo">desde o início do servidor</span></div>
+      <div class="grade-dados dois">
+        <div class="dado"><span class="rotulo">Requisições</span><span class="valor num" id="s-req">—</span></div>
+        <div class="dado"><span class="rotulo">Tokens</span><span class="valor num" id="s-tok">—</span></div>
+        <div class="dado"><span class="rotulo">Latência média</span><span class="valor num" id="s-lat">—</span></div>
+        <div class="dado"><span class="rotulo">Vazão média</span><span class="valor num" id="s-vaz">—</span></div>
+      </div>
+      <div class="linha-dado"><span>Energia</span><span id="s-ene">—</span></div>
+      <div class="sub-cabecalho rotulo">Última inferência</div>
+      <div class="linha-dado"><span>Modelo</span><span class="mono" id="u-mod">—</span></div>
+      <div class="linha-dado"><span>Latência · 1º token</span><span class="mono" id="u-lat">—</span></div>
+      <div class="linha-dado"><span>Tokens entrada · saída</span><span class="mono" id="u-tok">—</span></div>
+      <div class="linha-dado"><span>Quando</span><span id="u-em">—</span></div>
+      <p class="nota" id="u-fonte"></p>
+    </section>
+
+    <section class="moldura cartao" id="w-custos">
+      <div class="cabecalho"><span class="rotulo">Custo local vs nuvem</span><span class="fraco pequeno">estimativa</span></div>
+      <ul class="lista" id="cu-lista"></ul>
+      <p class="nota" id="cu-nota"></p>
+    </section>
+
+    <section class="moldura cartao largo" id="w-historico">
+      <div class="cabecalho"><span class="rotulo">Histórico de perguntas</span><span class="fraco pequeno">chat e voz, pelo OpenJarvis</span></div>
+      <ul class="lista historico" id="hs-lista"></ul>
+    </section>
+
+    <section class="moldura cartao" id="w-automacoes">
+      <div class="cabecalho"><span class="rotulo">Automações</span></div>
+      <ul class="lista" id="au-lista"></ul>
+    </section>
+
+    <section class="moldura cartao" id="w-servicos">
+      <div class="cabecalho"><span class="rotulo">Serviços</span></div>
+      <ul class="servicos" id="servicos"></ul>
+    </section>
+
+    <section class="moldura cartao" id="w-voz">
+      <div class="cabecalho"><span class="rotulo">Voz e áudio</span></div>
+      <div class="linha-dado"><span>Síntese</span><span id="v-tts">—</span></div>
+      <div class="linha-dado"><span>Transcrição</span><span id="v-stt">—</span></div>
+      <div class="linha-dado"><span>Entrada</span><span id="v-in">—</span></div>
+      <div class="linha-dado"><span>Saída · volume da voz</span><span id="v-out">—</span></div>
+      <div class="sub-cabecalho rotulo">Rota de inferência</div>
+      <div class="linha-dado"><span>Motor preferido</span><span class="mono" id="r-pref">—</span></div>
+      <div class="linha-dado"><span>Roteador do servidor</span><span class="mono" id="r-rot">—</span></div>
+      <div class="linha-dado"><span>Canais externos</span><span id="r-canais">—</span></div>
+      <p class="nota" id="r-nota"></p>
+    </section>
+
+    <section class="moldura cartao" id="w-apps">
+      <div class="cabecalho"><span class="rotulo">Apps abertos</span><span class="fraco pequeno" id="ap-total">—</span></div>
+      <ul class="lista" id="ap-lista"></ul>
+    </section>
+
+    <section class="moldura cartao" id="w-downloads">
+      <div class="cabecalho"><span class="rotulo">Downloads</span><span class="fraco pequeno" id="dl-pasta">—</span></div>
+      <ul class="lista" id="dl-lista"></ul>
+    </section>
+
+    <section class="moldura cartao" id="w-pastas">
+      <div class="cabecalho"><span class="rotulo">Pastas monitoradas</span></div>
+      <div id="ps-corpo"></div>
+      <form class="mini-form coluna" id="f-pastas">
+        <textarea id="ps-lista" rows="2" aria-label="Pastas monitoradas, uma por linha" placeholder="Uma pasta por linha (vazio = Área de Trabalho e Documentos)"></textarea>
+        <button class="botao mini" type="submit">Salvar pastas</button>
+      </form>
+    </section>
+
+    <section class="moldura cartao" id="w-dispositivos">
+      <div class="cabecalho"><span class="rotulo">Dispositivos conectados</span></div>
+      <div id="dv-corpo"></div>
+    </section>
+
+    <section class="moldura cartao" id="w-eventos">
+      <div class="cabecalho"><span class="rotulo">Eventos recentes</span></div>
+      <ol class="eventos" id="eventos"></ol>
+    </section>
+  </div>
+</main>
+
+<details id="trabalho-painel" class="trabalho">
+  <summary id="tr-resumo">Trabalho e evidências</summary>
+  <div class="tr-conteudo">
+    <div class="tr-botoes">
+      <button id="tr-fixar" type="button" aria-pressed="false">Fixar leitura</button>
+      <button id="tr-foco" type="button" aria-pressed="false">Ampliar painel</button>
+      <button id="tr-parar" type="button">Interromper Jarvis</button>
+    </div>
+    <label for="tr-historico">Rever evidências desta sessão</label>
+    <select id="tr-historico"><option value="">Estado atual</option></select>
+    <button id="tr-limpar" type="button">Limpar histórico desta tela</button>
+    <small>Até 20 registros de texto, só na memória desta tela. Sem fotos salvas.</small>
+    <p id="tr-status" role="status"></p>
+    <section id="tr-leitura" hidden aria-label="Leitura em voz alta">
+      <p id="tr-leitura-estado"></p>
+      <div class="tr-botoes">
+        <button id="tr-leitura-pausar" type="button">Pausar leitura</button>
+        <button id="tr-leitura-retomar" type="button">Retomar leitura</button>
+        <button id="tr-leitura-parar" type="button">Encerrar leitura</button>
+      </div>
+    </section>
+    <div id="tr-corpo" class="tr-corpo"></div>
+    <details><summary>Selecionar área fixa da câmera</summary>
+      <p>Coordenadas em porcentagem do quadro. A seleção não acompanha o objeto quando ele se move e não liga a câmera.</p>
+      <form id="tr-regiao-form">
+        <label>Esquerda (%)<input id="tr-regiao-x" type="number" min="0" max="99" step="1" value="25" required></label>
+        <label>Topo (%)<input id="tr-regiao-y" type="number" min="0" max="99" step="1" value="25" required></label>
+        <label>Largura (%)<input id="tr-regiao-w" type="number" min="1" max="100" step="1" value="50" required></label>
+        <label>Altura (%)<input id="tr-regiao-h" type="number" min="1" max="100" step="1" value="50" required></label>
+        <button type="submit">Selecionar região</button>
+      </form>
+    </details>
+  </div>
+</details>
+</body>
+</html>

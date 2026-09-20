@@ -1,0 +1,14 @@
+C:\Linguagem_C\projeto pessoal\Jarvis\rust\target\release\deps\thiserror-6f182e441ba0ec2b.d: C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\lib.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\aserror.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\display.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\var.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\private.rs C:\Linguagem_C\projeto\ pessoal\Jarvis\rust\target\release\build\thiserror-a23f8fdeb48a46b6\out/private.rs
+
+C:\Linguagem_C\projeto pessoal\Jarvis\rust\target\release\deps\libthiserror-6f182e441ba0ec2b.rlib: C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\lib.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\aserror.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\display.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\var.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\private.rs C:\Linguagem_C\projeto\ pessoal\Jarvis\rust\target\release\build\thiserror-a23f8fdeb48a46b6\out/private.rs
+
+C:\Linguagem_C\projeto pessoal\Jarvis\rust\target\release\deps\libthiserror-6f182e441ba0ec2b.rmeta: C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\lib.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\aserror.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\display.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\var.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\private.rs C:\Linguagem_C\projeto\ pessoal\Jarvis\rust\target\release\build\thiserror-a23f8fdeb48a46b6\out/private.rs
+
+C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\lib.rs:
+C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\aserror.rs:
+C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\display.rs:
+C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\var.rs:
+C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.20\src\private.rs:
+C:\Linguagem_C\projeto\ pessoal\Jarvis\rust\target\release\build\thiserror-a23f8fdeb48a46b6\out/private.rs:
+
+# env-dep:OUT_DIR=C:\\Linguagem_C\\projeto pessoal\\Jarvis\\rust\\target\\release\\build\\thiserror-a23f8fdeb48a46b6\\out

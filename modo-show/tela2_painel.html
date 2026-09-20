@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Painel</title>
+<style>
+  :root{
+    --fundo:#05070d; --carta:#0d1424; --borda:#1e293b;
+    --texto:#e2e8f0; --fraco:#64748b; --azul:#38bdf8;
+    --verde:#22c55e; --ambar:#f59e0b; --vermelho:#ef4444;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--fundo); color:var(--texto); min-height:100vh; padding:28px;
+    font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  }
+  header{display:flex;justify-content:space-between;align-items:flex-end;
+    padding-bottom:16px;border-bottom:1px solid var(--borda);margin-bottom:22px}
+  h1{font-size:19px;font-weight:650;letter-spacing:.2em;text-transform:uppercase}
+  h1 span{color:var(--azul)}
+  .relogio{text-align:right}
+  .hora{font-size:30px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+  .data{font-size:12px;color:var(--fraco);margin-top:5px;text-transform:capitalize}
+
+  .grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+  .carta{background:var(--carta);border:1px solid var(--borda);border-radius:11px;padding:16px}
+  .rotulo{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--fraco)}
+  .valor{font-size:27px;font-weight:620;margin-top:9px;font-variant-numeric:tabular-nums}
+  .unidade{font-size:13px;color:var(--fraco);font-weight:400;margin-left:3px}
+  .nota{font-size:11.5px;color:var(--fraco);margin-top:5px}
+
+  .barra{height:5px;background:#1e293b;border-radius:3px;margin-top:11px;overflow:hidden}
+  .barra i{display:block;height:100%;border-radius:3px;transition:width .6s ease}
+
+  .larga{grid-column:1/-1}
+  .lista{display:flex;flex-direction:column;gap:9px;margin-top:12px}
+  .linha{display:flex;justify-content:space-between;align-items:center;
+    font-size:13.5px;padding:8px 11px;background:#0a1120;border-radius:7px}
+  .linha b{font-weight:550}
+  .selo{font-size:10.5px;padding:3px 9px;border-radius:99px;font-weight:600;
+    letter-spacing:.06em;text-transform:uppercase}
+  .ok{background:rgba(34,197,94,.14);color:var(--verde)}
+  .atencao{background:rgba(245,158,11,.14);color:var(--ambar)}
+  .ruim{background:rgba(239,68,68,.14);color:var(--vermelho)}
+  footer{margin-top:20px;font-size:11px;color:var(--fraco);text-align:center}
+</style>
+</head>
+<body>
+  <header>
+    <h1>Painel <span>Jarvis</span></h1>
+    <div class="relogio">
+      <div class="hora" id="hora">--:--</div>
+      <div class="data" id="data"></div>
+    </div>
+  </header>
+
+  <div class="grade" id="grade"></div>
+  <footer id="rodape"></footer>
+
+<script src="dados.js"></script>
+<script>
+  const D = window.DADOS || {};
+
+  function cor(pct){ return pct >= 88 ? 'var(--vermelho)' : pct >= 70 ? 'var(--ambar)' : 'var(--verde)'; }
+  function selo(pct){ return pct >= 88 ? 'ruim' : pct >= 70 ? 'atencao' : 'ok'; }
+
+  function carta(rotulo, valor, unidade, nota, pct){
+    const barra = pct == null ? '' :
+      `<div class="barra"><i style="width:${Math.min(pct,100)}%;background:${cor(pct)}"></i></div>`;
+    return `<div class="carta">
+      <div class="rotulo">${rotulo}</div>
+      <div class="valor">${valor}<span class="unidade">${unidade||''}</span></div>
+      ${barra}<div class="nota">${nota||''}</div></div>`;
+  }
+
+  const ramPct   = D.ram_total  ? Math.round((D.ram_total - D.ram_livre) / D.ram_total * 100) : null;
+  const discoPct = D.disco_total? Math.round((D.disco_total - D.disco_livre) / D.disco_total * 100) : null;
+
+  const partes = [
+    carta('Memoria em uso', ramPct ?? '--', '%',
+          `${(D.ram_livre ?? 0).toFixed(1)} GB livres de ${(D.ram_total ?? 0).toFixed(1)} GB`, ramPct),
+    carta('Disco em uso', discoPct ?? '--', '%',
+          `${(D.disco_livre ?? 0).toFixed(0)} GB livres de ${(D.disco_total ?? 0).toFixed(0)} GB`, discoPct),
+    carta('Modelos locais', (D.modelos || []).length, '',
+          D.modelos_gb ? `${D.modelos_gb.toFixed(1)} GB em disco` : 'nenhum baixado'),
+    carta('Voz', D.voz || 'nao configurada', '',
+          D.tts ? `${D.tts} - offline` : ''),
+  ];
+
+  const mods = (D.modelos || []).map(m => `
+    <div class="linha"><b>${m.nome}</b>
+      <span><span style="color:var(--fraco);margin-right:12px">${m.tamanho}</span>
+      <span class="selo ok">pronto</span></span></div>`).join('');
+
+  partes.push(`<div class="carta larga">
+    <div class="rotulo">Modelos instalados (Ollama)</div>
+    <div class="lista">${mods || '<div class="linha">nenhum modelo baixado</div>'}</div></div>`);
+
+  const svc = (D.servicos || []).map(s => `
+    <div class="linha"><b>${s.nome}</b>
+      <span class="selo ${s.ok ? 'ok' : 'ruim'}">${s.ok ? 'no ar' : 'parado'}</span></div>`).join('');
+  if (svc) partes.push(`<div class="carta larga">
+    <div class="rotulo">Servicos</div><div class="lista">${svc}</div></div>`);
+
+  document.getElementById('grade').innerHTML = partes.join('');
+  document.getElementById('rodape').textContent =
+    D.gerado ? 'dados coletados em ' + D.gerado : 'sem dados - rode pelo modo_show.py';
+
+  function tick(){
+    const a = new Date();
+    document.getElementById('hora').textContent =
+      String(a.getHours()).padStart(2,'0') + ':' + String(a.getMinutes()).padStart(2,'0');
+    document.getElementById('data').textContent =
+      a.toLocaleDateString('pt-BR', {weekday:'long', day:'numeric', month:'long'});
+  }
+  tick(); setInterval(tick, 10000);
+</script>
+<!-- volta ao tema HUD: botao discreto + volta sozinho se o tema mudar em outra janela -->
+<button id="voltar-hud" type="button" title="Voltar ao tema HUD"
+  style="position:fixed;right:14px;bottom:12px;z-index:99;padding:6px 12px;border:1px solid rgba(94,200,240,.45);
+         background:rgba(6,19,29,.85);color:#bfe9ff;font:600 11px/1 'Segoe UI',sans-serif;letter-spacing:.12em;
+         text-transform:uppercase;cursor:pointer;opacity:.55">Voltar ao HUD</button>
+<script>
+  (function () {
+    const b = document.getElementById('voltar-hud');
+    b.addEventListener('mouseenter', () => { b.style.opacity = '1'; });
+    b.addEventListener('mouseleave', () => { b.style.opacity = '.55'; });
+    b.addEventListener('click', () => {
+      fetch('/api/preferencias', { method: 'POST', headers: { 'Content-Type': 'application/json',
+        'X-Jarvis-Token': '{{TOKEN}}' }, body: JSON.stringify({ tema: 'hud' }) })
+        .then(() => location.replace('/painel')).catch(() => location.replace('/painel'));
+    });
+    setInterval(() => {
+      fetch('/api/estado', { headers: { 'X-Jarvis-Token': '{{TOKEN}}' } })
+        .then((r) => { if (r.status === 403) location.reload(); }).catch(() => {});
+      fetch('/classico/tema').then((r) => r.json()).then((j) => { if (j.tema !== 'classico') location.replace('/painel'); })
+        .catch(() => {});
+    }, 3000);
+  })();
+</script>
+</body>
+</html>

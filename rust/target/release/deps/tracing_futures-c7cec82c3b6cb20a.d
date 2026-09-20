@@ -1,0 +1,10 @@
+C:\Linguagem_C\projeto pessoal\Jarvis\rust\target\release\deps\tracing_futures-c7cec82c3b6cb20a.d: C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\lib.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\stdlib.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\executor\mod.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\executor\futures_03.rs
+
+C:\Linguagem_C\projeto pessoal\Jarvis\rust\target\release\deps\libtracing_futures-c7cec82c3b6cb20a.rlib: C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\lib.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\stdlib.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\executor\mod.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\executor\futures_03.rs
+
+C:\Linguagem_C\projeto pessoal\Jarvis\rust\target\release\deps\libtracing_futures-c7cec82c3b6cb20a.rmeta: C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\lib.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\stdlib.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\executor\mod.rs C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\executor\futures_03.rs
+
+C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\lib.rs:
+C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\stdlib.rs:
+C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\executor\mod.rs:
+C:\Users\mateu\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tracing-futures-0.2.5\src\executor\futures_03.rs:

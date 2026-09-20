@@ -1,0 +1,16 @@
+export declare const JSON_LD_EVENT_TAG = "$json_ld";
+export declare function sanitizeJsonLd(text: string): [unknown, string] | null;
+type JsonLdPrivacyOptions = {
+    blockClass?: string | RegExp;
+    blockSelector?: string | null;
+    maskTextClass?: string | RegExp;
+    maskTextSelector?: string | null;
+};
+export declare function startJsonLdCapture(doc: Document, MutationObserverClass: typeof MutationObserver, options: JsonLdPrivacyOptions & {
+    emit: (jsonLd: unknown) => boolean;
+    getCaptureState?: () => boolean | null;
+}): {
+    scan: (force?: boolean) => void;
+    stop: () => void;
+};
+export {};

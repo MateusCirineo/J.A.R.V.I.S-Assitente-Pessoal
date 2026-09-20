@@ -1,0 +1,281 @@
+/* ==========================================================================
+   Visao do capacete, na linguagem visual dos filmes do Homem de Ferro:
+   branco com acentos ciano, ambar para destaque, vermelho para alerta;
+   camadas em profundidades diferentes; paineis curvos nas laterais;
+   "prateleira" na base; luz do HUD refletindo no rosto.
+   ========================================================================== */
+
+.capacete {
+  --cap-branco: #eaf9ff;
+  --cap-linha: rgba(234, 249, 255, 0.55);
+  --cap-fundo: rgba(2, 14, 22, 0.5);
+  --cap-verm: #ff4a57;
+  position: fixed; inset: 0; z-index: 15; overflow: hidden;
+  background: #010407;
+  perspective: 1000px; perspective-origin: 50% 45%;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.45s ease, visibility 0s linear 0.45s;
+}
+.capacete[data-ativo="true"] { opacity: 1; visibility: visible; transition: opacity 0.3s ease; }
+html[data-cor="dourado"] .capacete { --cap-branco: #fff6e6; --cap-linha: rgba(255, 246, 230, 0.55); --cap-fundo: rgba(22, 14, 2, 0.5); }
+
+.capacete > img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  /* rosto dentro do capacete: frio, contrastado, escuro nas bordas */
+  filter: grayscale(0.55) sepia(0.2) hue-rotate(160deg) saturate(1.25) contrast(1.2) brightness(0.58);
+}
+.capacete[data-espelho="true"] > img { transform: scaleX(-1); }
+.capacete[data-imagem="false"] > img { display: none; }
+.capacete[data-imagem="false"] {
+  background: radial-gradient(ellipse at 50% 42%, rgba(22, 157, 223, 0.18), transparent 60%), #010407;
+}
+
+/* luz do HUD batendo no rosto; o JS move o centro (--lx, --ly) com a cabeca */
+.cap-luz {
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
+  background:
+    radial-gradient(ellipse 22% 30% at var(--lx, 50%) var(--ly, 42%), rgba(90, 225, 255, 0.26), transparent 70%),
+    radial-gradient(ellipse 60% 55% at var(--lx, 50%) var(--ly, 42%), rgba(40, 150, 220, 0.12), transparent 75%);
+}
+.capacete[data-imagem="false"] .cap-luz { display: none; }
+.cap-vinheta {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 78% at 50% 46%, transparent 42%, rgba(0, 6, 11, 0.9) 100%),
+    linear-gradient(180deg, rgba(50, 232, 243, 0.04), rgba(22, 157, 223, 0.08));
+}
+.cap-vinheta::after {                                /* linhas do visor */
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(234, 249, 255, 0.03) 0 1px, transparent 1px 3px);
+}
+#cap-tela { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+            opacity: calc(0.6 + 0.4 * var(--brilho)); }
+
+/* --------------------------------------------------------------------------
+   paineis: o JS posiciona (transform) o de fora; o de dentro faz a entrada
+   -------------------------------------------------------------------------- */
+.cap-painel {
+  position: absolute; left: 0; top: 0;
+  width: clamp(210px, 18vw, 290px);
+  will-change: transform;
+}
+.cap-painel.esq { transform-origin: left center; }
+.cap-painel.dir { transform-origin: right center; }
+.cap-in {
+  position: relative;
+  padding: 11px 13px 12px;
+  color: var(--cap-branco);
+  background: linear-gradient(135deg, rgba(10, 42, 58, 0.5), var(--cap-fundo));
+  border-top: 1px solid var(--cap-linha);
+  border-bottom: 1px solid rgba(234, 249, 255, 0.18);
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  text-shadow: 0 0 6px rgba(50, 232, 243, 0.35);
+}
+.cap-in::before, .cap-in::after {                    /* cantoneiras */
+  content: ""; position: absolute; width: 10px; height: 10px; border: 1px solid var(--ciano);
+}
+.cap-in::before { left: 0; top: 0; border-right: 0; border-bottom: 0; }
+.cap-in::after { right: 0; bottom: 0; border-left: 0; border-top: 0; }
+
+/* entrada "vindo de longe", escalonada, quando o capacete fecha */
+.capacete[data-boot="true"] .cap-in { animation: cap-entrar 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+                                      animation-delay: var(--atraso, 0s); }
+@keyframes cap-entrar {
+  0% { opacity: 0; transform: scale(1.5); filter: blur(6px) brightness(2.2); }
+  60% { opacity: 1; filter: blur(0) brightness(1.4); }
+  100% { opacity: 1; transform: none; filter: none; }
+}
+#cap-alerta { --atraso: 0.15s; } #cap-armadura { --atraso: 0.25s; } #cap-hora { --atraso: 0.35s; }
+#cap-com { --atraso: 0.2s; } #cap-diag { --atraso: 0.3s; } #cap-radar { --atraso: 0.4s; }
+
+.cap-rot {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+  font: 600 10.5px/1 var(--f-titulo); letter-spacing: 0.3em; text-transform: uppercase; color: var(--cap-branco);
+}
+.cap-rot::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--cap-linha), transparent); }
+.cap-chev { display: none; width: 16px; height: 10px; flex: none;
+            background: linear-gradient(135deg, transparent 45%, currentColor 45% 60%, transparent 60%) 0 0 / 8px 10px repeat-x; }
+.cap-fraco { color: var(--texto-2); font-size: 12px; margin: 0; }
+
+/* estados de alerta: cabecalho vermelho como os "CRITICAL" do filme */
+.cap-painel[data-alerta="erro"] .cap-in {
+  background: linear-gradient(135deg, rgba(90, 8, 18, 0.62), rgba(24, 3, 6, 0.45));
+  border-top-color: var(--cap-verm);
+}
+.cap-painel[data-alerta="erro"] .cap-rot { color: var(--cap-verm); text-shadow: 0 0 8px rgba(255, 74, 87, 0.7); }
+.cap-painel[data-alerta="erro"] .cap-chev { display: block; animation: cap-piscar 1s steps(2) infinite; }
+.cap-painel[data-alerta="erro"] .cap-in::before, .cap-painel[data-alerta="erro"] .cap-in::after { border-color: var(--cap-verm); }
+.cap-painel[data-alerta="aviso"] .cap-rot { color: var(--ambar); }
+.cap-painel[data-alerta="aviso"] .cap-chev { display: block; }
+@keyframes cap-piscar { 50% { opacity: 0.25; } }
+
+.cap-painel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; font-size: 12px; }
+.cap-painel li { display: flex; justify-content: space-between; gap: 10px; padding-bottom: 4px;
+                 border-bottom: 1px solid rgba(234, 249, 255, 0.1); }
+.cap-painel li span:first-child { color: #b9d6e2; min-width: 0; overflow-wrap: anywhere; }
+.cap-painel li span:last-child { font-family: var(--f-mono); text-align: right; white-space: nowrap; }
+.cap-painel li[data-n="erro"] span { color: #ffc4c9; }
+.cap-painel li[data-n="aviso"] span:last-child { color: var(--ambar); }
+.cap-linha { display: flex; justify-content: space-between; gap: 8px; margin-top: 6px; font-size: 11px;
+             color: #b9d6e2; text-transform: uppercase; letter-spacing: 0.08em; }
+.cap-linha span:last-child { color: var(--cap-branco); font-family: var(--f-mono); text-transform: none; letter-spacing: 0; }
+
+/* hora: "19:40 / 21 Tuesday May" */
+.cap-relogio { font: 200 48px/1 var(--f-mono); color: #f2fcff; text-shadow: 0 0 16px rgba(50, 232, 243, 0.7); }
+.cap-relogio small { font-size: 16px; margin-left: 6px; color: var(--ciano); }
+.cap-data { display: flex; align-items: center; gap: 10px; margin-top: 6px; font-size: 12px; line-height: 1.25;
+            text-transform: capitalize; color: #b9d6e2; }
+.cap-dia { font: 300 32px/1 var(--f-mono); color: var(--ciano); }
+.cap-data b { font-weight: 600; color: var(--cap-branco); }
+.cap-clima { display: flex; align-items: center; gap: 9px; margin-top: 9px; padding-top: 8px;
+             border-top: 1px solid rgba(234, 249, 255, 0.15); color: var(--ciano); font-size: 12px; }
+.cap-clima span:last-child { color: var(--cap-branco); line-height: 1.3; }
+.cap-clima small { color: #b9d6e2; }
+.cap-temp { font: 300 28px/1 var(--f-mono); color: #f2fcff; }
+.cap-outros { margin-top: 4px; font-size: 11px; color: #b9d6e2; }
+
+/* armadura: silhueta com as partes coloridas pelos dados reais */
+.cap-arm { display: grid; grid-template-columns: 104px 1fr; gap: 10px; align-items: center; }
+.cap-arm svg { width: 104px; overflow: visible; }
+.cap-olho { fill: #f4feff; filter: drop-shadow(0 0 3px #bff8ff) drop-shadow(0 0 6px rgba(50, 232, 243, 0.9)); }
+.cap-tri { fill: none; stroke: #ffffff; stroke-width: 0.9; filter: drop-shadow(0 0 3px #bff8ff); }
+.cap-repulsor { fill: rgba(160, 245, 255, 0.9); filter: drop-shadow(0 0 4px rgba(50, 232, 243, 0.95)); }
+.cap-arm [data-parte] { fill: rgba(50, 232, 243, 0.12); stroke: var(--cap-branco); stroke-width: 0.8;
+                        transition: fill 0.5s, stroke 0.5s; filter: drop-shadow(0 0 2px rgba(50, 232, 243, 0.8)); }
+.cap-arm [data-n="atencao"] { fill: rgba(255, 150, 40, 0.45); stroke: #ffb547; filter: drop-shadow(0 0 4px rgba(255, 150, 40, 0.9)); }
+.cap-arm [data-n="critico"] { fill: rgba(255, 74, 87, 0.5); stroke: var(--cap-verm); filter: drop-shadow(0 0 4px rgba(255, 74, 87, 0.9)); }
+.cap-arm [data-n="sem"] { fill: none; stroke-dasharray: 2 2; opacity: 0.55; }
+.cap-arm circle[data-parte="reator"] { fill: rgba(160, 245, 255, 0.85); }
+.cap-arm circle[data-parte="reator"][data-n="critico"] { fill: var(--cap-verm); }
+.cap-risco { fill: none; stroke: rgba(234, 249, 255, 0.45); stroke-width: 0.6; }
+.cap-base { fill: none; stroke: var(--ciano); stroke-width: 0.8; stroke-dasharray: 3 3; }
+.cap-varre { fill: rgba(50, 232, 243, 0.55); animation: cap-varrer 3.2s linear infinite; }
+@keyframes cap-varrer { from { transform: translateY(0); opacity: 0.9; } to { transform: translateY(222px); opacity: 0.2; } }
+.cap-legenda { gap: 3px !important; }
+.cap-legenda li { font-size: 11px; }
+
+/* comunicacao: como a chamada da Pepper + analise de audio */
+.cap-fala { display: grid; grid-template-columns: 50px 1fr; gap: 6px; margin: 0 0 5px; font-size: 12px; line-height: 1.35; }
+.cap-fala b { font: 600 10px var(--f-titulo); letter-spacing: 0.2em; text-transform: uppercase; color: var(--ciano); padding-top: 2px; }
+.cap-fala.jarvis b { color: var(--ambar); }
+.cap-fala span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+#cap-onda { display: block; width: 100%; height: 50px; margin-top: 4px; border-top: 1px solid rgba(234, 249, 255, 0.12); }
+#cap-radar-cv { display: block; width: 100%; aspect-ratio: 2 / 1; }
+
+/* etiqueta junto ao rosto */
+.cap-alvo {
+  position: absolute; left: 0; top: 0; min-width: 190px; max-width: 250px;
+  padding: 6px 10px; border-left: 2px solid var(--cap-branco);
+  background: linear-gradient(90deg, rgba(3, 20, 30, 0.55), transparent);
+  font-size: 11px; will-change: transform; color: var(--cap-branco);
+}
+.cap-alvo .cap-rot { margin-bottom: 4px; color: var(--ciano); }
+#cap-alvo-det { font-family: var(--f-mono); line-height: 1.55; }
+
+/* faixa de eventos reais, no alto */
+.cap-ticker {
+  position: absolute; top: 16px; left: 18px; margin: 0;
+  max-width: 34vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font: 11px var(--f-mono); color: rgba(234, 249, 255, 0.7); letter-spacing: 0.04em;
+}
+
+/* base: estado + doca sobre a "prateleira" desenhada no canvas */
+.cap-base-inferior { position: absolute; left: 50%; bottom: 96px; transform: translateX(-50%);
+                     display: grid; justify-items: center; gap: 8px; pointer-events: none; will-change: transform; }
+.cap-estado { text-align: center; }
+.cap-nome { font: 600 11px var(--f-titulo); letter-spacing: 0.6em; color: #b9d6e2; }
+#cap-estado { font: 600 21px/1.3 var(--f-titulo); letter-spacing: 0.3em; text-transform: uppercase;
+              color: var(--cap-branco); text-shadow: 0 0 14px rgba(50, 232, 243, 0.8); }
+.cap-sub { font-size: 12px; color: #b9d6e2; }
+.cap-dock { display: flex; gap: 14px; list-style: none; margin: 0; padding: 0; }
+.cap-dock li { display: grid; grid-template-columns: auto auto; align-items: center; column-gap: 6px;
+               font-size: 10px; color: #b9d6e2; }
+.cap-dock i { grid-row: span 2; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid currentColor;
+              box-shadow: 0 0 6px currentColor; }
+.cap-dock b { font: 600 9px var(--f-titulo); letter-spacing: 0.22em; text-transform: uppercase; }
+.cap-dock span { font-family: var(--f-mono); color: var(--cap-branco); }
+.cap-dock li[data-s="ok"] { color: var(--ciano); }
+.cap-dock li[data-s="ativo"] { color: #ffffff; }
+.cap-dock li[data-s="ativo"] i { background: var(--ciano); }
+.cap-dock li[data-s="aviso"] { color: var(--ambar); }
+.cap-dock li[data-s="erro"] { color: var(--cap-verm); }
+.cap-dock li[data-s="off"] { color: rgba(185, 214, 226, 0.5); }
+
+.cap-barra { position: absolute; top: 12px; right: 16px; display: flex; gap: 8px; }
+
+/* com o capacete aberto, a barra de controles fica por cima dele */
+body[data-capacete="true"] .controles {
+  position: relative; z-index: 25;
+  background: linear-gradient(180deg, transparent, rgba(1, 6, 10, 0.9) 45%);
+}
+
+@media (max-width: 1150px) {
+  .cap-painel { width: clamp(180px, 25vw, 240px); }
+  .cap-relogio { font-size: 36px; }
+  #cap-radar, #cap-alerta { display: none; }
+  .cap-ticker { display: none; }
+}
+@media (max-width: 760px) {
+  #cap-diag, #cap-armadura { display: none; }
+  .cap-painel { width: 42vw; }
+  .cap-dock { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .capacete[data-boot="true"] .cap-in, .cap-varre, .cap-chev { animation: none !important; }
+}
+html[data-movimento="reduzido"] .capacete .cap-in,
+html[data-movimento="reduzido"] .cap-varre { animation: none !important; }
+
+/* analise visual: o que o Jarvis viu e o que concluiu */
+.cap-analise {
+  position: absolute; top: 118px; left: 50%; transform: translateX(-50%); z-index: 2;
+  display: flex; gap: 12px; align-items: flex-start; width: min(560px, 46vw);
+  padding: 10px 12px; color: var(--cap-branco);
+  background: linear-gradient(135deg, rgba(60, 34, 4, 0.72), rgba(14, 8, 2, 0.6));
+  border-top: 1px solid var(--ambar); box-shadow: 0 0 24px rgba(255, 181, 71, 0.25);
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+.cap-analise img { width: 120px; flex: none; border: 1px solid rgba(255, 181, 71, 0.6); }
+.cap-analise .cap-rot { color: var(--ambar); }
+.cap-analise p { margin: 0; font-size: 14px; line-height: 1.4; }
+.cap-analise[data-s="erro"] { border-top-color: var(--cap-verm); }
+.cap-analise .oculto, .cap-analise.oculto { display: none; }
+
+/* contexto (noticias numeradas, fontes, cotacoes) acima do noticiario */
+.cap-contexto {
+  position: absolute; left: 50%; bottom: 96px; transform: translateX(-50%); z-index: 2;
+  width: min(620px, 50vw); padding: 10px 14px; color: var(--cap-branco);
+  background: linear-gradient(135deg, rgba(10, 42, 58, 0.72), rgba(2, 14, 22, 0.6));
+  border-top: 1px solid var(--ciano); box-shadow: 0 0 24px rgba(50, 232, 243, 0.2);
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+.cap-contexto.oculto { display: none; }
+.cap-contexto ol { margin: 0; padding-left: 22px; display: grid; gap: 4px; font-size: 13px; line-height: 1.35; }
+.cap-contexto li::marker { color: var(--ciano); }
+.cap-contexto small { color: var(--texto-2); margin-left: 6px; }
+
+/* noticias correndo na base, como um noticiario */
+.cap-noticias {
+  position: absolute; left: 0; right: 0; bottom: 62px; height: 24px; z-index: 1;
+  display: flex; align-items: center; gap: 10px; padding: 0 14px;
+  background: linear-gradient(90deg, rgba(2, 14, 22, 0.85), rgba(2, 14, 22, 0.55));
+  border-top: 1px solid rgba(234, 249, 255, 0.2); border-bottom: 1px solid rgba(234, 249, 255, 0.1);
+  font-size: 12px; overflow: hidden;
+}
+.cap-noticias.oculto { display: none; }
+.cap-noticias-rot { flex: none; font: 600 10px var(--f-titulo); letter-spacing: 0.3em; text-transform: uppercase;
+                    color: #02080d; background: var(--ciano); padding: 2px 8px; }
+.cap-noticias-trilho { flex: 1; overflow: hidden; white-space: nowrap; }
+.cap-noticias-trilho p { display: inline-block; margin: 0; padding-left: 100%; color: var(--cap-branco);
+                         animation: cap-correr 60s linear infinite; }
+@keyframes cap-correr { to { transform: translateX(-100%); } }
+html[data-movimento="reduzido"] .cap-noticias-trilho p { animation: none; padding-left: 0; }
+
+/* telas baixas (notebook 1366x768 / 1536x816 com escala): colunas mais compactas */
+@media (max-height: 900px) {
+  #cap-radar-cv { aspect-ratio: 3 / 1; }
+  .cap-painel ul { gap: 3px; }
+  .cap-painel li { padding-bottom: 2px; }
+  .cap-in { padding: 9px 12px 10px; }
+  .cap-relogio { font-size: 40px; }
+}

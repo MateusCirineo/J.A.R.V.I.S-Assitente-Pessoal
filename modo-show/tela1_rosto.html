@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Jarvis</title>
+<style>
+  :root{
+    --fundo:#05070d; --aro:#38bdf8; --aro2:#818cf8;
+    --texto:#e2e8f0; --fraco:#64748b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:
+      radial-gradient(circle at 50% 42%, rgba(56,189,248,.16), transparent 58%),
+      var(--fundo);
+    color:var(--texto); overflow:hidden;
+    font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:34px; padding:24px;
+  }
+  .palco{position:relative;width:min(62vmin,420px);aspect-ratio:1}
+  .anel{
+    position:absolute; inset:0; border-radius:50%;
+    border:1px solid rgba(56,189,248,.22);
+  }
+  .anel.a{animation:girar 18s linear infinite;border-top-color:var(--aro);border-width:2px}
+  .anel.b{inset:9%;animation:girar 12s linear infinite reverse;border-left-color:var(--aro2);border-width:2px}
+  .anel.c{inset:18%;animation:girar 26s linear infinite;border-right-color:rgba(56,189,248,.5)}
+  @keyframes girar{to{transform:rotate(360deg)}}
+
+  .nucleo{
+    position:absolute; inset:27%; border-radius:50%;
+    background:radial-gradient(circle at 50% 45%, #7dd3fc, #2563eb 58%, #0b1220 100%);
+    box-shadow:0 0 62px rgba(56,189,248,.5), inset 0 0 40px rgba(2,6,23,.65);
+    animation:pulsar 2.6s ease-in-out infinite;
+  }
+  @keyframes pulsar{
+    0%,100%{transform:scale(1);box-shadow:0 0 52px rgba(56,189,248,.42),inset 0 0 40px rgba(2,6,23,.65)}
+    50%{transform:scale(1.045);box-shadow:0 0 86px rgba(56,189,248,.72),inset 0 0 40px rgba(2,6,23,.55)}
+  }
+
+  /* olhos */
+  .olhos{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:17%}
+  .olho{
+    width:10%; height:10%; border-radius:50%; background:#f0f9ff;
+    box-shadow:0 0 22px #bae6fd, 0 0 44px rgba(125,211,252,.85);
+    animation:piscar 5.5s infinite;
+  }
+  @keyframes piscar{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
+
+  /* onda de fala */
+  .onda{display:flex;align-items:flex-end;gap:5px;height:66px}
+  .onda i{
+    display:block;width:6px;border-radius:3px;
+    background:linear-gradient(180deg,var(--aro),var(--aro2));
+    animation:falar 1s ease-in-out infinite;
+  }
+  @keyframes falar{0%,100%{height:10px;opacity:.5}50%{height:60px;opacity:1}}
+
+  .legenda{text-align:center}
+  .nome{font-size:30px;font-weight:650;letter-spacing:.22em;color:#f0f9ff}
+  .estado{margin-top:8px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--fraco)}
+  .ponto{display:inline-block;width:7px;height:7px;border-radius:50%;
+    background:#22c55e;margin-right:8px;vertical-align:1px;
+    animation:respirar 2s ease-in-out infinite}
+  @keyframes respirar{0%,100%{opacity:.35}50%{opacity:1}}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none !important}}
+</style>
+</head>
+<body>
+  <div class="palco">
+    <div class="anel a"></div><div class="anel b"></div><div class="anel c"></div>
+    <div class="nucleo"></div>
+    <div class="olhos"><span class="olho"></span><span class="olho"></span></div>
+  </div>
+
+  <div class="onda" id="onda"></div>
+
+  <div class="legenda">
+    <div class="nome">J A R V I S</div>
+    <div class="estado"><span class="ponto"></span><span id="estado">falando</span></div>
+  </div>
+
+<script>
+  // barras da onda, com fases diferentes para nao pulsarem juntas
+  const onda = document.getElementById('onda');
+  for (let i = 0; i < 21; i++) {
+    const b = document.createElement('i');
+    b.style.animationDelay = (i * 0.07).toFixed(2) + 's';
+    b.style.animationDuration = (0.72 + (i % 5) * 0.13).toFixed(2) + 's';
+    onda.appendChild(b);
+  }
+  // depois da abertura, entra em repouso
+  setTimeout(() => {
+    document.getElementById('estado').textContent = 'ouvindo';
+    onda.querySelectorAll('i').forEach(b => {
+      b.style.animationDuration = '2.4s';
+      b.style.opacity = '.45';
+    });
+  }, 14000);
+</script>
+<!-- volta ao tema HUD: botao discreto + volta sozinho se o tema mudar em outra janela -->
+<button id="voltar-hud" type="button" title="Voltar ao tema HUD"
+  style="position:fixed;right:14px;bottom:12px;z-index:99;padding:6px 12px;border:1px solid rgba(94,200,240,.45);
+         background:rgba(6,19,29,.85);color:#bfe9ff;font:600 11px/1 'Segoe UI',sans-serif;letter-spacing:.12em;
+         text-transform:uppercase;cursor:pointer;opacity:.55">Voltar ao HUD</button>
+<script>
+  (function () {
+    const b = document.getElementById('voltar-hud');
+    b.addEventListener('mouseenter', () => { b.style.opacity = '1'; });
+    b.addEventListener('mouseleave', () => { b.style.opacity = '.55'; });
+    b.addEventListener('click', () => {
+      fetch('/api/preferencias', { method: 'POST', headers: { 'Content-Type': 'application/json',
+        'X-Jarvis-Token': '{{TOKEN}}' }, body: JSON.stringify({ tema: 'hud' }) })
+        .then(() => location.replace('/jarvis')).catch(() => location.replace('/jarvis'));
+    });
+    setInterval(() => {
+      fetch('/api/estado', { headers: { 'X-Jarvis-Token': '{{TOKEN}}' } })
+        .then((r) => { if (r.status === 403) location.reload(); }).catch(() => {});
+      fetch('/classico/tema').then((r) => r.json()).then((j) => { if (j.tema !== 'classico') location.replace('/jarvis'); })
+        .catch(() => {});
+    }, 3000);
+  })();
+</script>
+</body>
+</html>
